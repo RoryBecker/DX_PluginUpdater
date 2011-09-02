@@ -37,11 +37,16 @@ Public Class Options1
     Private Sub TryGetPlugin(ByVal PluginName As String)
         PluginName = PluginName.Trim
         If PluginName <> String.Empty Then
-            If mPluginManager.PluginUpdateExists(PluginName) Then
-                AddMessage(mPluginManager.DownloadAndInstallPlugin(PluginName))
-            Else
-                AddMessage(String.Format("No update currently exists for plugin {0}.", PluginName))
-            End If
+            Dim LocalPlugin = mPluginManager.GetLocalPluginReference(PluginName)
+            Dim Update = mPluginManager.GetPluginUpdateReference(PluginName)
+            Select Case True
+                Case Update Is Nothing
+                    AddMessage(String.Format("No versions of plugin {0} found on the community site.", PluginName))
+                Case LocalPlugin Is Nothing OrElse LocalPlugin.Version < Update.Version
+                    AddMessage(mPluginManager.DownloadAndInstallPlugin(PluginName))
+                Case LocalPlugin.Version >= Update.Version
+                    AddMessage(String.Format("Plugin {0} is already up to date.", PluginName))
+            End Select
         End If
     End Sub
     Private Sub AddMessage(ByVal Message As String)
