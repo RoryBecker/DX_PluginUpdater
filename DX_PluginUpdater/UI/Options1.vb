@@ -34,21 +34,7 @@ Public Class Options1
     Private ReadOnly mPluginManager As PluginManager = New PluginManager(CodeRush.Options.Paths.CommunityPlugInsPath)
 #End Region
 #Region "Utility"
-    Private Sub TryGetPlugin(ByVal PluginName As String)
-        PluginName = PluginName.Trim
-        If PluginName <> String.Empty Then
-            Dim LocalPlugin = mPluginManager.GetLocalPluginReference(PluginName)
-            Dim Update = mPluginManager.GetPluginUpdateReference(PluginName)
-            Select Case True
-                Case Update Is Nothing
-                    AddMessage(String.Format("No versions of plugin {0} found on the community site.", PluginName))
-                Case LocalPlugin Is Nothing OrElse LocalPlugin.Version < Update.Version
-                    AddMessage(mPluginManager.DownloadAndInstallPlugin(PluginName))
-                Case LocalPlugin.Version >= Update.Version
-                    AddMessage(String.Format("Plugin {0} is already up to date.", PluginName))
-            End Select
-        End If
-    End Sub
+    
     Private Sub AddMessage(ByVal Message As String)
         txtLog.AppendText(Environment.NewLine & Message)
         txtLog.SelectionStart = txtLog.Text.Length
@@ -75,9 +61,9 @@ Public Class Options1
         System.Diagnostics.Process.Start(CodeRush.Options.Paths.CommunityPlugInsPath)
     End Sub
     Private Sub cmdCheckForMultipleUpdates_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCheckForMultipleUpdates.Click
-        For Each PluginName In Split(txtMultiplePlugins.Text, Environment.NewLine)
-            TryGetPlugin(PluginName)
-        Next
+        Dim PluginNames = txtMultiplePlugins.Lines
+        Dim Results As String = mPluginManager.UpdatePlugins(PluginNames)
+        Call AddMessage(Results)
         Call AddMessage("All Plugins Checked.")
     End Sub
 
@@ -109,5 +95,22 @@ Public Class Options1
     Private Sub cmdClear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdClear.Click
         txtMultiplePlugins.Clear()
     End Sub
+    Public Shared Function LoadSettings(ByVal Storage As DecoupledStorage) As Settings
+        Return New Settings() With {.Plugins = Storage.ReadStrings("PluginUpdater", "PluginNames")}
+    End Function
 #End Region
+
+
+    Private Sub Options1_PreparePage(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.OptionsPageStorageEventArgs) Handles Me.PreparePage
+        Dim Settings = LoadSettings(ea.Storage)
+        txtMultiplePlugins.Lines = Settings.Plugins
+    End Sub
+
+    Private Sub Options1_CommitChanges(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.CommitChangesEventArgs) Handles Me.CommitChanges
+        ea.Storage.WriteStrings("PluginUpdater", "PluginNames", txtMultiplePlugins.Lines)
+    End Sub
+
+    Private Sub Options1_RestoreDefaults(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.OptionsPageEventArgs) Handles Me.RestoreDefaults
+        txtMultiplePlugins.Text = String.Empty
+    End Sub
 End Class

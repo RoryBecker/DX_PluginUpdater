@@ -94,12 +94,14 @@
     <Import Include="System.Diagnostics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ByteExtensions.vb" />
-    <Compile Include="Exclusion.vb" />
-    <Compile Include="Options1.Designer.vb">
+    <Compile Include="Extensions\ByteExtensions.vb" />
+    <Compile Include="Exclusions.vb" />
+    <Compile Include="Extensions\FileInfoExtensions.vb" />
+    <Compile Include="Settings.vb" />
+    <Compile Include="UI\Options1.Designer.vb">
       <DependentUpon>Options1.vb</DependentUpon>
     </Compile>
-    <Compile Include="Options1.vb">
+    <Compile Include="UI\Options1.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PlugIn1.vb">
@@ -108,16 +110,17 @@
     <Compile Include="PlugIn1.Designer.vb">
       <DependentUpon>PlugIn1.vb</DependentUpon>
     </Compile>
-    <Compile Include="PluginPicker.Designer.vb">
+    <Compile Include="UI\PluginPicker.Designer.vb">
       <DependentUpon>PluginPicker.vb</DependentUpon>
     </Compile>
-    <Compile Include="PluginPicker.vb">
+    <Compile Include="UI\PluginPicker.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PluginRef.vb" />
-    <Compile Include="PluginManager.vb" />
+    <Compile Include="Structures\PluginRef.vb" />
+    <Compile Include="Managers\PluginManager.vb" />
     <Compile Include="Properties\AssemblyInfo.vb" />
-    <Compile Include="WebManager.vb" />
+    <Compile Include="Structures\RemotePluginRef.vb" />
+    <Compile Include="Managers\WebManager.vb" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -137,10 +140,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Options1.resx">
+    <EmbeddedResource Include="UI\Options1.resx">
       <DependentUpon>Options1.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PluginPicker.resx">
+    <EmbeddedResource Include="UI\PluginPicker.resx">
       <DependentUpon>PluginPicker.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
