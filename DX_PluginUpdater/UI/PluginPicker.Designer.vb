@@ -23,12 +23,13 @@ Partial Class PluginPicker
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lstPlugins = New System.Windows.Forms.ListView()
+        Me.colName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colVersion = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cmdOk = New System.Windows.Forms.Button()
         Me.cmdSelectAll = New System.Windows.Forms.Button()
         Me.cmdSelectNone = New System.Windows.Forms.Button()
-        Me.colName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colVersion = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.lnkWiki = New System.Windows.Forms.LinkLabel()
         Me.SuspendLayout()
         '
         'lstPlugins
@@ -40,10 +41,19 @@ Partial Class PluginPicker
         Me.lstPlugins.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colName, Me.colVersion})
         Me.lstPlugins.Location = New System.Drawing.Point(12, 12)
         Me.lstPlugins.Name = "lstPlugins"
-        Me.lstPlugins.Size = New System.Drawing.Size(411, 290)
+        Me.lstPlugins.Size = New System.Drawing.Size(411, 239)
         Me.lstPlugins.TabIndex = 1
         Me.lstPlugins.UseCompatibleStateImageBehavior = False
         Me.lstPlugins.View = System.Windows.Forms.View.Details
+        '
+        'colName
+        '
+        Me.colName.Text = "Name"
+        Me.colName.Width = 300
+        '
+        'colVersion
+        '
+        Me.colVersion.Text = "Version"
         '
         'cmdCancel
         '
@@ -87,20 +97,22 @@ Partial Class PluginPicker
         Me.cmdSelectNone.Text = "Select None"
         Me.cmdSelectNone.UseVisualStyleBackColor = True
         '
-        'colName
+        'lnkWiki
         '
-        Me.colName.Text = "Name"
-        Me.colName.Width = 300
-        '
-        'colVersion
-        '
-        Me.colVersion.Text = "Version"
+        Me.lnkWiki.AutoSize = True
+        Me.lnkWiki.Location = New System.Drawing.Point(19, 284)
+        Me.lnkWiki.Name = "lnkWiki"
+        Me.lnkWiki.Size = New System.Drawing.Size(106, 13)
+        Me.lnkWiki.TabIndex = 7
+        Me.lnkWiki.TabStop = True
+        Me.lnkWiki.Text = "http://SomeWebSite"
         '
         'PluginPicker
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(430, 346)
+        Me.Controls.Add(Me.lnkWiki)
         Me.Controls.Add(Me.cmdSelectNone)
         Me.Controls.Add(Me.cmdSelectAll)
         Me.Controls.Add(Me.cmdOk)
@@ -109,6 +121,7 @@ Partial Class PluginPicker
         Me.Name = "PluginPicker"
         Me.Text = "PluginPicker"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents lstPlugins As System.Windows.Forms.ListView
@@ -118,4 +131,5 @@ Partial Class PluginPicker
     Friend WithEvents cmdSelectNone As System.Windows.Forms.Button
     Friend WithEvents colName As System.Windows.Forms.ColumnHeader
     Friend WithEvents colVersion As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lnkWiki As System.Windows.Forms.LinkLabel
 End Class

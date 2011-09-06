@@ -1,7 +1,7 @@
 ﻿Option Strict On
 Imports System.Linq
 Imports System.Windows.Forms
-
+Imports DevExpress.CodeRush.Core
 Public Class PluginPicker
 #Region "Populate"
     Public Sub PopulatePlugins(ByVal SourcePlugins As IEnumerable(Of String))
@@ -64,6 +64,15 @@ Public Class PluginPicker
     End Sub
 #End Region
 
+    Private Sub lnkWiki_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkWiki.LinkClicked
+        Dim PluginManager As New PluginManager(CodeRush.Options.Paths.CommunityPlugInsPath)
+        System.Diagnostics.Process.Start(PluginManager.WikiBaseUrl & CurrentPluginName())
+    End Sub
+    Private Function CurrentPluginName() As String
+        Return If(lstPlugins.SelectedItems.Count > 0, TryCast(lstPlugins.SelectedItems(0).Tag, String), "")
+    End Function
 
-
+    Private Sub lstPlugins_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstPlugins.SelectedIndexChanged
+        lnkWiki.Text = PluginManager.WikiBaseUrl & CurrentPluginName()
+    End Sub
 End Class

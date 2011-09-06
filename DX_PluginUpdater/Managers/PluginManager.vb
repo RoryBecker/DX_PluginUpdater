@@ -7,7 +7,8 @@ Imports System.Text
 Public Class PluginManager
 #Region "Fields"
     ReadOnly mLocalPluginFolder As String
-    Private Const mRemoteBasePluginFolder As String = "http://www.rorybecker.co.uk/DevExpress/Plugins/Community"
+    Public Const RemoteBasePluginFolder As String = "http://www.rorybecker.co.uk/DevExpress/Plugins/Community/"
+    Public Const WikiBaseUrl As String = "http://code.google.com/p/dxcorecommunityplugins/wiki/"
     Private ReadOnly WebManager As New WebManager()
 #End Region
 #Region "Construction"
@@ -20,7 +21,7 @@ Public Class PluginManager
     Public Function GetCommunityPluginNames() As IEnumerable(Of String)
         Dim Plugins As New List(Of String)
 
-        Dim Content = WebManager.GetUrlContentAsString(mRemoteBasePluginFolder)
+        Dim Content = WebManager.GetUrlContentAsString(RemoteBasePluginFolder)
         Dim regex As Regex = New Regex("<A HREF=""/DevExpress/Plugins/Community/(?<Plugin>(\w|-|_)+)/"">", _
                                         RegexOptions.CultureInvariant Or RegexOptions.Compiled)
         For Each Match In regex.Matches(Content)
@@ -36,7 +37,7 @@ Public Class PluginManager
 #Region "Get Plugin References"
     Public Function GetCommunityPluginReferences() As IEnumerable(Of RemotePluginRef)
         Dim Plugins As New List(Of RemotePluginRef)
-        Dim Content = WebManager.GetUrlContentAsString(mRemoteBasePluginFolder)
+        Dim Content = WebManager.GetUrlContentAsString(RemoteBasePluginFolder)
         Dim regex As Regex = New Regex("<A HREF=""/DevExpress/Plugins/Community/(?<Plugin>(\w|-|_)+)/"">", _
                                         RegexOptions.CultureInvariant Or RegexOptions.Compiled)
         For Each Match In regex.Matches(Content)
@@ -188,7 +189,7 @@ Public Class PluginManager
     End Function
 #End Region
     Private Function GetPluginFolderUrl(ByVal PluginName As String) As String
-        Return String.Format("{0}/{1}", mRemoteBasePluginFolder, PluginName)
+        Return String.Format("{0}{1}", RemoteBasePluginFolder, PluginName)
     End Function
     Public Function UpdatePlugins(ByVal PluginNames As String()) As String
         Dim ResultsBuilder = New StringBuilder()
