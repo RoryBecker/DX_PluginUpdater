@@ -40,7 +40,7 @@ Public Class PluginManager
         Dim regex As Regex = New Regex("<A HREF=""/DevExpress/Plugins/Community/(?<Plugin>(\w|-|_)+)/"">", _
                                         RegexOptions.CultureInvariant Or RegexOptions.Compiled)
         For Each Match In regex.Matches(Content)
-            Dim Plugin As RemotePluginRef = GetLatestVersionOfPlugin(Match.Groups("Plugin").Value)
+            Dim Plugin As RemotePluginRef = GetLatestRemoteVersionOfPlugin(Match.Groups("Plugin").Value)
             If Plugin IsNot Nothing Then
                 Plugins.Add(Plugin)
             End If
@@ -48,21 +48,25 @@ Public Class PluginManager
         Return Plugins
     End Function
     Public Function GetLocalPluginReference(ByVal PluginName As String) As PluginRef
-        Dim TheFile = New FileInfo(String.Format("{0}{1}.dll", mLocalPluginFolder, PluginName))
-        Return New PluginRef(TheFile.NameWithoutExtension, GetLocalPluginRevision(TheFile))
+        Try
+            Dim TheFile = New FileInfo(String.Format("{0}\{1}.dll", mLocalPluginFolder, PluginName))
+            Return New PluginRef(TheFile.NameWithoutExtension, GetLocalPluginRevision(TheFile))
+        Catch ex As Exception
+            Return Nothing
+        End Try
     End Function
     Public Function GetLocalPluginReferences() As IEnumerable(Of PluginRef)
         Return From TheFile In GetLocalPluginDlls() _
                Where Not Exclusions.List.Contains(TheFile.NameWithoutExtension) _
                Select New PluginRef(TheFile.NameWithoutExtension, _
-                                    GetLocalPluginRevision(TheFile))
+                                    GetLocalPluginVersion(TheFile.NameWithoutExtension))
     End Function
 #End Region
 #Region "Get Local"
     Public Function GetLocalUpdates() As List(Of RemotePluginRef)
         Dim Plugins As New List(Of RemotePluginRef)
         For Each LocalPlugin In GetLocalPluginReferences()
-            Dim LatestPluginRef = GetLatestVersionOfPlugin(LocalPlugin.BaseName)
+            Dim LatestPluginRef = GetLatestRemoteVersionOfPlugin(LocalPlugin.BaseName)
             If LatestPluginRef IsNot Nothing _
                 AndAlso LatestPluginRef.Version > LocalPlugin.Version Then
                 Plugins.Add(LatestPluginRef)
@@ -73,8 +77,9 @@ Public Class PluginManager
     Private Function GetLocalPluginDlls() As FileInfo()
         Return New DirectoryInfo(mLocalPluginFolder).GetFiles("*.dll").Cast(Of FileInfo)()
     End Function
-    Private Function GetLocalPluginRevision(ByVal PluginFile As FileInfo) As Integer
-        Return FileVersionInfo.GetVersionInfo(PluginFile.FullName).ProductPrivatePart
+
+    Private Function MethodName(ByVal File As FileInfo) As Boolean
+        Return File.Exists
     End Function
     Private Function GetLocalPluginVersion(ByVal PluginBaseName As String) As Integer
         Dim File As FileInfo = New FileInfo(String.Format("{0}\{1}.dll", mLocalPluginFolder, PluginBaseName))
@@ -83,14 +88,16 @@ Public Class PluginManager
         End If
         Return GetLocalPluginRevision(File)
     End Function
-
+    Private Function GetLocalPluginRevision(ByVal PluginFile As FileInfo) As Integer
+        Return FileVersionInfo.GetVersionInfo(PluginFile.FullName).ProductPrivatePart
+    End Function
 #End Region
 #Region "GetUpdates"
     Public Function GetUpdatesForPlugins(ByVal Plugins As IEnumerable(Of String)) As List(Of RemotePluginRef)
         Dim Updates As New List(Of RemotePluginRef)
         For Each PluginBaseName In Plugins
             Dim LocalVersion = GetLocalPluginVersion(PluginBaseName)
-            Dim LatestPluginRef = GetLatestVersionOfPlugin(PluginBaseName)
+            Dim LatestPluginRef = GetLatestRemoteVersionOfPlugin(PluginBaseName)
             If LatestPluginRef IsNot Nothing AndAlso LatestPluginRef.Version > LocalVersion Then
                 Updates.Add(LatestPluginRef)
             End If
@@ -99,9 +106,6 @@ Public Class PluginManager
     End Function
 #End Region
 #Region "Utils"
-    Public Function GetPluginUpdateReference(ByVal PluginName As String) As RemotePluginRef
-        Return GetUpdatesForPlugins(New String() {PluginName}).FirstOrDefault
-    End Function
     'Public Function PluginUpdateExists(ByVal PluginName As String) As Boolean
     '    Dim LocalVersion = GetLocalPluginVersion(PluginName)
     '    Return PluginUpdateExists(PluginName, LocalVersion)
@@ -117,7 +121,7 @@ Public Class PluginManager
     '    End If
     '    Return True
     'End Function
-    Public Function GetLatestVersionOfPlugin(ByVal PluginName As String) As RemotePluginRef
+    Public Function GetLatestRemoteVersionOfPlugin(ByVal PluginName As String) As RemotePluginRef
         Dim URL = GetPluginFolderUrl(PluginName)
         Dim Content = WebManager.GetUrlContentAsString(URL)
         If Content.Contains("Oops") Then
@@ -145,31 +149,37 @@ Public Class PluginManager
 
 #Region "Download"
     Public Function DownloadAndInstallPlugin(ByVal PluginName As String) As String
-        Return DownloadAndInstallPlugin(GetLatestVersionOfPlugin(PluginName))
+        Return DownloadAndInstallPlugin(GetLatestRemoteVersionOfPlugin(PluginName))
     End Function
     Public Function DownloadAndInstallPlugin(ByVal Plugin As RemotePluginRef) As String
         Try
             Dim FileBytes = WebManager.DownloadResource(Plugin.RemoteZipFileUrl)
-            Call WebManager.Unzip(ToStream(FileBytes), mLocalPluginFolder)
+            Using ToStreamVariable As Stream = ToStream(FileBytes)
+                WebManager.Unzip(ToStreamVariable, mLocalPluginFolder)
+            End Using
         Catch ex As Exception
             Return ex.Message
         End Try
         Return String.Format("Downloaded and installed version {0} of plugin {1}", Plugin.Version, Plugin.BaseName)
     End Function
-    Private Function TryInstallPlugin(ByVal PluginName As String) As String
+    Public Function TryInstallPlugin(ByVal PluginName As String, Optional ByVal ShowUpdatesOnly As Boolean = False) As String
         PluginName = PluginName.Trim
         If PluginName = String.Empty Then
             Return String.Empty
         End If
         Dim LocalPlugin = GetLocalPluginReference(PluginName)
-        Dim Update = GetPluginUpdateReference(PluginName)
+        Dim Update = GetLatestRemoteVersionOfPlugin(PluginName)
         Select Case True
             Case Update Is Nothing
-                Return String.Format("No versions of plugin {0} found on the community site.", PluginName)
+                If Not ShowUpdatesOnly Then
+                    Return String.Format("No versions of plugin {0} found on the community site.", PluginName)
+                End If
             Case LocalPlugin Is Nothing OrElse LocalPlugin.Version < Update.Version
                 Return DownloadAndInstallPlugin(PluginName)
             Case LocalPlugin.Version >= Update.Version
-                Return String.Format("Plugin {0} is already up to date.", PluginName)
+                If Not ShowUpdatesOnly Then
+                    Return String.Format("Plugin {0} is already up to date.", PluginName)
+                End If
             Case Else
                 Return String.Empty
         End Select
@@ -185,4 +195,5 @@ Public Class PluginManager
         Next
         Return ResultsBuilder.ToString()
     End Function
+
 End Class

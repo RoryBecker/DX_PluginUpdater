@@ -1,6 +1,11 @@
 ﻿Imports System.Text.RegularExpressions
 Imports NUnit.Framework
 Imports DX_PluginUpdater
+Imports System.Security
+Imports System.IO
+Imports System.Security.Permissions
+Imports System.Runtime.InteropServices
+Imports Microsoft.Win32
 <TestFixture()> _
 Public Class FunctionalTests
     Private Const mLocalPluginFolder As String = "C:\Users\Rory.Becker\Documents\DevExpress\IDE Tools\Community\PlugIns"
@@ -30,7 +35,7 @@ Public Class FunctionalTests
         Dim PluginManager As New PluginManager(mLocalPluginFolder)
         Dim PluginNames = PluginManager.GetCommunityPluginNames()
         For Each PluginName In PluginNames
-            Dim Plugin = PluginManager.GetLatestVersionOfPlugin(PluginName)
+            Dim Plugin = PluginManager.GetLatestRemoteVersionOfPlugin(PluginName)
             PluginManager.DownloadAndInstallPlugin(Plugin)
         Next
     End Sub
@@ -38,5 +43,9 @@ Public Class FunctionalTests
     Public Sub RemoveExtension_Test()
         Assert.AreEqual("Fred", New System.IO.FileInfo("Fred.Extension").NameWithoutExtension)
     End Sub
-
+    <Test()> _
+    Public Sub FileExists_Test()
+        Dim Exist = File.Exists("C:\Users\Rory.Becker\Documents\DevExpress\IDE Tools\Community\PlugIns\CR_EasierIdentiers.dll")
+        Assert.AreEqual(True, Exist)
+    End Sub
 End Class
