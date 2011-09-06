@@ -173,12 +173,16 @@ Public Class PluginManager
             Case Update Is Nothing
                 If Not ShowUpdatesOnly Then
                     Return String.Format("No versions of plugin {0} found on the community site.", PluginName)
+                Else
+                    Return String.Empty
                 End If
             Case LocalPlugin Is Nothing OrElse LocalPlugin.Version < Update.Version
                 Return DownloadAndInstallPlugin(PluginName)
             Case LocalPlugin.Version >= Update.Version
                 If Not ShowUpdatesOnly Then
                     Return String.Format("Plugin {0} is already up to date.", PluginName)
+                Else
+                    Return String.Empty
                 End If
             Case Else
                 Return String.Empty
