@@ -58,11 +58,11 @@ Partial Class Options1
         Me.txtMultiplePlugins.Size = New System.Drawing.Size(325, 199)
         Me.txtMultiplePlugins.TabIndex = 5
         '
-        'cmdCheckForMultipleUpdates
+        'cmdUpdateMultiplePlugins
         '
         Me.cmdUpdateMultiplePlugins.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdUpdateMultiplePlugins.Location = New System.Drawing.Point(337, 291)
-        Me.cmdUpdateMultiplePlugins.Name = "cmdCheckForMultipleUpdates"
+        Me.cmdUpdateMultiplePlugins.Name = "cmdUpdateMultiplePlugins"
         Me.cmdUpdateMultiplePlugins.Size = New System.Drawing.Size(143, 23)
         Me.cmdUpdateMultiplePlugins.TabIndex = 6
         Me.cmdUpdateMultiplePlugins.Text = "Check for Updates Now"
@@ -137,10 +137,10 @@ Partial Class Options1
         Me.cmdOpenPluginFolder.Text = "Open Plugin Folder"
         Me.cmdOpenPluginFolder.UseVisualStyleBackColor = True
         '
-        'cmdNewPlugins
+        'cmdAddFromNewPlugins
         '
         Me.cmdAddFromNewPlugins.Location = New System.Drawing.Point(245, 44)
-        Me.cmdAddFromNewPlugins.Name = "cmdNewPlugins"
+        Me.cmdAddFromNewPlugins.Name = "cmdAddFromNewPlugins"
         Me.cmdAddFromNewPlugins.Size = New System.Drawing.Size(115, 23)
         Me.cmdAddFromNewPlugins.TabIndex = 14
         Me.cmdAddFromNewPlugins.Text = "New Plugins..."
@@ -179,6 +179,7 @@ Partial Class Options1
         '
         'chkOnlyShowUpdates
         '
+        Me.chkOnlyShowUpdates.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.chkOnlyShowUpdates.AutoSize = True
         Me.chkOnlyShowUpdates.Location = New System.Drawing.Point(95, 446)
         Me.chkOnlyShowUpdates.Name = "chkOnlyShowUpdates"
