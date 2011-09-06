@@ -171,19 +171,17 @@ Public Class PluginManager
         Dim Update = GetLatestRemoteVersionOfPlugin(PluginName)
         Select Case True
             Case Update Is Nothing
-                If Not ShowUpdatesOnly Then
-                    Return String.Format("No versions of plugin {0} found on the community site.", PluginName)
-                Else
+                If ShowUpdatesOnly Then
                     Return String.Empty
                 End If
+                Return String.Format("No versions of plugin {0} found on the community site.", PluginName)
             Case LocalPlugin Is Nothing OrElse LocalPlugin.Version < Update.Version
                 Return DownloadAndInstallPlugin(PluginName)
             Case LocalPlugin.Version >= Update.Version
-                If Not ShowUpdatesOnly Then
-                    Return String.Format("Plugin {0} is already up to date.", PluginName)
-                Else
+                If ShowUpdatesOnly Then
                     Return String.Empty
                 End If
+                Return String.Format("Plugin {0} is already up to date.", PluginName)
             Case Else
                 Return String.Empty
         End Select
