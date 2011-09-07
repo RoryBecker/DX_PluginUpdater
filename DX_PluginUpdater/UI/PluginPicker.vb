@@ -66,13 +66,16 @@ Public Class PluginPicker
 
     Private Sub lnkWiki_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkWiki.LinkClicked
         Dim PluginManager As New PluginManager(CodeRush.Options.Paths.CommunityPlugInsPath)
-        System.Diagnostics.Process.Start(PluginManager.WikiBaseUrl & CurrentPluginName())
+        System.Diagnostics.Process.Start(PluginManager.BaseWikiUrl & CurrentPluginName())
     End Sub
     Private Function CurrentPluginName() As String
         Return If(lstPlugins.SelectedItems.Count > 0, TryCast(lstPlugins.SelectedItems(0).Tag, String), "")
     End Function
 
     Private Sub lstPlugins_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstPlugins.SelectedIndexChanged
-        lnkWiki.Text = PluginManager.WikiBaseUrl & CurrentPluginName()
+        lnkWiki.Text = PluginManager.BaseWikiUrl & CurrentPluginName()
+        lnkBinaries.Text = PluginManager.BaseBinaryUrl & CurrentPluginName()
+        lnkSource.Text = PluginManager.BaseSourceUrl & CurrentPluginName()
     End Sub
+
 End Class
