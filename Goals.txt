@@ -1,3 +1,6 @@
+Create Action to get updates to all selected plugins
+Create options page to configure p@lugins to update.
+
 Update Single plugin
 Update Multiple plugins
 

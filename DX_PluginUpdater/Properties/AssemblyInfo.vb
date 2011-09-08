@@ -3,7 +3,7 @@ Imports System.Reflection
 Imports System.Runtime.InteropServices
 Imports DevExpress.CodeRush.Common
 
-<Assembly: DXCoreAssembly(DXCoreAssemblyType.SystemPlugIn, "DX_PluginUpdater", PlugInLoadType.StartUp, LoadAbilityType.LoadEnabled)>
+<Assembly: DXCoreAssembly(DXCoreAssemblyType.PlugIn, "DX_PluginUpdater", PlugInLoadType.StartUp, LoadAbilityType.LoadEnabled)> 
 
 ' General Information about an assembly is controlled through the following 
 ' set of attributes. Change these attribute values to modify the information
