@@ -64,18 +64,28 @@ Public Class PluginPicker
     End Sub
 #End Region
 
-    Private Sub lnkWiki_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkWiki.LinkClicked
-        Dim PluginManager As New PluginManager(CodeRush.Options.Paths.CommunityPlugInsPath)
-        System.Diagnostics.Process.Start(PluginManager.BaseWikiUrl & CurrentPluginName())
-    End Sub
     Private Function CurrentPluginName() As String
         Return If(lstPlugins.SelectedItems.Count > 0, TryCast(lstPlugins.SelectedItems(0).Tag, String), "")
     End Function
 
     Private Sub lstPlugins_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstPlugins.SelectedIndexChanged
-        lnkWiki.Text = PluginManager.BaseWikiUrl & CurrentPluginName()
-        lnkBinaries.Text = PluginManager.BaseBinaryUrl & CurrentPluginName()
-        lnkSource.Text = PluginManager.BaseSourceUrl & CurrentPluginName()
+        lnkWiki.Text = "Wiki: " & CurrentPluginName()
+        lnkBinaries.Text = "Binaries:" & CurrentPluginName()
+        lnkSource.Text = "Source: " & CurrentPluginName()
     End Sub
 
+    Private Sub lnkWiki_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkWiki.LinkClicked
+        Dim PluginManager As New PluginManager(CodeRush.Options.Paths.CommunityPlugInsPath)
+        System.Diagnostics.Process.Start(PluginManager.BaseWikiUrl & CurrentPluginName())
+    End Sub
+
+    Private Sub lnkBinaries_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkBinaries.LinkClicked
+        Dim PluginManager As New PluginManager(CodeRush.Options.Paths.CommunityPlugInsPath)
+        System.Diagnostics.Process.Start(PluginManager.BaseBinaryUrl & CurrentPluginName())
+    End Sub
+
+    Private Sub lnkSource_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkSource.LinkClicked
+        Dim PluginManager As New PluginManager(CodeRush.Options.Paths.CommunityPlugInsPath)
+        System.Diagnostics.Process.Start(PluginManager.BaseSourceUrl & CurrentPluginName())
+    End Sub
 End Class

@@ -10,7 +10,7 @@ Public Class PluginManager
     Public Const RemoteBasePluginFolder As String = "http://www.rorybecker.co.uk/DevExpress/Plugins/Community/"
     Public Const BaseWikiUrl As String = "http://code.google.com/p/dxcorecommunityplugins/wiki/"
     Public Const BaseBinaryUrl As String = "http://www.rorybecker.co.uk/DevExpress/Plugins/Community/"
-    Public Const BaseSourceUrl As String = "http://code.google.com/p/dxcorecommunityplugins/source/browse/trunk/http://code.google.com/p/dxcorecommunityplugins/wiki/"
+    Public Const BaseSourceUrl As String = "http://code.google.com/p/dxcorecommunityplugins/source/browse/trunk/"
     Private ReadOnly WebManager As New WebManager()
 #End Region
 #Region "Construction"
