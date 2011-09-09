@@ -1,0 +1,4 @@
+This plugin is experimentally not being hosted in the normal google code location. 
+Instead you should be able to find the source on GitHub here -> https://github.com/RoryBecker/DX_PluginUpdater
+
+Note: This also means that for now, version numbers do not indicate repo version.
