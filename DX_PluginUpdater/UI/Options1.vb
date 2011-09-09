@@ -63,7 +63,7 @@ Public Class Options1
     Private Sub cmdUpdateMultiplePlugins_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUpdateMultiplePlugins.Click
         Dim PluginNames = txtMultiplePlugins.Lines
         For Each PluginName In PluginNames
-            AddMessage(mPluginManager.TryInstallPlugin(PluginName, chkOnlyShowUpdates.Checked, chkforce.Checked))
+            AddMessage(mPluginManager.TryInstallPlugin(PluginName, chkOnlyShowUpdates.Checked, chkForceUpdate.Checked))
         Next
         Call AddMessage("All Plugins Checked.")
     End Sub
@@ -106,21 +106,31 @@ Public Class Options1
     End Sub
 
     Public Shared Function LoadSettings(ByVal Storage As DecoupledStorage) As Settings
-        Return New Settings() With {.Plugins = Storage.ReadStrings("PluginUpdater", "PluginNames")}
+        Dim Settings = New Settings()
+        Settings.Plugins = Storage.ReadStrings("PluginUpdater", "PluginNames")
+        Settings.OnlyShowUpdates = Storage.ReadBoolean("PluginUpdater", "OnlyShowUpdates")
+        Settings.ForceUpdates = Storage.ReadBoolean("PluginUpdater", "ForceUpdate")
+        Return Settings
     End Function
 #End Region
 #Region "Options"
     Private Sub Options1_PreparePage(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.OptionsPageStorageEventArgs) Handles Me.PreparePage
         Dim Settings = LoadSettings(ea.Storage)
         txtMultiplePlugins.Lines = Settings.Plugins
+        chkOnlyShowUpdates.Checked = Settings.OnlyShowupdates
+        chkForceUpdate.Checked = Settings.ForceUpdates
     End Sub
 
     Private Sub Options1_CommitChanges(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.CommitChangesEventArgs) Handles Me.CommitChanges
         ea.Storage.WriteStrings("PluginUpdater", "PluginNames", txtMultiplePlugins.Lines)
+        ea.Storage.WriteBoolean("PluginUpdater", "OnlyShowUpdates", chkOnlyShowUpdates.Checked)
+        ea.Storage.WriteBoolean("PluginUpdater", "ForceUpdate", chkForceUpdate.Checked)
     End Sub
 
     Private Sub Options1_RestoreDefaults(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.OptionsPageEventArgs) Handles Me.RestoreDefaults
         txtMultiplePlugins.Text = String.Empty
+        chkOnlyShowUpdates.Checked = False
+        chkForceUpdate.Checked = False
     End Sub
 #End Region
 End Class

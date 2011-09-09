@@ -193,6 +193,7 @@ Partial Class Options1
         '
         'chkForceUpdate
         '
+        Me.chkForceUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.chkForceUpdate.AutoSize = True
         Me.chkForceUpdate.Location = New System.Drawing.Point(463, 295)
         Me.chkForceUpdate.Name = "chkForceUpdate"
