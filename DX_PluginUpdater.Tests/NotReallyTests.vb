@@ -7,23 +7,26 @@ Imports System.Security.Permissions
 Imports System.Runtime.InteropServices
 Imports Microsoft.Win32
 <TestFixture()> _
-Public Class FunctionalTests
+Public Class NotReallyTests
+
+    ' The tests in this file are not intended to be automated tests.
+    ' They are more like bootstraped pieces of functionality that can be Started using a test runner
+
+
     Private Const mLocalPluginFolder As String = "C:\Users\Rory.Becker\Documents\DevExpress\IDE Tools\Community\PlugIns"
     <Test()> _
-    Public Sub UpdateSpecificPlugins_Test()
+    Public Sub Apply_CR_StyleNinja_Updates_Test()
         Dim PluginManager As New PluginManager(mLocalPluginFolder)
         Dim PluginNames As List(Of String) = New List(Of String)(New String() {"CR_StyleNinja"})
         Dim Updates = PluginManager.GetUpdatesForPlugins(PluginNames)
 
-        If Updates.Count > 0 AndAlso MsgBox(String.Format("{0} plugin updates are available", Updates.Count), MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-            For Each Update As RemotePluginRef In Updates
-                PluginManager.DownloadAndInstallPlugin(Update)
-            Next
-        End If
+        For Each Update As RemotePluginRef In Updates
+            PluginManager.DownloadAndInstallPlugin(Update)
+        Next
     End Sub
 
     <Test()> _
-    Public Sub GetUpdatablePlugins_Test()
+    Public Sub Apply_LocalPlugin_Updates_Test()
         Dim PluginManager As New PluginManager(mLocalPluginFolder)
         Dim UpdatablePlugins = PluginManager.GetLocalUpdates()
         For Each Plugin In UpdatablePlugins
@@ -31,21 +34,12 @@ Public Class FunctionalTests
         Next
     End Sub
     <Test()> _
-    Public Sub GetAllCommunityPlugins_Test()
+    Public Sub Install_AllCommunityPlugins_Test()
         Dim PluginManager As New PluginManager(mLocalPluginFolder)
         Dim PluginNames = PluginManager.GetCommunityPluginNames()
         For Each PluginName In PluginNames
             Dim Plugin = PluginManager.GetLatestRemoteVersionOfPlugin(PluginName)
             PluginManager.DownloadAndInstallPlugin(Plugin)
         Next
-    End Sub
-    <Test()> _
-    Public Sub RemoveExtension_Test()
-        Assert.AreEqual("Fred", New System.IO.FileInfo("Fred.Extension").NameWithoutExtension)
-    End Sub
-    <Test()> _
-    Public Sub FileExists_Test()
-        Dim Exist = File.Exists("C:\Users\Rory.Becker\Documents\DevExpress\IDE Tools\Community\PlugIns\CR_EasierIdentiers.dll")
-        Assert.AreEqual(True, Exist)
     End Sub
 End Class

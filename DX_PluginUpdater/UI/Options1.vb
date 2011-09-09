@@ -63,7 +63,7 @@ Public Class Options1
     Private Sub cmdUpdateMultiplePlugins_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUpdateMultiplePlugins.Click
         Dim PluginNames = txtMultiplePlugins.Lines
         For Each PluginName In PluginNames
-            AddMessage(mPluginManager.TryInstallPlugin(PluginName, chkOnlyShowUpdates.Checked))
+            AddMessage(mPluginManager.TryInstallPlugin(PluginName, chkOnlyShowUpdates.Checked, chkforce.Checked))
         Next
         Call AddMessage("All Plugins Checked.")
     End Sub

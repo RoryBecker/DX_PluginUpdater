@@ -130,4 +130,7 @@ You can use the "Open Plugin Folder" button to open an explorer window to your c
 
 A restart of Visual Studio will be required to make use of these updates.</value>
   </data>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

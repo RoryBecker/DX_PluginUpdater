@@ -28,6 +28,7 @@ Partial Class Options1
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Options1))
         Me.txtMultiplePlugins = New System.Windows.Forms.TextBox()
         Me.cmdUpdateMultiplePlugins = New System.Windows.Forms.Button()
@@ -43,6 +44,8 @@ Partial Class Options1
         Me.txtInstructions = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.chkOnlyShowUpdates = New System.Windows.Forms.CheckBox()
+        Me.chkForceUpdate = New System.Windows.Forms.CheckBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -61,9 +64,9 @@ Partial Class Options1
         'cmdUpdateMultiplePlugins
         '
         Me.cmdUpdateMultiplePlugins.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdUpdateMultiplePlugins.Location = New System.Drawing.Point(337, 291)
+        Me.cmdUpdateMultiplePlugins.Location = New System.Drawing.Point(326, 291)
         Me.cmdUpdateMultiplePlugins.Name = "cmdUpdateMultiplePlugins"
-        Me.cmdUpdateMultiplePlugins.Size = New System.Drawing.Size(143, 23)
+        Me.cmdUpdateMultiplePlugins.Size = New System.Drawing.Size(131, 23)
         Me.cmdUpdateMultiplePlugins.TabIndex = 6
         Me.cmdUpdateMultiplePlugins.Text = "Check for Updates Now"
         Me.cmdUpdateMultiplePlugins.UseVisualStyleBackColor = True
@@ -122,7 +125,7 @@ Partial Class Options1
         Me.cmdClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdClear.Location = New System.Drawing.Point(245, 291)
         Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(86, 23)
+        Me.cmdClear.Size = New System.Drawing.Size(75, 23)
         Me.cmdClear.TabIndex = 12
         Me.cmdClear.Text = "Clear Plugins"
         Me.cmdClear.UseVisualStyleBackColor = True
@@ -188,10 +191,22 @@ Partial Class Options1
         Me.chkOnlyShowUpdates.Text = "Only Show Updates"
         Me.chkOnlyShowUpdates.UseVisualStyleBackColor = True
         '
+        'chkForceUpdate
+        '
+        Me.chkForceUpdate.AutoSize = True
+        Me.chkForceUpdate.Location = New System.Drawing.Point(463, 295)
+        Me.chkForceUpdate.Name = "chkForceUpdate"
+        Me.chkForceUpdate.Size = New System.Drawing.Size(53, 17)
+        Me.chkForceUpdate.TabIndex = 18
+        Me.chkForceUpdate.Text = "Force"
+        Me.ToolTip1.SetToolTip(Me.chkForceUpdate, "Forces the updater to update plugins even if the remove version is not newer.")
+        Me.chkForceUpdate.UseVisualStyleBackColor = True
+        '
         'Options1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.chkForceUpdate)
         Me.Controls.Add(Me.chkOnlyShowUpdates)
         Me.Controls.Add(Me.txtInstructions)
         Me.Controls.Add(Me.cmdUpdateMe)
@@ -249,6 +264,8 @@ Partial Class Options1
     Friend WithEvents txtInstructions As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents chkOnlyShowUpdates As System.Windows.Forms.CheckBox
+    Friend WithEvents chkForceUpdate As System.Windows.Forms.CheckBox
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 
 	Public Shared ReadOnly Property FullPath() As String
 		Get

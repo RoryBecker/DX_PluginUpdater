@@ -165,7 +165,7 @@ Public Class PluginManager
         End Try
         Return String.Format("Downloaded and installed version {0} of plugin {1}", Plugin.Version, Plugin.BaseName)
     End Function
-    Public Function TryInstallPlugin(ByVal PluginName As String, Optional ByVal ShowUpdatesOnly As Boolean = False) As String
+    Public Function TryInstallPlugin(ByVal PluginName As String, Optional ByVal ShowUpdatesOnly As Boolean = False, Optional ByVal Force As Boolean = False) As String
         PluginName = PluginName.Trim
         If PluginName = String.Empty Then
             Return String.Empty
@@ -178,7 +178,7 @@ Public Class PluginManager
                     Return String.Empty
                 End If
                 Return String.Format("No versions of plugin {0} found on the community site.", PluginName)
-            Case LocalPlugin Is Nothing OrElse LocalPlugin.Version < Update.Version
+            Case LocalPlugin Is Nothing OrElse LocalPlugin.Version < Update.Version OrElse Force
                 Return DownloadAndInstallPlugin(PluginName)
             Case LocalPlugin.Version >= Update.Version
                 If ShowUpdatesOnly Then
