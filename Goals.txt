@@ -1,8 +1,0 @@
-Create Action to get updates to all selected plugins
-Create options page to configure p@lugins to update.
-
-Update Single plugin
-Update Multiple plugins
-
-Get Plugin Suggestions from Site
-Get Plugin Suggestions from Feed
