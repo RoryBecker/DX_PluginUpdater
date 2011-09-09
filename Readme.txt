@@ -4,16 +4,19 @@ The targeted plugins are those found on the community site http://code.google.co
 The plugins to download are to be configurable through the options screen.
 Current location of the page in question is Community\Plugins\PluginUpdater
 
+Note: Tis plugin requires DXCore version 11.1.7.11241 or better to function.
+(This means a build since Sept 2nd)
+
 Goals 
- - Provide Action to retrieve plugin updates for named Plugins.
- - Provide OptionsPage to configure plugins to update.
+	- Provide Action to retrieve plugin updates for named Plugins.
+	- Provide OptionsPage to configure plugins to update.
 
 Options 
- - Save simple named list of plugins
- - Allow manual list population
- - Allow population from "All Community Plugins"
- - Allow population from "Local Plugins"
- - Allow population from "New Community Plugins"
+	- Save simple named list of plugins
+	- Allow manual list population
+	- Allow list population from "All Community Plugins"
+	- Allow list population from "Local Plugins"
+	- Allow list population from "New Community Plugins"
 
 Future 
 	- Allow plugin retrieval from sites other than Community Site.
