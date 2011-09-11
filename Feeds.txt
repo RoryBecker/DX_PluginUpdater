@@ -1,0 +1,38 @@
+ - The existing system is just a plain list of plugins.
+	
+	CR_StyleNinja
+
+ - Version 1 feeds will to be simple lists of plugins and assume download location of rorybecker.co.uk
+
+	<Doc>
+		<Plugins>
+			<Plugin Name="CR_StyleNinja" />
+		</Plugins>
+	</Doc>
+
+ - Version 2 feeds can override DownloadFolder
+
+	<Doc>
+		<Plugins>
+			<Plugin Name="CR_StyleNinja" />
+			<Plugin Name="My_OtherPlugin" BaseDownload="http://MyLocation/MyOtherPlugin" />
+		</Plugins>
+	</Doc>
+
+ - Version 3 can use aliases
+
+	<Doc>
+		<Aliases>
+			<Alias Name="DefaultCommunity" Value="http://www.rorybecker.co.uk/DevExpress/Plugins/Community/" />
+		</Aliases>
+		<Plugin Name="{DefaultCommunity}CR_StyleNinja" />
+		<Plugin Name="My_OtherPlugin" BaseDownload="http://MyLocation/MyOtherPlugin" />
+	</Doc>
+
+ - Version 4 will introduce Feed Collections aka Packages
+
+The point of this is so that new feeds can be created and used without new deployments.
+
+
+Package @ Url 
+Package contains
