@@ -44,4 +44,12 @@ Public Class RemotePluginRef
         End Get
     End Property
 #End Region
+
+    Private Function Serialize() As String
+        'Return <Reference>
+        '           <Name></Name>
+
+        '       </Reference>
+    End Function
+
 End Class

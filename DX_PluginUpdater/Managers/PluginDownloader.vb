@@ -43,7 +43,6 @@ Public Class PluginDownloader
                 Return String.Empty
         End Select
     End Function
-
     Public Function DownloadAndInstallPlugin(ByVal PluginName As String) As String
         Return DownloadAndInstallPlugin(mCommunityPluginProvider.GetPluginReference(PluginName))
     End Function

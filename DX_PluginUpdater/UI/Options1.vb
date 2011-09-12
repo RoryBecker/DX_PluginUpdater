@@ -36,6 +36,7 @@ Public Class Options1
     Private ReadOnly mLocalPluginProvider As New LocalPluginProvider(CodeRush.Options.Paths.CommunityPlugInsPath)
     Private ReadOnly mPluginDownloader As New PluginDownloader(CodeRush.Options.Paths.CommunityPlugInsPath)
 #End Region
+    Private mSettings As New Settings
 #Region "Utility"
     Private Sub AddMessage(ByVal Message As String)
         If Message = String.Empty OrElse Message.Trim = String.Empty Then
@@ -107,33 +108,28 @@ Public Class Options1
     Private Sub cmdOpenPluginFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdOpenPluginFolder.Click
         System.Diagnostics.Process.Start(CodeRush.Options.Paths.CommunityPlugInsPath)
     End Sub
-
-    Public Shared Function LoadSettings(ByVal Storage As DecoupledStorage) As Settings
-        Dim Settings = New Settings()
-        Settings.Plugins = Storage.ReadStrings("PluginUpdater", "PluginNames")
-        Settings.OnlyShowUpdates = Storage.ReadBoolean("PluginUpdater", "OnlyShowUpdates")
-        Settings.ForceUpdates = Storage.ReadBoolean("PluginUpdater", "ForceUpdate")
-        Return Settings
-    End Function
 #End Region
 #Region "Options"
     Private Sub Options1_PreparePage(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.OptionsPageStorageEventArgs) Handles Me.PreparePage
-        Dim Settings = LoadSettings(ea.Storage)
+        mSettings.Load(ea.Storage)
+        Call AssignFrom(mSettings)
+    End Sub
+
+    Private Sub AssignFrom(ByVal Settings As Settings)
         txtMultiplePlugins.Lines = Settings.Plugins
-        chkOnlyShowUpdates.Checked = Settings.OnlyShowupdates
+        chkOnlyShowUpdates.Checked = Settings.OnlyShowUpdates
         chkForceUpdate.Checked = Settings.ForceUpdates
     End Sub
 
     Private Sub Options1_CommitChanges(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.CommitChangesEventArgs) Handles Me.CommitChanges
-        ea.Storage.WriteStrings("PluginUpdater", "PluginNames", txtMultiplePlugins.Lines)
-        ea.Storage.WriteBoolean("PluginUpdater", "OnlyShowUpdates", chkOnlyShowUpdates.Checked)
-        ea.Storage.WriteBoolean("PluginUpdater", "ForceUpdate", chkForceUpdate.Checked)
+        mSettings.Plugins = txtMultiplePlugins.Lines
+        mSettings.OnlyShowUpdates = chkOnlyShowUpdates.Checked
+        mSettings.ForceUpdates = chkForceUpdate.Checked
+        mSettings.Save(ea.Storage)
     End Sub
 
     Private Sub Options1_RestoreDefaults(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.OptionsPageEventArgs) Handles Me.RestoreDefaults
-        txtMultiplePlugins.Text = String.Empty
-        chkOnlyShowUpdates.Checked = False
-        chkForceUpdate.Checked = False
+        Call AssignFrom(New Settings)
     End Sub
 #End Region
 End Class
