@@ -16,30 +16,34 @@ Public Class NotReallyTests
     Private Const mLocalPluginFolder As String = "C:\Users\Rory.Becker\Documents\DevExpress\IDE Tools\Community\PlugIns"
     <Test()> _
     Public Sub Apply_CR_StyleNinja_Updates_Test()
-        Dim PluginManager As New PluginManager(mLocalPluginFolder)
+        Dim UpdateProvider As New UpdateProvider(mLocalPluginFolder)
+        Dim PluginDownloader As New PluginDownloader(mLocalPluginFolder)
         Dim PluginNames As List(Of String) = New List(Of String)(New String() {"CR_StyleNinja"})
-        Dim Updates = PluginManager.GetUpdatesForPlugins(PluginNames)
+        Dim Updates = UpdateProvider.GetUpdatesForPlugins(PluginNames)
 
         For Each Update As RemotePluginRef In Updates
-            PluginManager.DownloadAndInstallPlugin(Update)
+            PluginDownloader.DownloadAndInstallPlugin(Update)
         Next
     End Sub
 
     <Test()> _
     Public Sub Apply_LocalPlugin_Updates_Test()
-        Dim PluginManager As New PluginManager(mLocalPluginFolder)
-        Dim UpdatablePlugins = PluginManager.GetLocalUpdates()
+        Dim UpdateProvider As New UpdateProvider(mLocalPluginFolder)
+        Dim PluginDownloader As New PluginDownloader(mLocalPluginFolder)
+        Dim UpdatablePlugins = UpdateProvider.GetLocalUpdates()
         For Each Plugin In UpdatablePlugins
-            PluginManager.DownloadAndInstallPlugin(Plugin)
+            PluginDownloader.DownloadAndInstallPlugin(Plugin)
         Next
     End Sub
     <Test()> _
     Public Sub Install_AllCommunityPlugins_Test()
-        Dim PluginManager As New PluginManager(mLocalPluginFolder)
-        Dim PluginNames = PluginManager.GetCommunityPluginNames()
+        Dim PluginDownloader As New PluginDownloader(mLocalPluginFolder)
+        Dim CommunityPluginProvider As New CommunityPluginProvider
+
+        Dim PluginNames = CommunityPluginProvider.GetPluginNames()
         For Each PluginName In PluginNames
-            Dim Plugin = PluginManager.GetLatestRemoteVersionOfPlugin(PluginName)
-            PluginManager.DownloadAndInstallPlugin(Plugin)
+            Dim Plugin = CommunityPluginProvider.GetPluginReference(PluginName)
+            PluginDownloader.DownloadAndInstallPlugin(Plugin)
         Next
     End Sub
 End Class

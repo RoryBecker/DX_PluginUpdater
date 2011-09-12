@@ -58,13 +58,13 @@ Partial Class Options1
         Me.txtMultiplePlugins.Multiline = True
         Me.txtMultiplePlugins.Name = "txtMultiplePlugins"
         Me.txtMultiplePlugins.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtMultiplePlugins.Size = New System.Drawing.Size(325, 199)
+        Me.txtMultiplePlugins.Size = New System.Drawing.Size(299, 183)
         Me.txtMultiplePlugins.TabIndex = 5
         '
         'cmdUpdateMultiplePlugins
         '
         Me.cmdUpdateMultiplePlugins.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdUpdateMultiplePlugins.Location = New System.Drawing.Point(326, 291)
+        Me.cmdUpdateMultiplePlugins.Location = New System.Drawing.Point(326, 275)
         Me.cmdUpdateMultiplePlugins.Name = "cmdUpdateMultiplePlugins"
         Me.cmdUpdateMultiplePlugins.Size = New System.Drawing.Size(131, 23)
         Me.cmdUpdateMultiplePlugins.TabIndex = 6
@@ -75,18 +75,18 @@ Partial Class Options1
         '
         Me.txtLog.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtLog.Location = New System.Drawing.Point(3, 320)
+        Me.txtLog.Location = New System.Drawing.Point(3, 304)
         Me.txtLog.Multiline = True
         Me.txtLog.Name = "txtLog"
         Me.txtLog.ReadOnly = True
         Me.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtLog.Size = New System.Drawing.Size(567, 116)
+        Me.txtLog.Size = New System.Drawing.Size(541, 116)
         Me.txtLog.TabIndex = 7
         '
         'cmdClearLog
         '
         Me.cmdClearLog.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdClearLog.Location = New System.Drawing.Point(3, 442)
+        Me.cmdClearLog.Location = New System.Drawing.Point(3, 426)
         Me.cmdClearLog.Name = "cmdClearLog"
         Me.cmdClearLog.Size = New System.Drawing.Size(86, 23)
         Me.cmdClearLog.TabIndex = 8
@@ -123,7 +123,7 @@ Partial Class Options1
         'cmdClear
         '
         Me.cmdClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdClear.Location = New System.Drawing.Point(245, 291)
+        Me.cmdClear.Location = New System.Drawing.Point(245, 275)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(75, 23)
         Me.cmdClear.TabIndex = 12
@@ -133,7 +133,7 @@ Partial Class Options1
         'cmdOpenPluginFolder
         '
         Me.cmdOpenPluginFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdOpenPluginFolder.Location = New System.Drawing.Point(3, 291)
+        Me.cmdOpenPluginFolder.Location = New System.Drawing.Point(3, 275)
         Me.cmdOpenPluginFolder.Name = "cmdOpenPluginFolder"
         Me.cmdOpenPluginFolder.Size = New System.Drawing.Size(119, 23)
         Me.cmdOpenPluginFolder.TabIndex = 13
@@ -167,7 +167,7 @@ Partial Class Options1
         Me.txtInstructions.Multiline = True
         Me.txtInstructions.Name = "txtInstructions"
         Me.txtInstructions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtInstructions.Size = New System.Drawing.Size(237, 282)
+        Me.txtInstructions.Size = New System.Drawing.Size(237, 266)
         Me.txtInstructions.TabIndex = 16
         Me.txtInstructions.Text = resources.GetString("txtInstructions.Text")
         '
@@ -184,7 +184,7 @@ Partial Class Options1
         '
         Me.chkOnlyShowUpdates.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.chkOnlyShowUpdates.AutoSize = True
-        Me.chkOnlyShowUpdates.Location = New System.Drawing.Point(95, 446)
+        Me.chkOnlyShowUpdates.Location = New System.Drawing.Point(95, 430)
         Me.chkOnlyShowUpdates.Name = "chkOnlyShowUpdates"
         Me.chkOnlyShowUpdates.Size = New System.Drawing.Size(120, 17)
         Me.chkOnlyShowUpdates.TabIndex = 17
@@ -195,7 +195,7 @@ Partial Class Options1
         '
         Me.chkForceUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.chkForceUpdate.AutoSize = True
-        Me.chkForceUpdate.Location = New System.Drawing.Point(463, 295)
+        Me.chkForceUpdate.Location = New System.Drawing.Point(463, 279)
         Me.chkForceUpdate.Name = "chkForceUpdate"
         Me.chkForceUpdate.Size = New System.Drawing.Size(53, 17)
         Me.chkForceUpdate.TabIndex = 18
@@ -223,7 +223,7 @@ Partial Class Options1
         Me.Controls.Add(Me.txtMultiplePlugins)
         Me.Controls.Add(Me.Label2)
         Me.Name = "Options1"
-        Me.Size = New System.Drawing.Size(573, 471)
+        Me.Size = New System.Drawing.Size(547, 455)
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

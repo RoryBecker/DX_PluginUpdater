@@ -11,9 +11,9 @@ Public Class PluginPicker
         lstPlugins.Items.Clear()
         lstPlugins.Items.AddRange(PluginItems)
     End Sub
-    Private Sub PopulatePlugins(ByVal SourcePlugins As IEnumerable(Of PluginRef))
+    Private Sub PopulatePlugins(ByVal SourcePlugins As IEnumerable(Of RemotePluginRef))
         Dim PluginItems = (From Plugin In SourcePlugins _
-                          Select New ListViewItem(New String() {Plugin.BaseName, CStr(Plugin.Version)}) With {.Tag = Plugin}).ToArray
+                          Select New ListViewItem(New String() {Plugin.PluginName, CStr(Plugin.Version)}) With {.Tag = Plugin}).ToArray
 
         lstPlugins.Items.Clear()
         lstPlugins.Items.AddRange(PluginItems)
@@ -29,20 +29,20 @@ Public Class PluginPicker
             Return New List(Of String)
         End If
     End Function
-    Public Shared Function PickPlugins(ByVal SourcePlugins As IEnumerable(Of PluginRef)) As IEnumerable(Of PluginRef)
+    Public Shared Function PickPlugins(ByVal SourcePlugins As IEnumerable(Of RemotePluginRef)) As IEnumerable(Of RemotePluginRef)
         Dim Form As New PluginPicker
         Form.PopulatePlugins(SourcePlugins)
         If Form.ShowDialog() = DialogResult.OK Then
             Return Form.PickedPlugins()
         Else
-            Return New List(Of PluginRef)
+            Return New List(Of RemotePluginRef)
         End If
     End Function
 #End Region
 #Region "Picked"
-    Private Function PickedPlugins() As IEnumerable(Of PluginRef)
+    Private Function PickedPlugins() As IEnumerable(Of RemotePluginRef)
         Return From ListViewItem In lstPlugins.CheckedItems.Cast(Of ListViewItem)()
-               Select TryCast(ListViewItem.Tag, PluginRef)
+               Select TryCast(ListViewItem.Tag, RemotePluginRef)
     End Function
     Public Function PickedPluginNames() As IEnumerable(Of String)
         Return From ListViewItem In lstPlugins.CheckedItems.Cast(Of ListViewItem)()
@@ -74,18 +74,19 @@ Public Class PluginPicker
         lnkSource.Text = "Source: " & CurrentPluginName()
     End Sub
 
+    Public Const BaseWikiUrl As String = "http://code.google.com/p/dxcorecommunityplugins/wiki/"
+    Public Const BaseBinaryUrl As String = "http://www.rorybecker.co.uk/DevExpress/Plugins/Community/"
+    Public Const BaseSourceUrl As String = "http://code.google.com/p/dxcorecommunityplugins/source/browse/trunk/"
+
     Private Sub lnkWiki_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkWiki.LinkClicked
-        Dim PluginManager As New PluginManager(CodeRush.Options.Paths.CommunityPlugInsPath)
-        System.Diagnostics.Process.Start(PluginManager.BaseWikiUrl & CurrentPluginName())
+        System.Diagnostics.Process.Start(BaseWikiUrl & CurrentPluginName())
     End Sub
 
     Private Sub lnkBinaries_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkBinaries.LinkClicked
-        Dim PluginManager As New PluginManager(CodeRush.Options.Paths.CommunityPlugInsPath)
-        System.Diagnostics.Process.Start(PluginManager.BaseBinaryUrl & CurrentPluginName())
+        System.Diagnostics.Process.Start(BaseBinaryUrl & CurrentPluginName())
     End Sub
 
     Private Sub lnkSource_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkSource.LinkClicked
-        Dim PluginManager As New PluginManager(CodeRush.Options.Paths.CommunityPlugInsPath)
-        System.Diagnostics.Process.Start(PluginManager.BaseSourceUrl & CurrentPluginName())
+        System.Diagnostics.Process.Start(BaseSourceUrl & CurrentPluginName())
     End Sub
 End Class

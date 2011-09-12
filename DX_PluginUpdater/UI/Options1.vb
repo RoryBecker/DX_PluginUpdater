@@ -1,4 +1,5 @@
 Option Strict On
+Option Infer On
 Imports System.Text.RegularExpressions
 Imports System.ComponentModel
 Imports System.Drawing
@@ -31,7 +32,9 @@ Public Class Options1
 #End Region
 
 #Region "Fields"
-    Private ReadOnly mPluginManager As PluginManager = New PluginManager(CodeRush.Options.Paths.CommunityPlugInsPath)
+    Private ReadOnly mCommunityPluginProvider As New CommunityPluginProvider
+    Private ReadOnly mLocalPluginProvider As New LocalPluginProvider(CodeRush.Options.Paths.CommunityPlugInsPath)
+    Private ReadOnly mPluginDownloader As New PluginDownloader(CodeRush.Options.Paths.CommunityPlugInsPath)
 #End Region
 #Region "Utility"
     Private Sub AddMessage(ByVal Message As String)
@@ -52,9 +55,9 @@ Public Class Options1
         Next
     End Sub
 
-    Private Sub AddPlugins(ByVal Plugins As IEnumerable(Of PluginRef))
-        Dim PluginNames = From Plugin As PluginRef In Plugins
-                          Select Plugin.BaseName
+    Private Sub AddPlugins(ByVal Plugins As IEnumerable(Of RemotePluginRef))
+        Dim PluginNames = From Plugin As RemotePluginRef In Plugins
+                          Select Plugin.PluginName
         Call AddPlugins(PluginNames)
     End Sub
 #End Region
@@ -63,12 +66,12 @@ Public Class Options1
     Private Sub cmdUpdateMultiplePlugins_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUpdateMultiplePlugins.Click
         Dim PluginNames = txtMultiplePlugins.Lines
         For Each PluginName In PluginNames
-            AddMessage(mPluginManager.TryInstallPlugin(PluginName, chkOnlyShowUpdates.Checked, chkForceUpdate.Checked))
+            AddMessage(mPluginDownloader.TryInstallPlugin(PluginName, chkOnlyShowUpdates.Checked, chkForceUpdate.Checked))
         Next
         Call AddMessage("All Plugins Checked.")
     End Sub
     Private Sub cmdUpdateMe_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUpdateMe.Click
-        mPluginManager.DownloadAndInstallPlugin(mPluginManager.GetLatestRemoteVersionOfPlugin("DX_PluginUpdater"))
+        mPluginDownloader.DownloadAndInstallPlugin(mCommunityPluginProvider.GetPluginReference("DX_PluginUpdater"))
     End Sub
 #End Region
 
@@ -83,18 +86,18 @@ Public Class Options1
 
 #Region "List Population"
     Private Sub cmdAddFromLocalMachine_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAddFromLocalMachine.Click
-        Dim LocalPlugins = mPluginManager.GetLocalPluginReferences
+        Dim LocalPlugins = mLocalPluginProvider.GetPluginReferences
         Dim PickedPlugins = PluginPicker.PickPlugins(LocalPlugins)
         Call AddPlugins(PickedPlugins)
     End Sub
     Private Sub cmdAddFromCommunitySite_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAddFromCommunitySite.Click
-        Dim CommunityPlugins = mPluginManager.GetCommunityPluginNames
+        Dim CommunityPlugins = mCommunityPluginProvider.GetPluginNames
         Dim PickedPlugins = PluginPicker.PickPlugins(CommunityPlugins)
         Call AddPlugins(PickedPlugins)
     End Sub
     Private Sub cmdAddFromNewPlugins_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAddFromNewPlugins.Click
-        Dim CommunityPlugins = mPluginManager.GetCommunityPluginNames
-        Dim LocalPlugins = mPluginManager.GetLocalPluginNames
+        Dim CommunityPlugins = mCommunityPluginProvider.GetPluginNames
+        Dim LocalPlugins = mLocalPluginProvider.GetPluginNames
 
         Dim PickedPlugins = PluginPicker.PickPlugins(CommunityPlugins.Except(LocalPlugins))
         Call AddPlugins(PickedPlugins)

@@ -11,8 +11,8 @@ Public Class PlugIn1
 #Region " InitializePlugIn "
 	Public Overrides Sub InitializePlugIn()
 		MyBase.InitializePlugIn()
-        Call RegisterUpdatePlugins()
-        Call RegisterConfigurePluginUpdater()
+        Call RegisterUpdatePluginsCommand()
+        Call RegisterConfigurePluginUpdaterCommand()
     End Sub
 #End Region
 #Region " FinalizePlugIn "
@@ -22,9 +22,7 @@ Public Class PlugIn1
         MyBase.FinalizePlugIn()
     End Sub
 #End Region
-    Private PluginManager As New PluginManager(CodeRush.Options.Paths.CommunityPlugInsPath)
-
-    Public Sub RegisterUpdatePlugins()
+    Public Sub RegisterUpdatePluginsCommand()
         Dim UpdatePlugins As New DevExpress.CodeRush.Core.Action(components)
         CType(UpdatePlugins, System.ComponentModel.ISupportInitialize).BeginInit()
         UpdatePlugins.ActionName = "UpdatePlugins"
@@ -34,9 +32,10 @@ Public Class PlugIn1
         CType(UpdatePlugins, System.ComponentModel.ISupportInitialize).EndInit()
     End Sub
     Private Sub UpdatePlugins_Execute(ByVal ea As ExecuteEventArgs)
-        PluginManager.UpdatePlugins(Options1.LoadSettings(Options1.Storage).Plugins)
+        Dim PluginDownloader = New PluginDownloader(CodeRush.Options.Paths.CommunityPlugInsPath)
+        Call PluginDownloader.UpdatePlugins(Options1.LoadSettings(Options1.Storage).Plugins)
     End Sub
-    Public Sub RegisterConfigurePluginUpdater()
+    Public Sub RegisterConfigurePluginUpdaterCommand()
         Dim ConfigurePluginUpdater As New DevExpress.CodeRush.Core.Action(components)
         CType(ConfigurePluginUpdater, System.ComponentModel.ISupportInitialize).BeginInit()
         ConfigurePluginUpdater.ActionName = "ConfigurePluginUpdater"
