@@ -11,7 +11,7 @@ Public Class PluginPicker
         lstPlugins.Items.Clear()
         lstPlugins.Items.AddRange(PluginItems)
     End Sub
-    Private Sub PopulatePlugins(ByVal SourcePlugins As IEnumerable(Of RemotePluginRef))
+    Private Sub PopulatePlugins(Of T As PluginRef)(ByVal SourcePlugins As IEnumerable(Of T))
         Dim PluginItems = (From Plugin In SourcePlugins _
                           Select New ListViewItem(New String() {Plugin.PluginName, CStr(Plugin.Version)}) With {.Tag = Plugin}).ToArray
 
@@ -29,20 +29,20 @@ Public Class PluginPicker
             Return New List(Of String)
         End If
     End Function
-    Public Shared Function PickPlugins(ByVal SourcePlugins As IEnumerable(Of RemotePluginRef)) As IEnumerable(Of RemotePluginRef)
+    Public Shared Function PickPlugins(Of T As PluginRef)(ByVal SourcePlugins As IEnumerable(Of T)) As IEnumerable(Of T)
         Dim Form As New PluginPicker
         Form.PopulatePlugins(SourcePlugins)
         If Form.ShowDialog() = DialogResult.OK Then
-            Return Form.PickedPlugins()
+            Return Form.PickedPlugins(Of T)()
         Else
-            Return New List(Of RemotePluginRef)
+            Return New List(Of T)
         End If
     End Function
 #End Region
 #Region "Picked"
-    Private Function PickedPlugins() As IEnumerable(Of RemotePluginRef)
+    Private Function PickedPlugins(Of T As PluginRef)() As IEnumerable(Of T)
         Return From ListViewItem In lstPlugins.CheckedItems.Cast(Of ListViewItem)()
-               Select TryCast(ListViewItem.Tag, RemotePluginRef)
+               Select TryCast(ListViewItem.Tag, T)
     End Function
     Public Function PickedPluginNames() As IEnumerable(Of String)
         Return From ListViewItem In lstPlugins.CheckedItems.Cast(Of ListViewItem)()

@@ -1,18 +1,12 @@
-
-Public Class RemotePluginRef
-#Region "Fields"
+Imports System.Xml
+Imports System.Xml.Linq
+Public Class PluginRef
     Protected mPluginName As String
     Protected mVersion As Integer
-    ReadOnly mRemoteFolderUrl As String
-#End Region
-#Region "Construction"
-    Public Sub New(ByVal PluginName As String, Optional ByVal Version As Integer = 0, Optional ByVal RemoteFolderUrl As String = "")
+    Public Sub New(ByVal PluginName As String, ByVal Version As Integer)
         mPluginName = PluginName
         mVersion = Version
-        mRemoteFolderUrl = RemoteFolderUrl
     End Sub
-#End Region
-#Region "Properties"
     Public ReadOnly Property PluginName() As String
         Get
             Return mPluginName
@@ -28,6 +22,21 @@ Public Class RemotePluginRef
             Return String.Format("{0}.dll", PluginName)
         End Get
     End Property
+End Class
+Public Class RemotePluginRef
+    Inherits PluginRef
+#Region "Fields"
+    ReadOnly mRemoteFolderUrl As String
+#End Region
+#Region "Construction"
+    Public Sub New(ByVal PluginName As String,
+                   Optional ByVal RemoteFolderUrl As String = "", _
+                   Optional ByVal Version As Integer = 0)
+        MyBase.new(PluginName, Version)
+        mRemoteFolderUrl = RemoteFolderUrl
+    End Sub
+#End Region
+#Region "Properties"
     Public ReadOnly Property RemoteFolderUrl() As String
         Get
             Return mRemoteFolderUrl
@@ -46,10 +55,10 @@ Public Class RemotePluginRef
 #End Region
 
     Private Function Serialize() As String
-        'Return <Reference>
-        '           <Name></Name>
-
-        '       </Reference>
+        Return <Reference>
+                   <Name>PluginName</Name>
+                   <Version></Version>
+               </Reference>.ToString
     End Function
 
 End Class

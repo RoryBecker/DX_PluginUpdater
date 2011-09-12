@@ -85,6 +85,7 @@
     <Reference Include="DevExpress.CodeRush.StructuralParser" />
     <Reference Include="DevExpress.DXCore.Parser" />
     <Reference Include="DevExpress.CodeRush.VSCore" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -99,7 +100,6 @@
     <Compile Include="Exclusions.vb" />
     <Compile Include="Extensions\FileInfoExtensions.vb" />
     <Compile Include="Managers\CommunityPluginProvider.vb" />
-    <Compile Include="Managers\IPluginProvider.vb" />
     <Compile Include="Managers\LocalPluginProvider.vb" />
     <Compile Include="Managers\UpdateProvider.vb" />
     <Compile Include="Settings.vb" />

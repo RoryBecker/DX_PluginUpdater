@@ -56,8 +56,8 @@ Public Class Options1
         Next
     End Sub
 
-    Private Sub AddPlugins(ByVal Plugins As IEnumerable(Of RemotePluginRef))
-        Dim PluginNames = From Plugin As RemotePluginRef In Plugins
+    Private Sub AddPlugins(Of T As PluginRef)(ByVal Plugins As IEnumerable(Of T))
+        Dim PluginNames = From Plugin As PluginRef In Plugins
                           Select Plugin.PluginName
         Call AddPlugins(PluginNames)
     End Sub
@@ -72,7 +72,8 @@ Public Class Options1
         Call AddMessage("All Plugins Checked.")
     End Sub
     Private Sub cmdUpdateMe_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUpdateMe.Click
-        mPluginDownloader.DownloadAndInstallPlugin(mCommunityPluginProvider.GetPluginReference("DX_PluginUpdater"))
+        Dim Plugin As RemotePluginRef = mCommunityPluginProvider.GetPluginReference("DX_PluginUpdater")
+        mPluginDownloader.DownloadAndInstallPlugin(Plugin)
     End Sub
 #End Region
 
@@ -88,7 +89,8 @@ Public Class Options1
 #Region "List Population"
     Private Sub cmdAddFromLocalMachine_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAddFromLocalMachine.Click
         Dim LocalPlugins = mLocalPluginProvider.GetPluginReferences
-        Dim PickedPlugins = PluginPicker.PickPlugins(LocalPlugins)
+        Dim RemoteReferences = mCommunityPluginProvider.GetPluginReferences(LocalPlugins)
+        Dim PickedPlugins = PluginPicker.PickPlugins(RemoteReferences)
         Call AddPlugins(PickedPlugins)
     End Sub
     Private Sub cmdAddFromCommunitySite_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAddFromCommunitySite.Click

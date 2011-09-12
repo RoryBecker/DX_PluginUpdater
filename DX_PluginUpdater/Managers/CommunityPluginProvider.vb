@@ -1,11 +1,11 @@
 Imports System.Text.RegularExpressions
 Imports System.Linq
+Imports System.Collections.Generic
 Public Class CommunityPluginProvider
-    Implements IPluginProvider
     Public Const RemoteBasePluginFolder As String = "http://www.rorybecker.co.uk/DevExpress/Plugins/Community/"
     Private ReadOnly WebManager As New WebManager()
 
-    Public Function GetPluginNames() As IEnumerable(Of String) Implements IPluginProvider.GetPluginNames
+    Public Function GetPluginNames() As IEnumerable(Of String)
         Dim Plugins As New List(Of String)
 
         Dim Content = WebManager.GetUrlContentAsString(RemoteBasePluginFolder)
@@ -16,7 +16,7 @@ Public Class CommunityPluginProvider
         Next
         Return Plugins
     End Function
-    Public Function GetPluginReferences() As IEnumerable(Of RemotePluginRef) Implements IPluginProvider.GetPluginReferences
+    Public Function GetPluginReferences() As IEnumerable(Of RemotePluginRef)
         Dim Plugins As New List(Of RemotePluginRef)
         Dim Content = WebManager.GetUrlContentAsString(RemoteBasePluginFolder)
         Dim regex As Regex = New Regex("<A HREF=""/DevExpress/Plugins/Community/(?<Plugin>(\w|-|_)+)/"">", _
@@ -29,10 +29,20 @@ Public Class CommunityPluginProvider
         Next
         Return Plugins
     End Function
-    Public Function GetPluginReference(ByVal PluginName As String) As RemotePluginRef Implements IPluginProvider.GetPluginReference
+    Public Function GetPluginReferences(ByVal LocalPlugins As IEnumerable(Of PluginRef)) As IEnumerable(Of RemotePluginRef)
+        Dim Results As New List(Of RemotePluginRef)
+        For Each PluginRef As PluginRef In LocalPlugins
+            Dim RemoteReference = GetPluginReference(PluginRef.PluginName)
+            If RemoteReference IsNot Nothing Then
+                Results.Add(RemoteReference)
+            End If
+        Next
+        Return Results
+    End Function
+    Public Function GetPluginReference(ByVal PluginName As String) As RemotePluginRef
         Dim URL = GetPluginFolderUrl(PluginName)
-        Dim Content = WebManager.GetUrlContentAsString(URL)
-        If Content.Contains("Oops") Then
+        Dim Content As String = String.Empty
+        If Not WebManager.ContentIsNot404(URL, Content) Then
             Return Nothing
         End If
         Dim LatestPlugin As RemotePluginRef = Nothing
@@ -40,8 +50,9 @@ Public Class CommunityPluginProvider
                                   RegexOptions.CultureInvariant Or RegexOptions.Compiled)
         For Each Match In regex.Matches(Content)
             Dim Plugin As RemotePluginRef = New RemotePluginRef(Match.Groups("Plugin").Value, _
-                                                    CInt(Match.Groups("Version").Value), _
-                                                    GetPluginFolderUrl(Match.Groups("Plugin").Value))
+                                                    GetPluginFolderUrl(Match.Groups("Plugin").Value), _
+                                                    CInt(Match.Groups("Version").Value) _
+                                                    )
 
             If LatestPlugin Is Nothing _
                 OrElse Plugin.Version > LatestPlugin.Version Then
