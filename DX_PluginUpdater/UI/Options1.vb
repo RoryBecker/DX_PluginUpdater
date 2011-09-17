@@ -94,15 +94,15 @@ Public Class Options1
         Call AddPlugins(PickedPlugins)
     End Sub
     Private Sub cmdAddFromCommunitySite_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAddFromCommunitySite.Click
-        Dim CommunityPlugins = mCommunityPluginProvider.GetPluginNames
+        Dim CommunityPlugins = mCommunityPluginProvider.GetPluginReferencesQuick
         Dim PickedPlugins = PluginPicker.PickPlugins(CommunityPlugins)
         Call AddPlugins(PickedPlugins)
     End Sub
     Private Sub cmdAddFromNewPlugins_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAddFromNewPlugins.Click
-        Dim CommunityPlugins = mCommunityPluginProvider.GetPluginNames
-        Dim LocalPlugins = mLocalPluginProvider.GetPluginNames
-
-        Dim PickedPlugins = PluginPicker.PickPlugins(CommunityPlugins.Except(LocalPlugins))
+        Dim CommunityPlugins = mCommunityPluginProvider.GetPluginReferencesQuick
+        Dim LocalPluginNames = From plugin In mLocalPluginProvider.GetPluginReferences Select plugin.PluginName
+        Dim NewPlugins = From plugin In CommunityPlugins Where Not LocalPluginNames.Contains(plugin.PluginName)
+        Dim PickedPlugins = PluginPicker.PickPlugins(NewPlugins)
         Call AddPlugins(PickedPlugins)
     End Sub
 #End Region

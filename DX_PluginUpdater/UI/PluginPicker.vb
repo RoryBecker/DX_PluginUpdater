@@ -20,15 +20,6 @@ Public Class PluginPicker
     End Sub
 #End Region
 #Region "Get"
-    Public Shared Function PickPlugins(ByVal SourcePlugins As IEnumerable(Of System.String)) As IEnumerable(Of System.String)
-        Dim Form As New PluginPicker
-        Form.PopulatePlugins(SourcePlugins)
-        If Form.ShowDialog() = DialogResult.OK Then
-            Return Form.PickedPluginNames()
-        Else
-            Return New List(Of String)
-        End If
-    End Function
     Public Shared Function PickPlugins(Of T As PluginRef)(ByVal SourcePlugins As IEnumerable(Of T)) As IEnumerable(Of T)
         Dim Form As New PluginPicker
         Form.PopulatePlugins(SourcePlugins)
@@ -43,10 +34,6 @@ Public Class PluginPicker
     Private Function PickedPlugins(Of T As PluginRef)() As IEnumerable(Of T)
         Return From ListViewItem In lstPlugins.CheckedItems.Cast(Of ListViewItem)()
                Select TryCast(ListViewItem.Tag, T)
-    End Function
-    Public Function PickedPluginNames() As IEnumerable(Of String)
-        Return From ListViewItem In lstPlugins.CheckedItems.Cast(Of ListViewItem)()
-               Select TryCast(ListViewItem.Tag, String)
     End Function
 #End Region
 
