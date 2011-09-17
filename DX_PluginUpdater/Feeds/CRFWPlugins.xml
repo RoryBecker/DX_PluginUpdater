@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Doc>
+  <Plugins BaseFolder="http://www.rorybecker.co.uk/DevExpress/Plugins/Community/">
+    <Plugin Name="CR_MultiSelect" />
+    <Plugin Name="CR_EasierIdentifiers" />
+    <Plugin Name="CR_Dispos-o-matic" />
+    <Plugin Name="CR_SyncNamespacesToFolder" />
+    <Plugin Name="CR_SuperSiblingNav" />
+    <Plugin Name="CR_StringFormatter" />
+    <Plugin Name="CR_RemoveOuterBlock" />
+    <Plugin Name="CR_PrimitiveTab" />
+    <Plugin Name="CR_OptionsInverter" />
+    <Plugin Name="CR_ObjectInitializerToConstructor" />
+    <Plugin Name="CR_ExtensionMethodsHelper" />
+    <Plugin Name="CR_ProjectReferenceDefaults" />
+    <Plugin Name="CR_JumpToType" />
+    
+  </Plugins>
+</Doc>

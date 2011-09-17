@@ -102,6 +102,7 @@
     <Compile Include="Managers\LocalPluginProvider.vb" />
     <Compile Include="Managers\PluginProviders\BaseRemotePluginProvider.vb" />
     <Compile Include="Managers\PluginProviders\CommunityPluginProvider.vb" />
+    <Compile Include="Managers\PluginProviders\FeedPluginProvider.vb" />
     <Compile Include="Managers\UpdateProvider.vb" />
     <Compile Include="Settings.vb" />
     <Compile Include="UI\Options1.Designer.vb">
@@ -155,6 +156,8 @@
   <ItemGroup>
     <Content Include="DeploymentFiles\DX_PluginUpdater.Readme.txt" />
     <Content Include="DeploymentFiles\Ionic.Zip.Reduced.Licence.txt" />
+    <Content Include="Feeds\CRFWPlugins.xml" />
+    <Content Include="Feeds\RoryPlugins.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

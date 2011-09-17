@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Doc>
+  <Plugins BaseFolder="http://www.rorybecker.co.uk/DevExpress/Plugins/Community/">
+    <Plugin Name="CR_StyleNinja" />
+    <Plugin Name="DX_GenerateProxy" />
+    <Plugin Name="DX_InterfaceNav" />
+    <Plugin Name="CR_PromoteExpressionToParameter" />
+    <Plugin Name="CR_DeclareParameter" />
+    <Plugin Name="DX_LocateInSolutionExplorer" />
+    <Plugin Name="DX_CloseFiles" />
+    <Plugin Name="DX_StudioSizer" />
+    <Plugin Name="DX_ConvertToTryParse" />
+    
+
+  </Plugins>
+</Doc>
