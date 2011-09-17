@@ -99,7 +99,7 @@
     <Compile Include="Extensions\ByteExtensions.vb" />
     <Compile Include="Exclusions.vb" />
     <Compile Include="Extensions\FileInfoExtensions.vb" />
-    <Compile Include="Managers\CommunityPluginProvider.vb" />
+    <Compile Include="Managers\PluginProviders\CommunityPluginProvider.vb" />
     <Compile Include="Managers\LocalPluginProvider.vb" />
     <Compile Include="Managers\UpdateProvider.vb" />
     <Compile Include="Settings.vb" />
@@ -150,6 +150,10 @@
     <EmbeddedResource Include="UI\PluginPicker.resx">
       <DependentUpon>PluginPicker.vb</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DeploymentFiles\DX_PluginUpdater.Readme.txt" />
+    <Content Include="DeploymentFiles\Ionic.Zip.Reduced.Licence.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
