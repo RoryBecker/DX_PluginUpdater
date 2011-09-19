@@ -33,6 +33,8 @@ Public Class Options1
 
 #Region "Fields"
     Private ReadOnly mCommunityPluginProvider As New CommunityPluginProvider
+    Private ReadOnly mRoryPluginProvider As New FeedPluginProvider("http://rorybecker.co.uk/DevExpress/community/plugins/RoryPlugins.xml")
+    Private ReadOnly mCRFWPluginProvider As New FeedPluginProvider("http://rorybecker.co.uk/DevExpress/community/plugins/CRFWPlugins.xml")
     Private ReadOnly mLocalPluginProvider As New LocalPluginProvider(CodeRush.Options.Paths.CommunityPlugInsPath)
     Private ReadOnly mPluginDownloader As New PluginDownloader(CodeRush.Options.Paths.CommunityPlugInsPath)
 #End Region
@@ -93,6 +95,7 @@ Public Class Options1
         Dim PickedPlugins = PluginPicker.PickPlugins(RemoteReferences)
         Call AddPlugins(PickedPlugins)
     End Sub
+
     Private Sub cmdAddFromCommunitySite_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAddFromCommunitySite.Click
         Dim CommunityPlugins = mCommunityPluginProvider.GetPluginReferencesQuick
         Dim PickedPlugins = PluginPicker.PickPlugins(CommunityPlugins)
@@ -102,6 +105,22 @@ Public Class Options1
         Dim CommunityPlugins = mCommunityPluginProvider.GetPluginReferencesQuick
         Dim LocalPluginNames = From plugin In mLocalPluginProvider.GetPluginReferences Select plugin.PluginName
         Dim NewPlugins = From plugin In CommunityPlugins Where Not LocalPluginNames.Contains(plugin.PluginName)
+        Dim PickedPlugins = PluginPicker.PickPlugins(NewPlugins)
+        Call AddPlugins(PickedPlugins)
+    End Sub
+
+    Private Sub cmdCRFW_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCRFW.Click
+        Call AddFeedPlugins(mCRFWPluginProvider)
+    End Sub
+
+    Private Sub cmdRoryPlugins_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdRoryPlugins.Click
+        Call AddFeedPlugins(mRoryPluginProvider)
+    End Sub
+
+    Private Sub AddFeedPlugins(ByVal FeedProvider As FeedPluginProvider)
+        Dim PluginSource = FeedProvider.GetPluginReferencesQuick
+        Dim LocalPluginNames = From plugin In mLocalPluginProvider.GetPluginReferences Select plugin.PluginName
+        Dim NewPlugins = From plugin In PluginSource Where Not LocalPluginNames.Contains(plugin.PluginName)
         Dim PickedPlugins = PluginPicker.PickPlugins(NewPlugins)
         Call AddPlugins(PickedPlugins)
     End Sub

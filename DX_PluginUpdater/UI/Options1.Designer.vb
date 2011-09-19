@@ -46,6 +46,8 @@ Partial Class Options1
         Me.chkOnlyShowUpdates = New System.Windows.Forms.CheckBox()
         Me.chkForceUpdate = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.cmdCRFW = New System.Windows.Forms.Button()
+        Me.cmdRoryPlugins = New System.Windows.Forms.Button()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -54,11 +56,11 @@ Partial Class Options1
         Me.txtMultiplePlugins.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtMultiplePlugins.Location = New System.Drawing.Point(245, 86)
+        Me.txtMultiplePlugins.Location = New System.Drawing.Point(245, 109)
         Me.txtMultiplePlugins.Multiline = True
         Me.txtMultiplePlugins.Name = "txtMultiplePlugins"
         Me.txtMultiplePlugins.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtMultiplePlugins.Size = New System.Drawing.Size(299, 183)
+        Me.txtMultiplePlugins.Size = New System.Drawing.Size(299, 160)
         Me.txtMultiplePlugins.TabIndex = 5
         '
         'cmdUpdateMultiplePlugins
@@ -95,16 +97,16 @@ Partial Class Options1
         '
         'cmdAddFromLocalMachine
         '
-        Me.cmdAddFromLocalMachine.Location = New System.Drawing.Point(245, 19)
+        Me.cmdAddFromLocalMachine.Location = New System.Drawing.Point(245, 44)
         Me.cmdAddFromLocalMachine.Name = "cmdAddFromLocalMachine"
         Me.cmdAddFromLocalMachine.Size = New System.Drawing.Size(115, 23)
         Me.cmdAddFromLocalMachine.TabIndex = 9
-        Me.cmdAddFromLocalMachine.Text = "Local Machine..."
+        Me.cmdAddFromLocalMachine.Text = "Local Plugins..."
         Me.cmdAddFromLocalMachine.UseVisualStyleBackColor = True
         '
         'cmdAddFromCommunitySite
         '
-        Me.cmdAddFromCommunitySite.Location = New System.Drawing.Point(365, 19)
+        Me.cmdAddFromCommunitySite.Location = New System.Drawing.Point(245, 19)
         Me.cmdAddFromCommunitySite.Name = "cmdAddFromCommunitySite"
         Me.cmdAddFromCommunitySite.Size = New System.Drawing.Size(115, 23)
         Me.cmdAddFromCommunitySite.TabIndex = 10
@@ -142,7 +144,7 @@ Partial Class Options1
         '
         'cmdAddFromNewPlugins
         '
-        Me.cmdAddFromNewPlugins.Location = New System.Drawing.Point(245, 44)
+        Me.cmdAddFromNewPlugins.Location = New System.Drawing.Point(245, 69)
         Me.cmdAddFromNewPlugins.Name = "cmdAddFromNewPlugins"
         Me.cmdAddFromNewPlugins.Size = New System.Drawing.Size(115, 23)
         Me.cmdAddFromNewPlugins.TabIndex = 14
@@ -151,7 +153,7 @@ Partial Class Options1
         '
         'cmdUpdateMe
         '
-        Me.cmdUpdateMe.Location = New System.Drawing.Point(365, 44)
+        Me.cmdUpdateMe.Location = New System.Drawing.Point(366, 69)
         Me.cmdUpdateMe.Name = "cmdUpdateMe"
         Me.cmdUpdateMe.Size = New System.Drawing.Size(115, 23)
         Me.cmdUpdateMe.TabIndex = 15
@@ -174,7 +176,7 @@ Partial Class Options1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(245, 70)
+        Me.Label2.Location = New System.Drawing.Point(245, 93)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(136, 13)
         Me.Label2.TabIndex = 2
@@ -203,10 +205,32 @@ Partial Class Options1
         Me.ToolTip1.SetToolTip(Me.chkForceUpdate, "Forces the updater to update plugins even if the remove version is not newer.")
         Me.chkForceUpdate.UseVisualStyleBackColor = True
         '
+        'cmdCRFW
+        '
+        Me.cmdCRFW.Location = New System.Drawing.Point(366, 19)
+        Me.cmdCRFW.Name = "cmdCRFW"
+        Me.cmdCRFW.Size = New System.Drawing.Size(115, 23)
+        Me.cmdCRFW.TabIndex = 19
+        Me.cmdCRFW.Text = "CRFW Plugins..."
+        Me.cmdCRFW.UseVisualStyleBackColor = True
+        Me.cmdCRFW.Visible = False
+        '
+        'cmdRoryPlugins
+        '
+        Me.cmdRoryPlugins.Location = New System.Drawing.Point(366, 44)
+        Me.cmdRoryPlugins.Name = "cmdRoryPlugins"
+        Me.cmdRoryPlugins.Size = New System.Drawing.Size(115, 23)
+        Me.cmdRoryPlugins.TabIndex = 20
+        Me.cmdRoryPlugins.Text = "Rory's Plugins..."
+        Me.cmdRoryPlugins.UseVisualStyleBackColor = True
+        Me.cmdRoryPlugins.Visible = False
+        '
         'Options1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdRoryPlugins)
+        Me.Controls.Add(Me.cmdCRFW)
         Me.Controls.Add(Me.chkForceUpdate)
         Me.Controls.Add(Me.chkOnlyShowUpdates)
         Me.Controls.Add(Me.txtInstructions)
@@ -267,6 +291,8 @@ Partial Class Options1
     Friend WithEvents chkOnlyShowUpdates As System.Windows.Forms.CheckBox
     Friend WithEvents chkForceUpdate As System.Windows.Forms.CheckBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents cmdCRFW As System.Windows.Forms.Button
+    Friend WithEvents cmdRoryPlugins As System.Windows.Forms.Button
 
 	Public Shared ReadOnly Property FullPath() As String
 		Get

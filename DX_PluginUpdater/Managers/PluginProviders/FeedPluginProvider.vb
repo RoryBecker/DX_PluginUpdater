@@ -21,6 +21,6 @@ Public Class FeedPluginProvider
     End Function
 
     Public Function GetPluginReferencesQuick() As IEnumerable(Of RemotePluginRef)
-
+        Return GetPluginReferences()
     End Function
 End Class
