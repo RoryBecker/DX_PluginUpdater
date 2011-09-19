@@ -24,7 +24,6 @@ Partial Class PluginPicker
     Private Sub InitializeComponent()
         Me.lstPlugins = New System.Windows.Forms.ListView()
         Me.colName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colVersion = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cmdOk = New System.Windows.Forms.Button()
         Me.cmdSelectAll = New System.Windows.Forms.Button()
@@ -42,7 +41,7 @@ Partial Class PluginPicker
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lstPlugins.CheckBoxes = True
-        Me.lstPlugins.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colName, Me.colVersion})
+        Me.lstPlugins.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colName})
         Me.lstPlugins.Location = New System.Drawing.Point(12, 12)
         Me.lstPlugins.Name = "lstPlugins"
         Me.lstPlugins.Size = New System.Drawing.Size(411, 257)
@@ -54,10 +53,6 @@ Partial Class PluginPicker
         '
         Me.colName.Text = "Name"
         Me.colName.Width = 300
-        '
-        'colVersion
-        '
-        Me.colVersion.Text = "Version"
         '
         'cmdCancel
         '
@@ -170,7 +165,6 @@ Partial Class PluginPicker
     Friend WithEvents cmdSelectAll As System.Windows.Forms.Button
     Friend WithEvents cmdSelectNone As System.Windows.Forms.Button
     Friend WithEvents colName As System.Windows.Forms.ColumnHeader
-    Friend WithEvents colVersion As System.Windows.Forms.ColumnHeader
     Friend WithEvents lnkWiki As System.Windows.Forms.LinkLabel
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents lnkSource As System.Windows.Forms.LinkLabel

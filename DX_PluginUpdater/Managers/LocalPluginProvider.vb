@@ -1,5 +1,6 @@
 Imports System.IO
 Imports System.Linq
+Imports DX_PluginUpdater.FileInfoExtensions
 
 Public Class LocalPluginProvider
     ReadOnly mLocalPluginFolder As String

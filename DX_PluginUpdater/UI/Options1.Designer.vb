@@ -213,7 +213,6 @@ Partial Class Options1
         Me.cmdCRFW.TabIndex = 19
         Me.cmdCRFW.Text = "CRFW Plugins..."
         Me.cmdCRFW.UseVisualStyleBackColor = True
-        Me.cmdCRFW.Visible = False
         '
         'cmdRoryPlugins
         '
@@ -223,7 +222,6 @@ Partial Class Options1
         Me.cmdRoryPlugins.TabIndex = 20
         Me.cmdRoryPlugins.Text = "Rory's Plugins..."
         Me.cmdRoryPlugins.UseVisualStyleBackColor = True
-        Me.cmdRoryPlugins.Visible = False
         '
         'Options1
         '

@@ -10,7 +10,7 @@ Public Class FeedPluginProvider
     End Sub
     Private Function GetFeedXML() As XElement
         Dim Content As String = String.Empty
-        If WebManager.ContentIsNot404(mFeedUrl, Content) Then
+        If WebManager.ContentIs404(mFeedUrl, Content) Then
             Return Nothing ' 404
         End If
         Return XElement.Parse(Content)
