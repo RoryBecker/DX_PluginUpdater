@@ -7,9 +7,9 @@ Imports System.Text
 Public Class PluginManager
 #Region "Fields"
     ReadOnly mLocalPluginFolder As String
-    Public Const RemoteBasePluginFolder As String = "http://www.rorybecker.co.uk/DevExpress/Plugins/Community/"
+    Public Const RemoteBasePluginFolder As String = "http://www.rorybecker.co.uk/DevExpress/Community/Plugins/"
     Public Const BaseWikiUrl As String = "http://code.google.com/p/dxcorecommunityplugins/wiki/"
-    Public Const BaseBinaryUrl As String = "http://www.rorybecker.co.uk/DevExpress/Plugins/Community/"
+    Public Const BaseBinaryUrl As String = "http://www.rorybecker.co.uk/DevExpress/Community/Plugins/"
     Public Const BaseSourceUrl As String = "http://code.google.com/p/dxcorecommunityplugins/source/browse/trunk/"
     Private ReadOnly WebManager As New WebManager()
 #End Region
