@@ -64,6 +64,7 @@ Public Class Options1
         Call AddPlugins(PluginNames)
     End Sub
 #End Region
+
 #Region "UI Events"
 #Region "Update"
     Private Sub cmdUpdateMultiplePlugins_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUpdateMultiplePlugins.Click
