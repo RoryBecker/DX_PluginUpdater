@@ -101,7 +101,7 @@ Public Class Options1
         Dim AllLocalNew As String = Settings.AllLocalNew
         optAll.Checked = AllLocalNew.ToLower = "all"
         optLocal.Checked = AllLocalNew.ToLower = "local"
-        optAll.Checked = AllLocalNew.ToLower = "new"
+        optNew.Checked = AllLocalNew.ToLower = "new"
         chkLstPlugins.Items.Clear()
         chkLstPlugins.Items.AddRange(Settings.PluginNames)
         chkIncludeCommunitySite.Checked = Settings.ShowAllCommunityPlugins

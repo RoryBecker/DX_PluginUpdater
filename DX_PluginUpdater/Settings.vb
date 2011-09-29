@@ -1,7 +1,14 @@
 ﻿Imports DevExpress.CodeRush.Core
 
 Public Class Settings
-#Region "Constants"
+#Region "Setting Defaults"
+    Private Default_PluginNames As String()
+    Const Default_AllLocalNew As String = "All"
+    Const Default_ForceUpdates As Boolean = False
+    Const Default_OnlyShowUpdates As Boolean = False
+    Const Default_ShowAllCommunityPlugins As Boolean = False
+#End Region
+#Region "Setting Names"
     Private Const Section As String = "PluginUpdater"
     Private Const Setting_PluginNames As String = "PluginNames"
     Private Const Setting_OnlyShowUpdates As String = "OnlyShowUpdates"
@@ -9,6 +16,7 @@ Public Class Settings
     Private Const Setting_ShowAllCommunityPlugins As String = "ShowAllCommunityPlugins"
     Private Const Setting_AllLocalNew As String = "AllLocalNew"
 #End Region
+
 #Region "Fields"
     Private mPluginNames As String()
     Private mOnlyShowUpdates As Boolean = False
@@ -60,12 +68,12 @@ Public Class Settings
     End Property
 #End Region
     Public Sub Load(ByVal Storage As DecoupledStorage)
-        PluginNames = Storage.ReadStrings(Section, Setting_PluginNames)
-        OnlyShowUpdates = Storage.ReadBoolean(Section, Setting_OnlyShowUpdates)
-        ForceUpdates = Storage.ReadBoolean(Section, Setting_ForceUpdates)
+        PluginNames = Storage.ReadStrings(Section, Setting_PluginNames, Default_PluginNames)
+        OnlyShowUpdates = Storage.ReadBoolean(Section, Setting_OnlyShowUpdates, Default_OnlyShowUpdates)
+        ForceUpdates = Storage.ReadBoolean(Section, Setting_ForceUpdates, Default_ForceUpdates)
 
-        ShowAllCommunityPlugins = Storage.ReadBoolean(Section, Setting_ShowAllCommunityPlugins)
-        AllLocalNew = Storage.ReadString(Section, Setting_AllLocalNew)
+        ShowAllCommunityPlugins = Storage.ReadBoolean(Section, Setting_ShowAllCommunityPlugins, Default_ShowAllCommunityPlugins)
+        AllLocalNew = Storage.ReadString(Section, Setting_AllLocalNew, Default_AllLocalNew)
     End Sub
     Public Sub Save(ByVal Storage As DecoupledStorage)
         Storage.WriteStrings(Section, Setting_PluginNames, PluginNames)
@@ -73,7 +81,7 @@ Public Class Settings
         Storage.WriteBoolean(Section, Setting_ForceUpdates, ForceUpdates)
 
         Storage.WriteBoolean(Section, Setting_ShowAllCommunityPlugins, ShowAllCommunityPlugins)
-        Storage.ReadString(Section, Setting_AllLocalNew, AllLocalNew)
+        Storage.WriteString(Section, Setting_AllLocalNew, AllLocalNew)
     End Sub
 End Class
 
