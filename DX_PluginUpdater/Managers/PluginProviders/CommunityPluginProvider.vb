@@ -6,19 +6,19 @@ Imports System
 Public Class CommunityPluginProvider
     Inherits BaseRemotePluginProvider
 #Region "Fields"
-    Private Const mRootDownloadFolder As String = "/DevExpress/Community/Plugins/"
-    Private Const mRemoteBasePluginFolder As String = "http://www.rorybecker.co.uk" & mRootDownloadFolder
+    Private Const RootDownloadFolder As String = "/DevExpress/Community/Plugins/"
+    Public Const RemoteBasePluginFolder As String = "http://www.rorybecker.co.uk" & RootDownloadFolder
     Private Const REGEX_SpecificPluginZipFile As String = "(?<Plugin>({0}))_(?<Version>\d+)\.zip"">"
     Private Const REGEX_PluginZipFile As String = "(?<Plugin>(\w|-|_)+)_(?<Version>\d+)\.zip"">"
 #End Region
 
     Private Function GetRootFolderMatches() As MatchCollection
-        Dim Content = WebManager.GetUrlContentAsString(mRemoteBasePluginFolder)
-        Dim regex As Regex = New Regex(String.Format("<A HREF=""{0}(?<Plugin>(\w|-|_)+)/"">", mRootDownloadFolder), RegexOptions.CultureInvariant Or RegexOptions.Compiled)
+        Dim Content = WebManager.GetUrlContentAsString(RemoteBasePluginFolder)
+        Dim regex As Regex = New Regex(String.Format("<A HREF=""{0}(?<Plugin>(\w|-|_)+)/"">", RootDownloadFolder), RegexOptions.CultureInvariant Or RegexOptions.Compiled)
         Return regex.Matches(Content)
     End Function
     Private Function GetPluginFolderUrl(ByVal PluginName As String) As String
-        Return String.Format("{0}{1}", mRemoteBasePluginFolder, PluginName)
+        Return String.Format("{0}{1}", RemoteBasePluginFolder, PluginName)
     End Function
     Private Function ExtractZipReferences(ByVal Content As String, ByVal Regex As System.Text.RegularExpressions.Regex) As RemotePluginRef
         Dim LatestPlugin As RemotePluginRef = Nothing
@@ -66,7 +66,7 @@ Public Class CommunityPluginProvider
         Dim Plugins As New List(Of RemotePluginRef)()
         For Each Match As Match In GetRootFolderMatches()
             Dim PluginName = Match.Groups("Plugin").Value
-            Plugins.Add(New RemotePluginRef(PluginName, mRemoteBasePluginFolder & PluginName))
+            Plugins.Add(New RemotePluginRef(PluginName, RemoteBasePluginFolder & PluginName))
         Next
         Return Plugins
     End Function

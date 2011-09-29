@@ -117,19 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="txtInstructions.Text" xml:space="preserve">
-    <value>Note: For best effect you'll need version 11.1.8 or higher of the DXCore (or a daily build from no earlier than 01 Sept 2011) 
-
-Instructions
-------------
-Use the buttons in the upper right corner (Or just type) to add the names of some plugins to the memo on the right. One plugin per line.
-
-Click "Check for Updates" to then search for updates to these plugins and download them to your machine and install them to your community plugins folder.
-
-You can use the "Open Plugin Folder" button to open an explorer window to your community plugins folder.
-
-A restart of Visual Studio will be required to make use of these updates.</value>
-  </data>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

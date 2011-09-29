@@ -4,7 +4,6 @@ Imports System.Linq
 Imports System.Runtime.CompilerServices
 Imports System.Text
 Public Class PluginDownloader
-    Dim mLocalPluginFolder As String = String.Empty
     Private mLocalPluginProvider As LocalPluginProvider
     Private mCommunityPluginProvider As New CommunityPluginProvider
     Private ReadOnly WebManager As New WebManager()
@@ -50,7 +49,7 @@ Public Class PluginDownloader
         Try
             Dim FileBytes = WebManager.DownloadResource(Plugin.RemoteZipFileUrl)
             Using ToStreamVariable As Stream = ToStream(FileBytes)
-                WebManager.Unzip(ToStreamVariable, mLocalPluginFolder)
+                WebManager.Unzip(ToStreamVariable, mLocalPluginProvider.LocalPluginFolder)
             End Using
         Catch ex As Exception
             Return ex.Message

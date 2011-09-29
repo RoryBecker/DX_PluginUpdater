@@ -37,8 +37,9 @@ Public Class Options1
     Private ReadOnly mCRFWPluginProvider As New FeedPluginProvider("http://rorybecker.co.uk/DevExpress/community/plugins/CRFWPlugins.xml")
     Private ReadOnly mLocalPluginProvider As New LocalPluginProvider(CodeRush.Options.Paths.CommunityPlugInsPath)
     Private ReadOnly mPluginDownloader As New PluginDownloader(CodeRush.Options.Paths.CommunityPlugInsPath)
-#End Region
+    Private ReadOnly NoPlugins As IEnumerable(Of RemotePluginRef) = From item In New String() {} Select New RemotePluginRef(item)
     Private mSettings As New Settings
+#End Region
 #Region "Utility"
     Private Sub AddMessage(ByVal Message As String)
         If Message = String.Empty OrElse Message.Trim = String.Empty Then
@@ -49,26 +50,28 @@ Public Class Options1
         txtLog.ScrollToCaret()
     End Sub
 
-    Private Sub AddPlugins(ByVal Plugins As IEnumerable(Of String))
-        For Each Plugin In Plugins
-            If txtMultiplePlugins.Text.Trim <> String.Empty AndAlso Not txtMultiplePlugins.Text.EndsWith(Environment.NewLine) Then
-                txtMultiplePlugins.AppendText(Environment.NewLine)
-            End If
-            txtMultiplePlugins.AppendText(Plugin & Environment.NewLine)
-        Next
-    End Sub
+    'Private Sub AddPlugins(ByVal Plugins As IEnumerable(Of String))
+    '    For Each Plugin In Plugins
+    '        If txtMultiplePlugins.Text.Trim <> String.Empty AndAlso Not txtMultiplePlugins.Text.EndsWith(Environment.NewLine) Then
+    '            txtMultiplePlugins.AppendText(Environment.NewLine)
+    '        End If
+    '        txtMultiplePlugins.AppendText(Plugin & Environment.NewLine)
+    '    Next
+    'End Sub
 
-    Private Sub AddPlugins(Of T As PluginRef)(ByVal Plugins As IEnumerable(Of T))
-        Dim PluginNames = From Plugin As PluginRef In Plugins
-                          Select Plugin.PluginName
-        Call AddPlugins(PluginNames)
-    End Sub
+    'Private Sub AddPlugins(Of T As PluginRef)(ByVal Plugins As IEnumerable(Of T))
+    '    Dim PluginNames = From Plugin As PluginRef In Plugins
+    '                      Select Plugin.PluginName
+    '    Call AddPlugins(PluginNames)
+    'End Sub
 #End Region
 
 #Region "UI Events"
-#Region "Update"
-    Private Sub cmdUpdateMultiplePlugins_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUpdateMultiplePlugins.Click
-        Dim PluginNames = txtMultiplePlugins.Lines
+    Private Sub cmdRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdRefresh.Click
+        RefreshPluginList()
+    End Sub
+    Private Sub cmdUpdatePlugins_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUpdatePlugins.Click
+        Dim PluginNames = GetTickedPluginNames()
         For Each PluginName In PluginNames
             AddMessage(mPluginDownloader.TryInstallPlugin(PluginName, chkOnlyShowUpdates.Checked, chkForceUpdate.Checked))
         Next
@@ -78,54 +81,10 @@ Public Class Options1
         Dim Plugin As RemotePluginRef = mCommunityPluginProvider.GetPluginReference("DX_PluginUpdater")
         mPluginDownloader.DownloadAndInstallPlugin(Plugin)
     End Sub
-#End Region
 
-#Region "Clear"
     Private Sub cmdClearLog_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdClearLog.Click
         txtLog.Clear()
     End Sub
-    Private Sub cmdClear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdClear.Click
-        txtMultiplePlugins.Clear()
-    End Sub
-#End Region
-
-#Region "List Population"
-    Private Sub cmdAddFromLocalMachine_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAddFromLocalMachine.Click
-        Dim LocalPlugins = mLocalPluginProvider.GetPluginReferences
-        Dim RemoteReferences = mCommunityPluginProvider.GetPluginReferences(LocalPlugins)
-        Dim PickedPlugins = PluginPicker.PickPlugins(RemoteReferences)
-        Call AddPlugins(PickedPlugins)
-    End Sub
-
-    Private Sub cmdAddFromCommunitySite_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAddFromCommunitySite.Click
-        Dim CommunityPlugins = mCommunityPluginProvider.GetPluginReferencesQuick
-        Dim PickedPlugins = PluginPicker.PickPlugins(CommunityPlugins)
-        Call AddPlugins(PickedPlugins)
-    End Sub
-    Private Sub cmdAddFromNewPlugins_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAddFromNewPlugins.Click
-        Dim CommunityPlugins = mCommunityPluginProvider.GetPluginReferencesQuick
-        Dim LocalPluginNames = From plugin In mLocalPluginProvider.GetPluginReferences Select plugin.PluginName
-        Dim NewPlugins = From plugin In CommunityPlugins Where Not LocalPluginNames.Contains(plugin.PluginName)
-        Dim PickedPlugins = PluginPicker.PickPlugins(NewPlugins)
-        Call AddPlugins(PickedPlugins)
-    End Sub
-
-    Private Sub cmdCRFW_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCRFW.Click
-        Call AddFeedPlugins(mCRFWPluginProvider)
-    End Sub
-
-    Private Sub cmdRoryPlugins_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdRoryPlugins.Click
-        Call AddFeedPlugins(mRoryPluginProvider)
-    End Sub
-
-    Private Sub AddFeedPlugins(ByVal FeedProvider As FeedPluginProvider)
-        Dim PluginSource = FeedProvider.GetPluginReferencesQuick
-        Dim LocalPluginNames = From plugin In mLocalPluginProvider.GetPluginReferences Select plugin.PluginName
-        Dim NewPlugins = From plugin In PluginSource Where Not LocalPluginNames.Contains(plugin.PluginName)
-        Dim PickedPlugins = PluginPicker.PickPlugins(NewPlugins)
-        Call AddPlugins(PickedPlugins)
-    End Sub
-#End Region
 
     Private Sub cmdOpenPluginFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdOpenPluginFolder.Click
         System.Diagnostics.Process.Start(CodeRush.Options.Paths.CommunityPlugInsPath)
@@ -135,16 +94,23 @@ Public Class Options1
     Private Sub Options1_PreparePage(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.OptionsPageStorageEventArgs) Handles Me.PreparePage
         mSettings.Load(ea.Storage)
         Call AssignFrom(mSettings)
+        RefreshPluginList()
     End Sub
 
     Private Sub AssignFrom(ByVal Settings As Settings)
-        txtMultiplePlugins.Lines = Settings.Plugins
+        Dim AllLocalNew As String = Settings.AllLocalNew
+        optAll.Checked = AllLocalNew.ToLower = "all"
+        optLocal.Checked = AllLocalNew.ToLower = "local"
+        optAll.Checked = AllLocalNew.ToLower = "new"
+        chkLstPlugins.Items.Clear()
+        chkLstPlugins.Items.AddRange(Settings.PluginNames)
+        chkIncludeCommunitySite.Checked = Settings.ShowAllCommunityPlugins
         chkOnlyShowUpdates.Checked = Settings.OnlyShowUpdates
         chkForceUpdate.Checked = Settings.ForceUpdates
     End Sub
 
     Private Sub Options1_CommitChanges(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.CommitChangesEventArgs) Handles Me.CommitChanges
-        mSettings.Plugins = txtMultiplePlugins.Lines
+        'mSettings.Plugins = txtMultiplePlugins.Lines
         mSettings.OnlyShowUpdates = chkOnlyShowUpdates.Checked
         mSettings.ForceUpdates = chkForceUpdate.Checked
         mSettings.Save(ea.Storage)
@@ -154,4 +120,74 @@ Public Class Options1
         Call AssignFrom(New Settings)
     End Sub
 #End Region
+
+    Public Sub RefreshPluginList()
+        ' Update Plugins shown on tabPlugins
+        Dim FeedPlugins = GetFeedPlugins(txtFeeds.Text)
+        Dim CustomPlugins = GetCustomPlugins(txtCustom.Text)
+        Dim CommunityPlugins = GetCommunityPlugins()
+
+        Dim TickedPlugins As IEnumerable(Of RemotePluginRef) = NoPlugins 'Temporary
+        Dim AllPlugins = TickedPlugins _
+                         .Union(FeedPlugins) _
+                         .Union(CustomPlugins) _
+                         .Union(CommunityPlugins)
+
+        RepopulatePluginList(AllPlugins)
+    End Sub
+    Private Sub RepopulatePluginList(ByVal AllPlugins As IEnumerable(Of RemotePluginRef))
+        chkLstPlugins.Items.Clear()
+        For Each Plugin In From Item In AllPlugins Where Included(Item) Order By Item.PluginName
+            chkLstPlugins.Items.Add(Plugin.PluginName)
+        Next
+    End Sub
+    Private Function Included(ByVal Plugin As RemotePluginRef) As Boolean
+        If optAll.Checked Then
+            Return True
+        End If
+        If optNew.Checked AndAlso Not mLocalPluginProvider.PluginExists(Plugin) Then
+            Return True
+        End If
+        If optLocal.Checked AndAlso mLocalPluginProvider.PluginExists(Plugin) Then
+            Return True
+        End If
+        Return False
+    End Function
+    Public Function GetTickedPluginNames() As IEnumerable(Of String)
+        Return From item In chkLstPlugins.CheckedItems Select TryCast(item, String)
+    End Function
+
+#Region "Get Plugins"
+    Private Function GetCommunityPlugins() As IEnumerable(Of RemotePluginRef)
+        Dim CommunityPlugins As IEnumerable(Of RemotePluginRef) = Nothing
+        If chkIncludeCommunitySite.Checked Then
+            CommunityPlugins = From Plugin In mCommunityPluginProvider.GetPluginReferencesQuick()
+        Else
+            CommunityPlugins = NoPlugins
+        End If
+        Return CommunityPlugins
+    End Function
+    Private Function GetCustomPlugins(ByVal Source As String) As IEnumerable(Of RemotePluginRef)
+        Dim CustomPluginNames As String() = Split(Source.Trim, Environment.NewLine)
+        If CustomPluginNames.Count = 1 AndAlso CustomPluginNames(0).Trim = "" Then
+            CustomPluginNames = New String() {}
+        End If
+
+        Dim CustomPlugins = _
+            From Name As String In CustomPluginNames _
+            Select mCommunityPluginProvider.GetPluginReference(Name)
+        Return CustomPlugins
+    End Function
+    Private Function GetFeedPlugins(ByVal Source As String) As IEnumerable(Of RemotePluginRef)
+        Dim FeedNames As String() = Split(Source.Trim, Environment.NewLine)
+        If FeedNames.Count = 1 AndAlso FeedNames(0).Trim = "" Then
+            FeedNames = New String() {}
+        End If
+        Dim FeedPlugins = _
+                    From URL As String In FeedNames, plugin In New FeedPluginProvider(URL).GetPluginReferences() _
+                    Select plugin
+        Return FeedPlugins
+    End Function
+#End Region
+
 End Class

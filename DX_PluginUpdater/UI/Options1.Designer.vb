@@ -29,49 +29,43 @@ Partial Class Options1
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Options1))
-        Me.txtMultiplePlugins = New System.Windows.Forms.TextBox()
-        Me.cmdUpdateMultiplePlugins = New System.Windows.Forms.Button()
+        Me.cmdUpdatePlugins = New System.Windows.Forms.Button()
         Me.txtLog = New System.Windows.Forms.TextBox()
         Me.cmdClearLog = New System.Windows.Forms.Button()
-        Me.cmdAddFromLocalMachine = New System.Windows.Forms.Button()
-        Me.cmdAddFromCommunitySite = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdOpenPluginFolder = New System.Windows.Forms.Button()
-        Me.cmdAddFromNewPlugins = New System.Windows.Forms.Button()
         Me.cmdUpdateMe = New System.Windows.Forms.Button()
-        Me.txtInstructions = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.chkOnlyShowUpdates = New System.Windows.Forms.CheckBox()
         Me.chkForceUpdate = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.cmdCRFW = New System.Windows.Forms.Button()
-        Me.cmdRoryPlugins = New System.Windows.Forms.Button()
+        Me.optLocal = New System.Windows.Forms.RadioButton()
+        Me.optNew = New System.Windows.Forms.RadioButton()
+        Me.optAll = New System.Windows.Forms.RadioButton()
+        Me.cmdRefresh = New System.Windows.Forms.Button()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.tabPlugins = New System.Windows.Forms.TabPage()
+        Me.chkLstPlugins = New System.Windows.Forms.CheckedListBox()
+        Me.tabFeeds = New System.Windows.Forms.TabPage()
+        Me.txtFeeds = New System.Windows.Forms.TextBox()
+        Me.tabCustom = New System.Windows.Forms.TabPage()
+        Me.txtCustom = New System.Windows.Forms.TextBox()
+        Me.tabKeywords = New System.Windows.Forms.TabPage()
+        Me.chkIncludeCommunitySite = New System.Windows.Forms.CheckBox()
+        Me.TabControl1.SuspendLayout()
+        Me.tabPlugins.SuspendLayout()
+        Me.tabFeeds.SuspendLayout()
+        Me.tabCustom.SuspendLayout()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'txtMultiplePlugins
+        'cmdUpdatePlugins
         '
-        Me.txtMultiplePlugins.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtMultiplePlugins.Location = New System.Drawing.Point(245, 109)
-        Me.txtMultiplePlugins.Multiline = True
-        Me.txtMultiplePlugins.Name = "txtMultiplePlugins"
-        Me.txtMultiplePlugins.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtMultiplePlugins.Size = New System.Drawing.Size(299, 160)
-        Me.txtMultiplePlugins.TabIndex = 5
-        '
-        'cmdUpdateMultiplePlugins
-        '
-        Me.cmdUpdateMultiplePlugins.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdUpdateMultiplePlugins.Location = New System.Drawing.Point(326, 275)
-        Me.cmdUpdateMultiplePlugins.Name = "cmdUpdateMultiplePlugins"
-        Me.cmdUpdateMultiplePlugins.Size = New System.Drawing.Size(131, 23)
-        Me.cmdUpdateMultiplePlugins.TabIndex = 6
-        Me.cmdUpdateMultiplePlugins.Text = "Check for Updates Now"
-        Me.cmdUpdateMultiplePlugins.UseVisualStyleBackColor = True
+        Me.cmdUpdatePlugins.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmdUpdatePlugins.Location = New System.Drawing.Point(3, 273)
+        Me.cmdUpdatePlugins.Name = "cmdUpdatePlugins"
+        Me.cmdUpdatePlugins.Size = New System.Drawing.Size(131, 23)
+        Me.cmdUpdatePlugins.TabIndex = 6
+        Me.cmdUpdatePlugins.Text = "Check for Updates Now"
+        Me.cmdUpdatePlugins.UseVisualStyleBackColor = True
         '
         'txtLog
         '
@@ -95,92 +89,25 @@ Partial Class Options1
         Me.cmdClearLog.Text = "Clear Log"
         Me.cmdClearLog.UseVisualStyleBackColor = True
         '
-        'cmdAddFromLocalMachine
-        '
-        Me.cmdAddFromLocalMachine.Location = New System.Drawing.Point(245, 44)
-        Me.cmdAddFromLocalMachine.Name = "cmdAddFromLocalMachine"
-        Me.cmdAddFromLocalMachine.Size = New System.Drawing.Size(115, 23)
-        Me.cmdAddFromLocalMachine.TabIndex = 9
-        Me.cmdAddFromLocalMachine.Text = "Local Plugins..."
-        Me.cmdAddFromLocalMachine.UseVisualStyleBackColor = True
-        '
-        'cmdAddFromCommunitySite
-        '
-        Me.cmdAddFromCommunitySite.Location = New System.Drawing.Point(245, 19)
-        Me.cmdAddFromCommunitySite.Name = "cmdAddFromCommunitySite"
-        Me.cmdAddFromCommunitySite.Size = New System.Drawing.Size(115, 23)
-        Me.cmdAddFromCommunitySite.TabIndex = 10
-        Me.cmdAddFromCommunitySite.Text = "Community Site..."
-        Me.cmdAddFromCommunitySite.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(242, 3)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(55, 13)
-        Me.Label1.TabIndex = 11
-        Me.Label1.Text = "Add from:"
-        '
-        'cmdClear
-        '
-        Me.cmdClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdClear.Location = New System.Drawing.Point(245, 275)
-        Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(75, 23)
-        Me.cmdClear.TabIndex = 12
-        Me.cmdClear.Text = "Clear Plugins"
-        Me.cmdClear.UseVisualStyleBackColor = True
-        '
         'cmdOpenPluginFolder
         '
         Me.cmdOpenPluginFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdOpenPluginFolder.Location = New System.Drawing.Point(3, 275)
+        Me.cmdOpenPluginFolder.Location = New System.Drawing.Point(416, 275)
         Me.cmdOpenPluginFolder.Name = "cmdOpenPluginFolder"
         Me.cmdOpenPluginFolder.Size = New System.Drawing.Size(119, 23)
         Me.cmdOpenPluginFolder.TabIndex = 13
         Me.cmdOpenPluginFolder.Text = "Open Plugin Folder"
         Me.cmdOpenPluginFolder.UseVisualStyleBackColor = True
         '
-        'cmdAddFromNewPlugins
-        '
-        Me.cmdAddFromNewPlugins.Location = New System.Drawing.Point(245, 69)
-        Me.cmdAddFromNewPlugins.Name = "cmdAddFromNewPlugins"
-        Me.cmdAddFromNewPlugins.Size = New System.Drawing.Size(115, 23)
-        Me.cmdAddFromNewPlugins.TabIndex = 14
-        Me.cmdAddFromNewPlugins.Text = "New Plugins..."
-        Me.cmdAddFromNewPlugins.UseVisualStyleBackColor = True
-        '
         'cmdUpdateMe
         '
-        Me.cmdUpdateMe.Location = New System.Drawing.Point(366, 69)
+        Me.cmdUpdateMe.Location = New System.Drawing.Point(429, 3)
         Me.cmdUpdateMe.Name = "cmdUpdateMe"
-        Me.cmdUpdateMe.Size = New System.Drawing.Size(115, 23)
+        Me.cmdUpdateMe.Size = New System.Drawing.Size(115, 24)
         Me.cmdUpdateMe.TabIndex = 15
         Me.cmdUpdateMe.Text = "Update Me"
         Me.cmdUpdateMe.UseVisualStyleBackColor = True
         Me.cmdUpdateMe.Visible = False
-        '
-        'txtInstructions
-        '
-        Me.txtInstructions.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtInstructions.Location = New System.Drawing.Point(2, 3)
-        Me.txtInstructions.Multiline = True
-        Me.txtInstructions.Name = "txtInstructions"
-        Me.txtInstructions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtInstructions.Size = New System.Drawing.Size(237, 266)
-        Me.txtInstructions.TabIndex = 16
-        Me.txtInstructions.Text = resources.GetString("txtInstructions.Text")
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(245, 93)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(136, 13)
-        Me.Label2.TabIndex = 2
-        Me.Label2.Text = "Plugins to Install or Update"
         '
         'chkOnlyShowUpdates
         '
@@ -197,7 +124,7 @@ Partial Class Options1
         '
         Me.chkForceUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.chkForceUpdate.AutoSize = True
-        Me.chkForceUpdate.Location = New System.Drawing.Point(463, 279)
+        Me.chkForceUpdate.Location = New System.Drawing.Point(140, 277)
         Me.chkForceUpdate.Name = "chkForceUpdate"
         Me.chkForceUpdate.Size = New System.Drawing.Size(53, 17)
         Me.chkForceUpdate.TabIndex = 18
@@ -205,47 +132,172 @@ Partial Class Options1
         Me.ToolTip1.SetToolTip(Me.chkForceUpdate, "Forces the updater to update plugins even if the remove version is not newer.")
         Me.chkForceUpdate.UseVisualStyleBackColor = True
         '
-        'cmdCRFW
+        'optLocal
         '
-        Me.cmdCRFW.Location = New System.Drawing.Point(366, 19)
-        Me.cmdCRFW.Name = "cmdCRFW"
-        Me.cmdCRFW.Size = New System.Drawing.Size(115, 23)
-        Me.cmdCRFW.TabIndex = 19
-        Me.cmdCRFW.Text = "CRFW Plugins..."
-        Me.cmdCRFW.UseVisualStyleBackColor = True
+        Me.optLocal.AutoSize = True
+        Me.optLocal.Location = New System.Drawing.Point(374, 5)
+        Me.optLocal.Name = "optLocal"
+        Me.optLocal.Size = New System.Drawing.Size(49, 17)
+        Me.optLocal.TabIndex = 23
+        Me.optLocal.Text = "Local"
+        Me.optLocal.UseVisualStyleBackColor = True
         '
-        'cmdRoryPlugins
+        'optNew
         '
-        Me.cmdRoryPlugins.Location = New System.Drawing.Point(366, 44)
-        Me.cmdRoryPlugins.Name = "cmdRoryPlugins"
-        Me.cmdRoryPlugins.Size = New System.Drawing.Size(115, 23)
-        Me.cmdRoryPlugins.TabIndex = 20
-        Me.cmdRoryPlugins.Text = "Rory's Plugins..."
-        Me.cmdRoryPlugins.UseVisualStyleBackColor = True
+        Me.optNew.AutoSize = True
+        Me.optNew.Location = New System.Drawing.Point(321, 5)
+        Me.optNew.Name = "optNew"
+        Me.optNew.Size = New System.Drawing.Size(46, 17)
+        Me.optNew.TabIndex = 22
+        Me.optNew.Text = "New"
+        Me.optNew.UseVisualStyleBackColor = True
+        '
+        'optAll
+        '
+        Me.optAll.AutoSize = True
+        Me.optAll.Checked = True
+        Me.optAll.Location = New System.Drawing.Point(279, 5)
+        Me.optAll.Name = "optAll"
+        Me.optAll.Size = New System.Drawing.Size(36, 17)
+        Me.optAll.TabIndex = 21
+        Me.optAll.TabStop = True
+        Me.optAll.Text = "All"
+        Me.optAll.UseVisualStyleBackColor = True
+        '
+        'cmdRefresh
+        '
+        Me.cmdRefresh.Location = New System.Drawing.Point(225, 3)
+        Me.cmdRefresh.Name = "cmdRefresh"
+        Me.cmdRefresh.Size = New System.Drawing.Size(53, 20)
+        Me.cmdRefresh.TabIndex = 20
+        Me.cmdRefresh.Text = "Refresh"
+        Me.cmdRefresh.UseVisualStyleBackColor = True
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TabControl1.Controls.Add(Me.tabPlugins)
+        Me.TabControl1.Controls.Add(Me.tabFeeds)
+        Me.TabControl1.Controls.Add(Me.tabCustom)
+        Me.TabControl1.Controls.Add(Me.tabKeywords)
+        Me.TabControl1.Location = New System.Drawing.Point(3, 3)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(541, 264)
+        Me.TabControl1.TabIndex = 19
+        '
+        'tabPlugins
+        '
+        Me.tabPlugins.Controls.Add(Me.chkLstPlugins)
+        Me.tabPlugins.Controls.Add(Me.chkIncludeCommunitySite)
+        Me.tabPlugins.Location = New System.Drawing.Point(4, 22)
+        Me.tabPlugins.Name = "tabPlugins"
+        Me.tabPlugins.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabPlugins.Size = New System.Drawing.Size(533, 238)
+        Me.tabPlugins.TabIndex = 0
+        Me.tabPlugins.Text = "Plugins"
+        Me.tabPlugins.UseVisualStyleBackColor = True
+        '
+        'chkLstPlugins
+        '
+        Me.chkLstPlugins.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkLstPlugins.CheckOnClick = True
+        Me.chkLstPlugins.FormattingEnabled = True
+        Me.chkLstPlugins.Location = New System.Drawing.Point(6, 6)
+        Me.chkLstPlugins.Name = "chkLstPlugins"
+        Me.chkLstPlugins.Size = New System.Drawing.Size(521, 212)
+        Me.chkLstPlugins.TabIndex = 0
+        '
+        'tabFeeds
+        '
+        Me.tabFeeds.Controls.Add(Me.txtFeeds)
+        Me.tabFeeds.Location = New System.Drawing.Point(4, 22)
+        Me.tabFeeds.Name = "tabFeeds"
+        Me.tabFeeds.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabFeeds.Size = New System.Drawing.Size(533, 238)
+        Me.tabFeeds.TabIndex = 1
+        Me.tabFeeds.Text = "Feeds"
+        Me.tabFeeds.UseVisualStyleBackColor = True
+        '
+        'txtFeeds
+        '
+        Me.txtFeeds.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtFeeds.Location = New System.Drawing.Point(3, 3)
+        Me.txtFeeds.Multiline = True
+        Me.txtFeeds.Name = "txtFeeds"
+        Me.txtFeeds.Size = New System.Drawing.Size(527, 232)
+        Me.txtFeeds.TabIndex = 2
+        Me.txtFeeds.Text = "http://rorybecker.co.uk/DevExpress/community/plugins/CRFWPlugins.xml" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "http://rory" & _
+            "becker.co.uk/DevExpress/community/plugins/RoryPlugins.xml" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
+        'tabCustom
+        '
+        Me.tabCustom.Controls.Add(Me.txtCustom)
+        Me.tabCustom.Location = New System.Drawing.Point(4, 22)
+        Me.tabCustom.Name = "tabCustom"
+        Me.tabCustom.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabCustom.Size = New System.Drawing.Size(239, 193)
+        Me.tabCustom.TabIndex = 2
+        Me.tabCustom.Text = "Custom"
+        Me.tabCustom.UseVisualStyleBackColor = True
+        '
+        'txtCustom
+        '
+        Me.txtCustom.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtCustom.Location = New System.Drawing.Point(3, 3)
+        Me.txtCustom.Multiline = True
+        Me.txtCustom.Name = "txtCustom"
+        Me.txtCustom.Size = New System.Drawing.Size(233, 187)
+        Me.txtCustom.TabIndex = 2
+        '
+        'tabKeywords
+        '
+        Me.tabKeywords.Location = New System.Drawing.Point(4, 22)
+        Me.tabKeywords.Name = "tabKeywords"
+        Me.tabKeywords.Size = New System.Drawing.Size(239, 193)
+        Me.tabKeywords.TabIndex = 3
+        Me.tabKeywords.Text = "Keywords"
+        Me.tabKeywords.UseVisualStyleBackColor = True
+        '
+        'chkIncludeCommunitySite
+        '
+        Me.chkIncludeCommunitySite.AutoSize = True
+        Me.chkIncludeCommunitySite.Location = New System.Drawing.Point(7, 221)
+        Me.chkIncludeCommunitySite.Name = "chkIncludeCommunitySite"
+        Me.chkIncludeCommunitySite.Size = New System.Drawing.Size(179, 17)
+        Me.chkIncludeCommunitySite.TabIndex = 4
+        Me.chkIncludeCommunitySite.Text = "Show All Community Site Plugins"
+        Me.chkIncludeCommunitySite.UseVisualStyleBackColor = True
         '
         'Options1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.cmdRoryPlugins)
-        Me.Controls.Add(Me.cmdCRFW)
+        Me.Controls.Add(Me.optLocal)
+        Me.Controls.Add(Me.optNew)
+        Me.Controls.Add(Me.optAll)
+        Me.Controls.Add(Me.cmdRefresh)
         Me.Controls.Add(Me.chkForceUpdate)
         Me.Controls.Add(Me.chkOnlyShowUpdates)
-        Me.Controls.Add(Me.txtInstructions)
         Me.Controls.Add(Me.cmdUpdateMe)
-        Me.Controls.Add(Me.cmdAddFromNewPlugins)
         Me.Controls.Add(Me.cmdOpenPluginFolder)
-        Me.Controls.Add(Me.cmdClear)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.cmdAddFromCommunitySite)
-        Me.Controls.Add(Me.cmdAddFromLocalMachine)
         Me.Controls.Add(Me.cmdClearLog)
         Me.Controls.Add(Me.txtLog)
-        Me.Controls.Add(Me.cmdUpdateMultiplePlugins)
-        Me.Controls.Add(Me.txtMultiplePlugins)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.cmdUpdatePlugins)
+        Me.Controls.Add(Me.TabControl1)
         Me.Name = "Options1"
         Me.Size = New System.Drawing.Size(547, 455)
+        Me.TabControl1.ResumeLayout(False)
+        Me.tabPlugins.ResumeLayout(False)
+        Me.tabPlugins.PerformLayout()
+        Me.tabFeeds.ResumeLayout(False)
+        Me.tabFeeds.PerformLayout()
+        Me.tabCustom.ResumeLayout(False)
+        Me.tabCustom.PerformLayout()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -273,24 +325,27 @@ Partial Class Options1
     Public Shared Shadows Sub Show()
         DevExpress.CodeRush.Core.CodeRush.Command.Execute("Options", FullPath)
     End Sub
-    Friend WithEvents txtMultiplePlugins As System.Windows.Forms.TextBox
-    Friend WithEvents cmdUpdateMultiplePlugins As System.Windows.Forms.Button
+    Friend WithEvents cmdUpdatePlugins As System.Windows.Forms.Button
     Friend WithEvents txtLog As System.Windows.Forms.TextBox
     Friend WithEvents cmdClearLog As System.Windows.Forms.Button
-    Friend WithEvents cmdAddFromLocalMachine As System.Windows.Forms.Button
-    Friend WithEvents cmdAddFromCommunitySite As System.Windows.Forms.Button
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents cmdClear As System.Windows.Forms.Button
     Friend WithEvents cmdOpenPluginFolder As System.Windows.Forms.Button
-    Friend WithEvents cmdAddFromNewPlugins As System.Windows.Forms.Button
     Friend WithEvents cmdUpdateMe As System.Windows.Forms.Button
-    Friend WithEvents txtInstructions As System.Windows.Forms.TextBox
-    Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents chkOnlyShowUpdates As System.Windows.Forms.CheckBox
     Friend WithEvents chkForceUpdate As System.Windows.Forms.CheckBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents cmdCRFW As System.Windows.Forms.Button
-    Friend WithEvents cmdRoryPlugins As System.Windows.Forms.Button
+    Friend WithEvents optLocal As System.Windows.Forms.RadioButton
+    Friend WithEvents optNew As System.Windows.Forms.RadioButton
+    Friend WithEvents optAll As System.Windows.Forms.RadioButton
+    Friend WithEvents cmdRefresh As System.Windows.Forms.Button
+    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
+    Friend WithEvents tabPlugins As System.Windows.Forms.TabPage
+    Friend WithEvents chkLstPlugins As System.Windows.Forms.CheckedListBox
+    Friend WithEvents tabFeeds As System.Windows.Forms.TabPage
+    Friend WithEvents txtFeeds As System.Windows.Forms.TextBox
+    Friend WithEvents tabCustom As System.Windows.Forms.TabPage
+    Friend WithEvents txtCustom As System.Windows.Forms.TextBox
+    Friend WithEvents tabKeywords As System.Windows.Forms.TabPage
+    Friend WithEvents chkIncludeCommunitySite As System.Windows.Forms.CheckBox
 
 	Public Shared ReadOnly Property FullPath() As String
 		Get
