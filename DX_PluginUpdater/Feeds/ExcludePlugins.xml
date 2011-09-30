@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Doc>
+  <Plugins BaseFolder="http://www.rorybecker.co.uk/DevExpress/Plugins/Community/">
+    <Plugin Name="CR_ClassCleaner" />
+  </Plugins>
+</Doc>

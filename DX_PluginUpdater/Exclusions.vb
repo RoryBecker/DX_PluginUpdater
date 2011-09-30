@@ -13,7 +13,8 @@ Public Class Exclusions
         "Xceed.Compression", _
         "Xceed.Compression.Formats", _
         "Xceed.FileSystem", _
-        "Xceed.Ftp"})
+        "Xceed.Ftp", _
+        "Ionic.Zip.Reduced"})
 
     End Function
 End Class

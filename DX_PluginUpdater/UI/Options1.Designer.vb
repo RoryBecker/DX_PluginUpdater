@@ -71,12 +71,12 @@ Partial Class Options1
         '
         Me.txtLog.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtLog.Location = New System.Drawing.Point(3, 304)
+        Me.txtLog.Location = New System.Drawing.Point(3, 300)
         Me.txtLog.Multiline = True
         Me.txtLog.Name = "txtLog"
         Me.txtLog.ReadOnly = True
         Me.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtLog.Size = New System.Drawing.Size(541, 116)
+        Me.txtLog.Size = New System.Drawing.Size(544, 120)
         Me.txtLog.TabIndex = 7
         '
         'cmdClearLog
@@ -92,7 +92,7 @@ Partial Class Options1
         'cmdOpenPluginFolder
         '
         Me.cmdOpenPluginFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdOpenPluginFolder.Location = New System.Drawing.Point(416, 275)
+        Me.cmdOpenPluginFolder.Location = New System.Drawing.Point(424, 273)
         Me.cmdOpenPluginFolder.Name = "cmdOpenPluginFolder"
         Me.cmdOpenPluginFolder.Size = New System.Drawing.Size(119, 23)
         Me.cmdOpenPluginFolder.TabIndex = 13
@@ -166,7 +166,8 @@ Partial Class Options1
         '
         'cmdRefresh
         '
-        Me.cmdRefresh.Location = New System.Drawing.Point(225, 3)
+        Me.cmdRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cmdRefresh.Location = New System.Drawing.Point(474, 219)
         Me.cmdRefresh.Name = "cmdRefresh"
         Me.cmdRefresh.Size = New System.Drawing.Size(53, 20)
         Me.cmdRefresh.TabIndex = 20
@@ -185,17 +186,18 @@ Partial Class Options1
         Me.TabControl1.Location = New System.Drawing.Point(3, 3)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(541, 264)
+        Me.TabControl1.Size = New System.Drawing.Size(544, 268)
         Me.TabControl1.TabIndex = 19
         '
         'tabPlugins
         '
         Me.tabPlugins.Controls.Add(Me.chkLstPlugins)
         Me.tabPlugins.Controls.Add(Me.chkIncludeCommunitySite)
+        Me.tabPlugins.Controls.Add(Me.cmdRefresh)
         Me.tabPlugins.Location = New System.Drawing.Point(4, 22)
         Me.tabPlugins.Name = "tabPlugins"
         Me.tabPlugins.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabPlugins.Size = New System.Drawing.Size(533, 238)
+        Me.tabPlugins.Size = New System.Drawing.Size(536, 242)
         Me.tabPlugins.TabIndex = 0
         Me.tabPlugins.Text = "Plugins"
         Me.tabPlugins.UseVisualStyleBackColor = True
@@ -209,7 +211,7 @@ Partial Class Options1
         Me.chkLstPlugins.FormattingEnabled = True
         Me.chkLstPlugins.Location = New System.Drawing.Point(6, 6)
         Me.chkLstPlugins.Name = "chkLstPlugins"
-        Me.chkLstPlugins.Size = New System.Drawing.Size(521, 212)
+        Me.chkLstPlugins.Size = New System.Drawing.Size(524, 196)
         Me.chkLstPlugins.TabIndex = 0
         '
         'tabFeeds
@@ -218,7 +220,7 @@ Partial Class Options1
         Me.tabFeeds.Location = New System.Drawing.Point(4, 22)
         Me.tabFeeds.Name = "tabFeeds"
         Me.tabFeeds.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabFeeds.Size = New System.Drawing.Size(533, 238)
+        Me.tabFeeds.Size = New System.Drawing.Size(536, 248)
         Me.tabFeeds.TabIndex = 1
         Me.tabFeeds.Text = "Feeds"
         Me.tabFeeds.UseVisualStyleBackColor = True
@@ -229,7 +231,7 @@ Partial Class Options1
         Me.txtFeeds.Location = New System.Drawing.Point(3, 3)
         Me.txtFeeds.Multiline = True
         Me.txtFeeds.Name = "txtFeeds"
-        Me.txtFeeds.Size = New System.Drawing.Size(527, 232)
+        Me.txtFeeds.Size = New System.Drawing.Size(530, 242)
         Me.txtFeeds.TabIndex = 2
         Me.txtFeeds.Text = "http://rorybecker.co.uk/DevExpress/community/plugins/CRFWPlugins.xml" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "http://rory" & _
             "becker.co.uk/DevExpress/community/plugins/RoryPlugins.xml" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
@@ -240,7 +242,7 @@ Partial Class Options1
         Me.tabCustom.Location = New System.Drawing.Point(4, 22)
         Me.tabCustom.Name = "tabCustom"
         Me.tabCustom.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabCustom.Size = New System.Drawing.Size(239, 193)
+        Me.tabCustom.Size = New System.Drawing.Size(536, 248)
         Me.tabCustom.TabIndex = 2
         Me.tabCustom.Text = "Custom"
         Me.tabCustom.UseVisualStyleBackColor = True
@@ -251,22 +253,23 @@ Partial Class Options1
         Me.txtCustom.Location = New System.Drawing.Point(3, 3)
         Me.txtCustom.Multiline = True
         Me.txtCustom.Name = "txtCustom"
-        Me.txtCustom.Size = New System.Drawing.Size(233, 187)
+        Me.txtCustom.Size = New System.Drawing.Size(530, 242)
         Me.txtCustom.TabIndex = 2
         '
         'tabKeywords
         '
         Me.tabKeywords.Location = New System.Drawing.Point(4, 22)
         Me.tabKeywords.Name = "tabKeywords"
-        Me.tabKeywords.Size = New System.Drawing.Size(239, 193)
+        Me.tabKeywords.Size = New System.Drawing.Size(536, 248)
         Me.tabKeywords.TabIndex = 3
         Me.tabKeywords.Text = "Keywords"
         Me.tabKeywords.UseVisualStyleBackColor = True
         '
         'chkIncludeCommunitySite
         '
+        Me.chkIncludeCommunitySite.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkIncludeCommunitySite.AutoSize = True
-        Me.chkIncludeCommunitySite.Location = New System.Drawing.Point(7, 221)
+        Me.chkIncludeCommunitySite.Location = New System.Drawing.Point(289, 221)
         Me.chkIncludeCommunitySite.Name = "chkIncludeCommunitySite"
         Me.chkIncludeCommunitySite.Size = New System.Drawing.Size(179, 17)
         Me.chkIncludeCommunitySite.TabIndex = 4
@@ -280,7 +283,6 @@ Partial Class Options1
         Me.Controls.Add(Me.optLocal)
         Me.Controls.Add(Me.optNew)
         Me.Controls.Add(Me.optAll)
-        Me.Controls.Add(Me.cmdRefresh)
         Me.Controls.Add(Me.chkForceUpdate)
         Me.Controls.Add(Me.chkOnlyShowUpdates)
         Me.Controls.Add(Me.cmdUpdateMe)

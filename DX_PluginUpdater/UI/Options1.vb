@@ -81,11 +81,9 @@ Public Class Options1
         Dim Plugin As RemotePluginRef = mCommunityPluginProvider.GetPluginReference("DX_PluginUpdater")
         mPluginDownloader.DownloadAndInstallPlugin(Plugin)
     End Sub
-
     Private Sub cmdClearLog_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdClearLog.Click
         txtLog.Clear()
     End Sub
-
     Private Sub cmdOpenPluginFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdOpenPluginFolder.Click
         System.Diagnostics.Process.Start(CodeRush.Options.Paths.CommunityPlugInsPath)
     End Sub
@@ -126,12 +124,13 @@ Public Class Options1
         Dim FeedPlugins = GetFeedPlugins(txtFeeds.Text)
         Dim CustomPlugins = GetCustomPlugins(txtCustom.Text)
         Dim CommunityPlugins = GetCommunityPlugins()
-
+        Dim Exclusions = GetFeedPlugins(CommunityPluginProvider.RemoteBasePluginFolder & "ExcludePlugins.xml")
         Dim TickedPlugins As IEnumerable(Of RemotePluginRef) = NoPlugins 'Temporary
         Dim AllPlugins = TickedPlugins _
                          .Union(FeedPlugins) _
                          .Union(CustomPlugins) _
-                         .Union(CommunityPlugins)
+                         .Union(CommunityPlugins) _
+                         .Except(Exclusions)
 
         RepopulatePluginList(AllPlugins)
     End Sub
@@ -156,7 +155,6 @@ Public Class Options1
     Public Function GetTickedPluginNames() As IEnumerable(Of String)
         Return From item In chkLstPlugins.CheckedItems Select TryCast(item, String)
     End Function
-
 #Region "Get Plugins"
     Private Function GetCommunityPlugins() As IEnumerable(Of RemotePluginRef)
         Dim CommunityPlugins As IEnumerable(Of RemotePluginRef) = Nothing

@@ -10,7 +10,6 @@
     <Plugin Name="DX_CloseFiles" />
     <Plugin Name="DX_StudioSizer" />
     <Plugin Name="DX_ConvertToTryParse" />
-    
 
   </Plugins>
 </Doc>

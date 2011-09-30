@@ -36,5 +36,18 @@ Public Class RemotePluginRef
                    <Version></Version>
                </Reference>.ToString
     End Function
+    Public Overrides Function Equals(ByVal obj As Object) As Boolean
+        Dim OtherPlugin = TryCast(obj, RemotePluginRef)
+        If OtherPlugin Is Nothing Then
+            Return False
+        End If
+        If OtherPlugin.PluginName <> Me.PluginName Then
+            Return False
+        End If
+        If OtherPlugin.RemoteFolderUrl <> RemoteFolderUrl Then
+            Return False
+        End If
+        Return True
+    End Function
 
 End Class
