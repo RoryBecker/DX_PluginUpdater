@@ -125,12 +125,14 @@ Public Class Options1
         Dim CustomPlugins = GetCustomPlugins(txtCustom.Text)
         Dim CommunityPlugins = GetCommunityPlugins()
         Dim Exclusions = GetFeedPlugins(CommunityPluginProvider.RemoteBasePluginFolder & "ExcludePlugins.xml")
+        Dim Unstable = GetFeedPlugins(CommunityPluginProvider.RemoteBasePluginFolder & "UnstablePlugins.xml")
         Dim TickedPlugins As IEnumerable(Of RemotePluginRef) = NoPlugins 'Temporary
         Dim AllPlugins = TickedPlugins _
                          .Union(FeedPlugins) _
                          .Union(CustomPlugins) _
                          .Union(CommunityPlugins) _
-                         .Except(Exclusions)
+                         .Except(Exclusions) _
+                         .Except(Unstable)
 
         RepopulatePluginList(AllPlugins)
     End Sub
