@@ -4,8 +4,9 @@ The targeted plugins are those found on the community site http://code.google.co
 The plugins to download are to be configurable through the options screen.
 Current location of the page in question is Community\Plugins\PluginUpdater
 
-Note: This plugin requires DXCore version 11.1.7.11241 or better to function.
-(This means a build since Sept 2nd)
+This plugin requires ... 
+...DXCore version 11.1.8 or better to function.
+...the Core\Startup 'Use raw assembly load (prevents locking of assemblies)'
 
 Goals 
 	- Provide Action to retrieve plugin updates for named Plugins.

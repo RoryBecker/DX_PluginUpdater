@@ -1,0 +1,4 @@
+  - Inline Descriptions of Plugins (Scrape intro of Wiki)
+  - Links to Wiki
+  - Links to Binaries
+  - Links to Source
