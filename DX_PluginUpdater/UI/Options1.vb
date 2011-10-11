@@ -108,7 +108,6 @@ Public Class Options1
     End Sub
 
     Private Sub Options1_CommitChanges(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.CommitChangesEventArgs) Handles Me.CommitChanges
-        'mSettings.Plugins = txtMultiplePlugins.Lines
         mSettings.OnlyShowUpdates = chkOnlyShowUpdates.Checked
         mSettings.ForceUpdates = chkForceUpdate.Checked
         mSettings.Save(ea.Storage)
