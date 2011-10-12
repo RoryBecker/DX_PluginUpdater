@@ -1,5 +1,0 @@
-Update Single plugin
-Update Multiple plugins
-
-Get Plugin Suggestions from Site
-Get Plugin Suggestions from Feed
