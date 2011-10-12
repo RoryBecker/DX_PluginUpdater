@@ -162,6 +162,7 @@
     <Content Include="Feeds\ExcludePlugins.xml" />
     <Content Include="Feeds\CRFWPlugins.xml" />
     <Content Include="Feeds\RoryPlugins.xml" />
+    <Content Include="Feeds\TypicalPlugins.xml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
