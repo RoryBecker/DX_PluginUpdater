@@ -35,7 +35,7 @@ Public Class PlugIn1
         Dim PluginDownloader = New PluginDownloader(CodeRush.Options.Paths.CommunityPlugInsPath)
         Dim Settings = New Settings
         Call Settings.Load(Options1.Storage)
-        Call PluginDownloader.UpdatePlugins(Settings.PluginNames)
+        Call PluginDownloader.UpdatePlugins(Settings.Plugins)
     End Sub
     Public Sub RegisterConfigurePluginUpdaterCommand()
         Dim ConfigurePluginUpdater As New DevExpress.CodeRush.Core.Action(components)

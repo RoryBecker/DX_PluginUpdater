@@ -37,7 +37,7 @@ Public Class Options1
     Private ReadOnly mCRFWPluginProvider As New FeedPluginProvider("http://rorybecker.co.uk/DevExpress/community/plugins/CRFWPlugins.xml")
     Private ReadOnly mLocalPluginProvider As New LocalPluginProvider(CodeRush.Options.Paths.CommunityPlugInsPath)
     Private ReadOnly mPluginDownloader As New PluginDownloader(CodeRush.Options.Paths.CommunityPlugInsPath)
-    Private ReadOnly NoPlugins As IEnumerable(Of RemotePluginRef) = From item In New String() {} Select New RemotePluginRef(item)
+    Private ReadOnly NoPlugins As IEnumerable(Of RemotePluginRef) = From item In New String() {} Select New RemotePluginRef(item, "")
     Private mSettings As New Settings
 #End Region
 #Region "Utility"
@@ -71,9 +71,9 @@ Public Class Options1
         RefreshPluginList()
     End Sub
     Private Sub cmdUpdatePlugins_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUpdatePlugins.Click
-        Dim PluginNames = GetTickedPluginNames()
-        For Each PluginName In PluginNames
-            AddMessage(mPluginDownloader.TryInstallPlugin(PluginName, chkOnlyShowUpdates.Checked, chkForceUpdate.Checked))
+        Dim Plugins As IEnumerable(Of RemotePluginRef) = GetTickedPlugin()
+        For Each Plugin As RemotePluginRef In Plugins
+            AddMessage(mPluginDownloader.TryInstallPlugin(Plugin, chkOnlyShowUpdates.Checked, chkForceUpdate.Checked))
         Next
         Call AddMessage("All Plugins Checked.")
     End Sub
@@ -101,7 +101,7 @@ Public Class Options1
         optLocal.Checked = AllLocalNew.ToLower = "local"
         optNew.Checked = AllLocalNew.ToLower = "new"
         chkLstPlugins.Items.Clear()
-        chkLstPlugins.Items.AddRange(Settings.PluginNames)
+        chkLstPlugins.Items.AddRange(Settings.Plugins)
         chkIncludeCommunitySite.Checked = Settings.ShowAllCommunityPlugins
         chkOnlyShowUpdates.Checked = Settings.OnlyShowUpdates
         chkForceUpdate.Checked = Settings.ForceUpdates
@@ -132,13 +132,12 @@ Public Class Options1
                          .Union(CommunityPlugins) _
                          .Except(Exclusions) _
                          .Except(Unstable)
-
         RepopulatePluginList(AllPlugins)
     End Sub
     Private Sub RepopulatePluginList(ByVal AllPlugins As IEnumerable(Of RemotePluginRef))
         chkLstPlugins.Items.Clear()
         For Each Plugin In From Item In AllPlugins Where Included(Item) Order By Item.PluginName
-            chkLstPlugins.Items.Add(Plugin.PluginName)
+            chkLstPlugins.Items.Add(Plugin)
         Next
     End Sub
     Private Function Included(ByVal Plugin As RemotePluginRef) As Boolean
@@ -153,8 +152,8 @@ Public Class Options1
         End If
         Return False
     End Function
-    Public Function GetTickedPluginNames() As IEnumerable(Of String)
-        Return From item In chkLstPlugins.CheckedItems Select TryCast(item, String)
+    Public Function GetTickedPlugin() As IEnumerable(Of RemotePluginRef)
+        Return From item In chkLstPlugins.CheckedItems Select TryCast(item, RemotePluginRef)
     End Function
 #Region "Get Plugins"
     Private Function GetCommunityPlugins() As IEnumerable(Of RemotePluginRef)

@@ -29,7 +29,9 @@ Public Class RemotePluginRef
         End Get
     End Property
 #End Region
+    Public Sub UpdateVersionFromRemoteSource()
 
+    End Sub
     Private Function Serialize() As String
         Return <Reference>
                    <Name>PluginName</Name>

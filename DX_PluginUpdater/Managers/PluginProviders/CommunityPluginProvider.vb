@@ -17,13 +17,13 @@ Public Class CommunityPluginProvider
         Dim regex As Regex = New Regex(String.Format("<A HREF=""{0}(?<Plugin>(\w|-|_)+)/"">", RootDownloadFolder), RegexOptions.CultureInvariant Or RegexOptions.Compiled)
         Return regex.Matches(Content)
     End Function
-    Private Function GetPluginFolderUrl(ByVal PluginName As String) As String
+    Private Function GetPluginCommunityFolderUrl(ByVal PluginName As String) As String
         Return String.Format("{0}{1}", RemoteBasePluginFolder, PluginName)
     End Function
     Private Function ExtractZipReferences(ByVal Content As String, ByVal Regex As System.Text.RegularExpressions.Regex) As RemotePluginRef
         Dim LatestPlugin As RemotePluginRef = Nothing
         For Each Match As Match In Regex.Matches(Content)
-            Dim Plugin As RemotePluginRef = New RemotePluginRef(Match.Groups("Plugin").Value, GetPluginFolderUrl(Match.Groups("Plugin").Value), CInt(Match.Groups("Version").Value))
+            Dim Plugin As RemotePluginRef = New RemotePluginRef(Match.Groups("Plugin").Value, GetPluginCommunityFolderUrl(Match.Groups("Plugin").Value), CInt(Match.Groups("Version").Value))
             If LatestPlugin Is Nothing OrElse Plugin.Version > LatestPlugin.Version Then
                 LatestPlugin = Plugin
             End If
@@ -35,7 +35,7 @@ Public Class CommunityPluginProvider
     End Function
 #Region "GetPluginReferences"
     Public Function GetPluginReference(ByVal PluginName As String) As RemotePluginRef
-        Dim URL = GetPluginFolderUrl(PluginName)
+        Dim URL = GetPluginCommunityFolderUrl(PluginName)
         Dim Content As String = String.Empty
         If WebManager.ContentIs404(URL, Content) Then
             Return Nothing

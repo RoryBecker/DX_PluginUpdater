@@ -1,4 +1,6 @@
 ﻿Imports DevExpress.CodeRush.Core
+Imports System.Linq
+Imports System.Runtime.CompilerServices
 
 Public Class Settings
 #Region "Setting Defaults"
@@ -18,7 +20,7 @@ Public Class Settings
 #End Region
 
 #Region "Fields"
-    Private mPluginNames As String()
+    Private mPlugins As RemotePluginRef()
     Private mOnlyShowUpdates As Boolean = False
     Private mForceUpdates As Boolean = False
     Private mShowAllCommunityPlugins As Boolean = False
@@ -33,12 +35,12 @@ Public Class Settings
             mAllLocalNew = value
         End Set
     End Property
-    Public Property PluginNames() As String()
+    Public Property Plugins() As RemotePluginRef()
         Get
-            Return mPluginNames
+            Return mPlugins
         End Get
-        Set(ByVal value As String())
-            mPluginNames = value
+        Set(ByVal value As RemotePluginRef())
+            mPlugins = value
         End Set
     End Property
 
@@ -68,7 +70,8 @@ Public Class Settings
     End Property
 #End Region
     Public Sub Load(ByVal Storage As DecoupledStorage)
-        PluginNames = Storage.ReadStrings(Section, Setting_PluginNames, Default_PluginNames)
+        Plugins = (From plugin As String In Storage.ReadStrings(Section, Setting_PluginNames, Default_PluginNames) _
+                                            Select plugin.ToRemotePluginRef).ToArray
         OnlyShowUpdates = Storage.ReadBoolean(Section, Setting_OnlyShowUpdates, Default_OnlyShowUpdates)
         ForceUpdates = Storage.ReadBoolean(Section, Setting_ForceUpdates, Default_ForceUpdates)
 
@@ -76,7 +79,8 @@ Public Class Settings
         AllLocalNew = Storage.ReadString(Section, Setting_AllLocalNew, Default_AllLocalNew)
     End Sub
     Public Sub Save(ByVal Storage As DecoupledStorage)
-        Storage.WriteStrings(Section, Setting_PluginNames, PluginNames)
+        Dim PluginsAsStrings = (From plugin As RemotePluginRef In Plugins Select plugin.ToSerialisedString).ToArray
+        Storage.WriteStrings(Section, Setting_PluginNames, PluginsAsStrings)
         Storage.WriteBoolean(Section, Setting_OnlyShowUpdates, OnlyShowUpdates)
         Storage.WriteBoolean(Section, Setting_ForceUpdates, ForceUpdates)
 
@@ -85,3 +89,27 @@ Public Class Settings
     End Sub
 End Class
 
+Module StringExtensions
+    <Extension()> _
+    Public Function ToRemotePluginRef(ByVal Source As String) As RemotePluginRef
+        Dim Parts = Source.Split("|")
+        Dim Name As String = parts(0)
+        Dim URL As String = String.Empty
+        If Parts.Count = 2 Then
+            URL = Parts(1)
+        Else
+            URL = CommunityPluginProvider.RemoteBasePluginFolder & Parts(0)
+        End If
+        Return New RemotePluginRef(name, url)
+    End Function
+    <Extension()> _
+    Public Function ToSerialisedString(ByVal Source As RemotePluginRef) As String
+        Dim Url As String = String.Empty
+        If Source.RemoteFolderUrl = String.Empty Then
+            Url = CommunityPluginProvider.RemoteBasePluginFolder
+        Else
+            Url = Source.RemoteFolderUrl
+        End If
+        Return Source.PluginName & "|" & Url
+    End Function
+End Module

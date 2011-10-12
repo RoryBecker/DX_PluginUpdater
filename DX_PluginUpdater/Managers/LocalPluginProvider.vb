@@ -34,7 +34,7 @@ Public Class LocalPluginProvider
     Public Function GetPluginReference(ByVal PluginName As String) As PluginRef
         Try
             Dim TheFile = New FileInfo(String.Format("{0}\{1}.dll", mLocalPluginFolder, PluginName))
-            Return New RemotePluginRef(TheFile.NameWithoutExtension, "", GetLocalPluginRevision(TheFile))
+            Return New RemotePluginRef(TheFile.NameWithoutExtension, CommunityPluginProvider.RemoteBasePluginFolder & TheFile.NameWithoutExtension, GetLocalPluginRevision(TheFile))
         Catch ex As Exception
             Return Nothing
         End Try

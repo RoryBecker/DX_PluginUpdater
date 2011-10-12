@@ -4,7 +4,7 @@ Public Class PluginRef
     Protected mPluginName As String
     Protected mVersion As Integer
     Public Sub New(ByVal PluginName As String, ByVal Version As Integer)
-        mPluginName = PluginName
+        mPluginName = PluginName.Trim
         mVersion = Version
     End Sub
     Public ReadOnly Property PluginName() As String
