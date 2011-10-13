@@ -50,20 +50,6 @@ Public Class Options1
         txtLog.ScrollToCaret()
     End Sub
 
-    'Private Sub AddPlugins(ByVal Plugins As IEnumerable(Of String))
-    '    For Each Plugin In Plugins
-    '        If txtMultiplePlugins.Text.Trim <> String.Empty AndAlso Not txtMultiplePlugins.Text.EndsWith(Environment.NewLine) Then
-    '            txtMultiplePlugins.AppendText(Environment.NewLine)
-    '        End If
-    '        txtMultiplePlugins.AppendText(Plugin & Environment.NewLine)
-    '    Next
-    'End Sub
-
-    'Private Sub AddPlugins(Of T As PluginRef)(ByVal Plugins As IEnumerable(Of T))
-    '    Dim PluginNames = From Plugin As PluginRef In Plugins
-    '                      Select Plugin.PluginName
-    '    Call AddPlugins(PluginNames)
-    'End Sub
 #End Region
 
 #Region "UI Events"
@@ -71,14 +57,13 @@ Public Class Options1
         RefreshPluginList()
     End Sub
     Private Sub cmdUpdatePlugins_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUpdatePlugins.Click
-        Dim Plugins As IEnumerable(Of RemotePluginRef) = GetTickedPlugin()
-        For Each Plugin As RemotePluginRef In Plugins
+        For Each Plugin As RemotePluginRef In GetTickedPlugins()
             AddMessage(mPluginDownloader.TryInstallPlugin(Plugin, chkOnlyShowUpdates.Checked, chkForceUpdate.Checked))
         Next
         Call AddMessage("All Plugins Checked.")
     End Sub
     Private Sub cmdUpdateMe_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUpdateMe.Click
-        Dim Plugin As RemotePluginRef = mCommunityPluginProvider.GetPluginReference("DX_PluginUpdater")
+        Dim Plugin As RemotePluginRef = mCommunityPluginProvider.GetLatestCommunityPluginReference("DX_PluginUpdater")
         mPluginDownloader.DownloadAndInstallPlugin(Plugin)
     End Sub
     Private Sub cmdClearLog_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdClearLog.Click
@@ -152,7 +137,7 @@ Public Class Options1
         End If
         Return False
     End Function
-    Public Function GetTickedPlugin() As IEnumerable(Of RemotePluginRef)
+    Public Function GetTickedPlugins() As IEnumerable(Of RemotePluginRef)
         Return From item In chkLstPlugins.CheckedItems Select TryCast(item, RemotePluginRef)
     End Function
 #Region "Get Plugins"
@@ -173,7 +158,7 @@ Public Class Options1
 
         Dim CustomPlugins = _
             From Name As String In CustomPluginNames _
-            Select mCommunityPluginProvider.GetPluginReference(Name)
+            Select mCommunityPluginProvider.GetLatestCommunityPluginReference(Name)
         Return CustomPlugins
     End Function
     Private Function GetFeedPlugins(ByVal Source As String) As IEnumerable(Of RemotePluginRef)

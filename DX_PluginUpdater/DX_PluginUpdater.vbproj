@@ -105,7 +105,6 @@
     <Compile Include="Managers\PluginProviders\BaseRemotePluginProvider.vb" />
     <Compile Include="Managers\PluginProviders\CommunityPluginProvider.vb" />
     <Compile Include="Managers\PluginProviders\FeedPluginProvider.vb" />
-    <Compile Include="Managers\UpdateProvider.vb" />
     <Compile Include="Settings.vb" />
     <Compile Include="Structures\RemotePluginRef.vb" />
     <Compile Include="UI\Options1.Designer.vb">

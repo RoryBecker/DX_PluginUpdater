@@ -5,6 +5,10 @@ Imports System.Runtime.CompilerServices
 Imports System.Text
 Public Class PluginDownloader
     Private ReadOnly mLocalPluginProvider As LocalPluginProvider
+    Private WebManager As New WebManager
+    Private Const REGEX_SpecificPluginZipFile As String = "(?<Plugin>({0}))_(?<Version>\d+)\.zip"">"
+
+
     Public Sub New(ByVal LocalPluginFolder As String)
         mLocalPluginProvider = New LocalPluginProvider(LocalPluginFolder)
     End Sub
@@ -22,7 +26,7 @@ Public Class PluginDownloader
             Return String.Empty
         End If
         Dim LocalPlugin As PluginRef = mLocalPluginProvider.GetPluginReference(RemotePlugin.PluginName)
-        Dim Update As RemotePluginRef = RemotePlugin
+        Dim Update As RemotePluginRef = GetReferenceToLatestVersion(RemotePlugin)
         Select Case True
             Case Update Is Nothing
                 If ShowUpdatesOnly Then
@@ -51,5 +55,26 @@ Public Class PluginDownloader
             Return ex.Message
         End Try
         Return String.Format("Downloaded and installed version {0} of plugin {1}", Plugin.Version, Plugin.PluginName)
+    End Function
+    Private Function GetSpecificPluginRegex(ByVal PluginName As String) As System.Text.RegularExpressions.Regex
+        Return New System.Text.RegularExpressions.Regex(String.Format(REGEX_SpecificPluginZipFile, PluginName), RegexOptions.CultureInvariant Or RegexOptions.Compiled)
+    End Function
+    Public Function GetReferenceToLatestVersion(ByVal RemotePlugin As RemotePluginRef) As RemotePluginRef
+        Return GetReferenceToLatestVersion(RemotePlugin.PluginName, RemotePlugin.RemoteFolderUrl)
+    End Function
+    Public Function GetReferenceToLatestVersion(ByVal PluginName As String, ByVal RemoteFolderUrl As String) As RemotePluginRef
+        Dim Source As String = String.Empty
+        If WebManager.ContentIs404(RemoteFolderUrl, Source) Then
+            Return Nothing
+        End If
+        Dim Results = GetSpecificPluginRegex(PluginName).Matches(Source)
+        Dim LatestPlugin As RemotePluginRef = Nothing
+        For Each Match As Match In Results
+            Dim Plugin As RemotePluginRef = New RemotePluginRef(PluginName, RemoteFolderUrl, CInt(Match.Groups("Version").Value))
+            If LatestPlugin Is Nothing OrElse Plugin.Version > LatestPlugin.Version Then
+                LatestPlugin = Plugin
+            End If
+        Next
+        Return LatestPlugin
     End Function
 End Class
