@@ -3,5 +3,6 @@
   <Plugins BaseFolder="http://www.rorybecker.co.uk/DevExpress/Plugins/Community/">
     <Plugin Name="CR_ClassCleaner" />
     <Plugin Name="CR_QuickAddReference" />
+    <Plugin Name="Impromptu" />
   </Plugins>
 </Doc>
