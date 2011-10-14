@@ -158,7 +158,9 @@
   <ItemGroup>
     <Content Include="DeploymentFiles\DX_PluginUpdater.Readme.txt" />
     <Content Include="DeploymentFiles\Ionic.Zip.Reduced.Licence.txt" />
-    <Content Include="Feeds\ExcludePlugins.xml" />
+    <Content Include="Feeds\ExcludePlugins.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Feeds\CRFWPlugins.xml" />
     <Content Include="Feeds\RoryPlugins.xml" />
     <Content Include="Feeds\TypicalPlugins.xml" />

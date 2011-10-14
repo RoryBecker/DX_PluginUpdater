@@ -172,5 +172,33 @@ Public Class Options1
         Return FeedPlugins
     End Function
 #End Region
+#Region "Links"
+    Private Function CurrentPluginName() As String
+        Dim SelectedItems As IEnumerable(Of RemotePluginRef) = _
+            From item In chkLstPlugins.SelectedItems Select TryCast(item, RemotePluginRef)
+        Return If(SelectedItems.Any, SelectedItems.First.PluginName, "")
+    End Function
 
+    Private Sub chkLstPlugins_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkLstPlugins.SelectedIndexChanged
+        Dim PluginName As String = CurrentPluginName()
+        lnkWiki.Text = "Wiki: " & PluginName
+        lnkBinaries.Text = "Binaries:" & PluginName
+        lnkSource.Text = "Source: " & PluginName
+    End Sub
+    Public Const BaseWikiUrl As String = "http://code.google.com/p/dxcorecommunityplugins/wiki/"
+    Public Const BaseBinaryUrl As String = "http://www.rorybecker.co.uk/DevExpress/Plugins/Community/"
+    Public Const BaseSourceUrl As String = "http://code.google.com/p/dxcorecommunityplugins/source/browse/trunk/"
+
+    Private Sub lnkWiki_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkWiki.LinkClicked
+        System.Diagnostics.Process.Start(BaseWikiUrl & CurrentPluginName())
+    End Sub
+
+    Private Sub lnkBinaries_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkBinaries.LinkClicked
+        System.Diagnostics.Process.Start(BaseBinaryUrl & CurrentPluginName())
+    End Sub
+
+    Private Sub lnkSource_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkSource.LinkClicked
+        System.Diagnostics.Process.Start(BaseSourceUrl & CurrentPluginName())
+    End Sub
+#End Region
 End Class

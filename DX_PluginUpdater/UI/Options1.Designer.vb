@@ -44,12 +44,15 @@ Partial Class Options1
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tabPlugins = New System.Windows.Forms.TabPage()
         Me.chkLstPlugins = New System.Windows.Forms.CheckedListBox()
+        Me.chkIncludeCommunitySite = New System.Windows.Forms.CheckBox()
         Me.tabFeeds = New System.Windows.Forms.TabPage()
         Me.txtFeeds = New System.Windows.Forms.TextBox()
         Me.tabCustom = New System.Windows.Forms.TabPage()
         Me.txtCustom = New System.Windows.Forms.TextBox()
         Me.tabKeywords = New System.Windows.Forms.TabPage()
-        Me.chkIncludeCommunitySite = New System.Windows.Forms.CheckBox()
+        Me.lnkSource = New System.Windows.Forms.LinkLabel()
+        Me.lnkBinaries = New System.Windows.Forms.LinkLabel()
+        Me.lnkWiki = New System.Windows.Forms.LinkLabel()
         Me.TabControl1.SuspendLayout()
         Me.tabPlugins.SuspendLayout()
         Me.tabFeeds.SuspendLayout()
@@ -91,7 +94,7 @@ Partial Class Options1
         '
         'cmdOpenPluginFolder
         '
-        Me.cmdOpenPluginFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmdOpenPluginFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdOpenPluginFolder.Location = New System.Drawing.Point(424, 273)
         Me.cmdOpenPluginFolder.Name = "cmdOpenPluginFolder"
         Me.cmdOpenPluginFolder.Size = New System.Drawing.Size(119, 23)
@@ -191,6 +194,9 @@ Partial Class Options1
         '
         'tabPlugins
         '
+        Me.tabPlugins.Controls.Add(Me.lnkSource)
+        Me.tabPlugins.Controls.Add(Me.lnkBinaries)
+        Me.tabPlugins.Controls.Add(Me.lnkWiki)
         Me.tabPlugins.Controls.Add(Me.chkLstPlugins)
         Me.tabPlugins.Controls.Add(Me.chkIncludeCommunitySite)
         Me.tabPlugins.Controls.Add(Me.cmdRefresh)
@@ -211,8 +217,19 @@ Partial Class Options1
         Me.chkLstPlugins.FormattingEnabled = True
         Me.chkLstPlugins.Location = New System.Drawing.Point(6, 6)
         Me.chkLstPlugins.Name = "chkLstPlugins"
-        Me.chkLstPlugins.Size = New System.Drawing.Size(524, 196)
+        Me.chkLstPlugins.Size = New System.Drawing.Size(524, 164)
         Me.chkLstPlugins.TabIndex = 0
+        '
+        'chkIncludeCommunitySite
+        '
+        Me.chkIncludeCommunitySite.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkIncludeCommunitySite.AutoSize = True
+        Me.chkIncludeCommunitySite.Location = New System.Drawing.Point(289, 221)
+        Me.chkIncludeCommunitySite.Name = "chkIncludeCommunitySite"
+        Me.chkIncludeCommunitySite.Size = New System.Drawing.Size(179, 17)
+        Me.chkIncludeCommunitySite.TabIndex = 4
+        Me.chkIncludeCommunitySite.Text = "Show All Community Site Plugins"
+        Me.chkIncludeCommunitySite.UseVisualStyleBackColor = True
         '
         'tabFeeds
         '
@@ -220,7 +237,7 @@ Partial Class Options1
         Me.tabFeeds.Location = New System.Drawing.Point(4, 22)
         Me.tabFeeds.Name = "tabFeeds"
         Me.tabFeeds.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabFeeds.Size = New System.Drawing.Size(536, 248)
+        Me.tabFeeds.Size = New System.Drawing.Size(536, 242)
         Me.tabFeeds.TabIndex = 1
         Me.tabFeeds.Text = "Feeds"
         Me.tabFeeds.UseVisualStyleBackColor = True
@@ -242,7 +259,7 @@ Partial Class Options1
         Me.tabCustom.Location = New System.Drawing.Point(4, 22)
         Me.tabCustom.Name = "tabCustom"
         Me.tabCustom.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabCustom.Size = New System.Drawing.Size(536, 248)
+        Me.tabCustom.Size = New System.Drawing.Size(536, 242)
         Me.tabCustom.TabIndex = 2
         Me.tabCustom.Text = "Custom"
         Me.tabCustom.UseVisualStyleBackColor = True
@@ -260,21 +277,43 @@ Partial Class Options1
         '
         Me.tabKeywords.Location = New System.Drawing.Point(4, 22)
         Me.tabKeywords.Name = "tabKeywords"
-        Me.tabKeywords.Size = New System.Drawing.Size(536, 248)
+        Me.tabKeywords.Size = New System.Drawing.Size(536, 242)
         Me.tabKeywords.TabIndex = 3
         Me.tabKeywords.Text = "Keywords"
         Me.tabKeywords.UseVisualStyleBackColor = True
         '
-        'chkIncludeCommunitySite
+        'lnkSource
         '
-        Me.chkIncludeCommunitySite.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkIncludeCommunitySite.AutoSize = True
-        Me.chkIncludeCommunitySite.Location = New System.Drawing.Point(289, 221)
-        Me.chkIncludeCommunitySite.Name = "chkIncludeCommunitySite"
-        Me.chkIncludeCommunitySite.Size = New System.Drawing.Size(179, 17)
-        Me.chkIncludeCommunitySite.TabIndex = 4
-        Me.chkIncludeCommunitySite.Text = "Show All Community Site Plugins"
-        Me.chkIncludeCommunitySite.UseVisualStyleBackColor = True
+        Me.lnkSource.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lnkSource.AutoSize = True
+        Me.lnkSource.Location = New System.Drawing.Point(6, 208)
+        Me.lnkSource.Name = "lnkSource"
+        Me.lnkSource.Size = New System.Drawing.Size(40, 13)
+        Me.lnkSource.TabIndex = 23
+        Me.lnkSource.TabStop = True
+        Me.lnkSource.Text = "Source"
+        '
+        'lnkBinaries
+        '
+        Me.lnkBinaries.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lnkBinaries.AutoSize = True
+        Me.lnkBinaries.Location = New System.Drawing.Point(6, 195)
+        Me.lnkBinaries.Name = "lnkBinaries"
+        Me.lnkBinaries.Size = New System.Drawing.Size(44, 13)
+        Me.lnkBinaries.TabIndex = 22
+        Me.lnkBinaries.TabStop = True
+        Me.lnkBinaries.Text = "Binaries"
+        '
+        'lnkWiki
+        '
+        Me.lnkWiki.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lnkWiki.AutoSize = True
+        Me.lnkWiki.Location = New System.Drawing.Point(6, 182)
+        Me.lnkWiki.Name = "lnkWiki"
+        Me.lnkWiki.Size = New System.Drawing.Size(53, 13)
+        Me.lnkWiki.TabIndex = 21
+        Me.lnkWiki.TabStop = True
+        Me.lnkWiki.Text = "Wiki Page"
         '
         'Options1
         '
@@ -348,6 +387,9 @@ Partial Class Options1
     Friend WithEvents txtCustom As System.Windows.Forms.TextBox
     Friend WithEvents tabKeywords As System.Windows.Forms.TabPage
     Friend WithEvents chkIncludeCommunitySite As System.Windows.Forms.CheckBox
+    Friend WithEvents lnkSource As System.Windows.Forms.LinkLabel
+    Friend WithEvents lnkBinaries As System.Windows.Forms.LinkLabel
+    Friend WithEvents lnkWiki As System.Windows.Forms.LinkLabel
 
 	Public Shared ReadOnly Property FullPath() As String
 		Get
