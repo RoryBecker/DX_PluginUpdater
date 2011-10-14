@@ -49,5 +49,7 @@ Public Class RemotePluginRef
         End If
         Return True
     End Function
-
+    Public Overrides Function ToString() As String
+        Return PluginName
+    End Function
 End Class
