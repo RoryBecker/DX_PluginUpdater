@@ -43,6 +43,9 @@ Partial Class Options1
         Me.cmdRefresh = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tabPlugins = New System.Windows.Forms.TabPage()
+        Me.lnkSource = New System.Windows.Forms.LinkLabel()
+        Me.lnkBinaries = New System.Windows.Forms.LinkLabel()
+        Me.lnkWiki = New System.Windows.Forms.LinkLabel()
         Me.chkLstPlugins = New System.Windows.Forms.CheckedListBox()
         Me.chkIncludeCommunitySite = New System.Windows.Forms.CheckBox()
         Me.tabFeeds = New System.Windows.Forms.TabPage()
@@ -50,9 +53,6 @@ Partial Class Options1
         Me.tabCustom = New System.Windows.Forms.TabPage()
         Me.txtCustom = New System.Windows.Forms.TextBox()
         Me.tabKeywords = New System.Windows.Forms.TabPage()
-        Me.lnkSource = New System.Windows.Forms.LinkLabel()
-        Me.lnkBinaries = New System.Windows.Forms.LinkLabel()
-        Me.lnkWiki = New System.Windows.Forms.LinkLabel()
         Me.TabControl1.SuspendLayout()
         Me.tabPlugins.SuspendLayout()
         Me.tabFeeds.SuspendLayout()
@@ -208,16 +208,48 @@ Partial Class Options1
         Me.tabPlugins.Text = "Plugins"
         Me.tabPlugins.UseVisualStyleBackColor = True
         '
+        'lnkSource
+        '
+        Me.lnkSource.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lnkSource.AutoSize = True
+        Me.lnkSource.Location = New System.Drawing.Point(6, 223)
+        Me.lnkSource.Name = "lnkSource"
+        Me.lnkSource.Size = New System.Drawing.Size(40, 13)
+        Me.lnkSource.TabIndex = 23
+        Me.lnkSource.TabStop = True
+        Me.lnkSource.Text = "Source"
+        '
+        'lnkBinaries
+        '
+        Me.lnkBinaries.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lnkBinaries.AutoSize = True
+        Me.lnkBinaries.Location = New System.Drawing.Point(6, 210)
+        Me.lnkBinaries.Name = "lnkBinaries"
+        Me.lnkBinaries.Size = New System.Drawing.Size(44, 13)
+        Me.lnkBinaries.TabIndex = 22
+        Me.lnkBinaries.TabStop = True
+        Me.lnkBinaries.Text = "Binaries"
+        '
+        'lnkWiki
+        '
+        Me.lnkWiki.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lnkWiki.AutoSize = True
+        Me.lnkWiki.Location = New System.Drawing.Point(6, 197)
+        Me.lnkWiki.Name = "lnkWiki"
+        Me.lnkWiki.Size = New System.Drawing.Size(53, 13)
+        Me.lnkWiki.TabIndex = 21
+        Me.lnkWiki.TabStop = True
+        Me.lnkWiki.Text = "Wiki Page"
+        '
         'chkLstPlugins
         '
         Me.chkLstPlugins.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkLstPlugins.CheckOnClick = True
         Me.chkLstPlugins.FormattingEnabled = True
         Me.chkLstPlugins.Location = New System.Drawing.Point(6, 6)
         Me.chkLstPlugins.Name = "chkLstPlugins"
-        Me.chkLstPlugins.Size = New System.Drawing.Size(524, 164)
+        Me.chkLstPlugins.Size = New System.Drawing.Size(524, 180)
         Me.chkLstPlugins.TabIndex = 0
         '
         'chkIncludeCommunitySite
@@ -248,7 +280,7 @@ Partial Class Options1
         Me.txtFeeds.Location = New System.Drawing.Point(3, 3)
         Me.txtFeeds.Multiline = True
         Me.txtFeeds.Name = "txtFeeds"
-        Me.txtFeeds.Size = New System.Drawing.Size(530, 242)
+        Me.txtFeeds.Size = New System.Drawing.Size(530, 236)
         Me.txtFeeds.TabIndex = 2
         Me.txtFeeds.Text = "http://rorybecker.co.uk/DevExpress/community/plugins/CRFWPlugins.xml" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "http://rory" & _
             "becker.co.uk/DevExpress/community/plugins/RoryPlugins.xml" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
@@ -270,7 +302,7 @@ Partial Class Options1
         Me.txtCustom.Location = New System.Drawing.Point(3, 3)
         Me.txtCustom.Multiline = True
         Me.txtCustom.Name = "txtCustom"
-        Me.txtCustom.Size = New System.Drawing.Size(530, 242)
+        Me.txtCustom.Size = New System.Drawing.Size(530, 236)
         Me.txtCustom.TabIndex = 2
         '
         'tabKeywords
@@ -281,39 +313,6 @@ Partial Class Options1
         Me.tabKeywords.TabIndex = 3
         Me.tabKeywords.Text = "Keywords"
         Me.tabKeywords.UseVisualStyleBackColor = True
-        '
-        'lnkSource
-        '
-        Me.lnkSource.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.lnkSource.AutoSize = True
-        Me.lnkSource.Location = New System.Drawing.Point(6, 208)
-        Me.lnkSource.Name = "lnkSource"
-        Me.lnkSource.Size = New System.Drawing.Size(40, 13)
-        Me.lnkSource.TabIndex = 23
-        Me.lnkSource.TabStop = True
-        Me.lnkSource.Text = "Source"
-        '
-        'lnkBinaries
-        '
-        Me.lnkBinaries.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.lnkBinaries.AutoSize = True
-        Me.lnkBinaries.Location = New System.Drawing.Point(6, 195)
-        Me.lnkBinaries.Name = "lnkBinaries"
-        Me.lnkBinaries.Size = New System.Drawing.Size(44, 13)
-        Me.lnkBinaries.TabIndex = 22
-        Me.lnkBinaries.TabStop = True
-        Me.lnkBinaries.Text = "Binaries"
-        '
-        'lnkWiki
-        '
-        Me.lnkWiki.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.lnkWiki.AutoSize = True
-        Me.lnkWiki.Location = New System.Drawing.Point(6, 182)
-        Me.lnkWiki.Name = "lnkWiki"
-        Me.lnkWiki.Size = New System.Drawing.Size(53, 13)
-        Me.lnkWiki.TabIndex = 21
-        Me.lnkWiki.TabStop = True
-        Me.lnkWiki.Text = "Wiki Page"
         '
         'Options1
         '
