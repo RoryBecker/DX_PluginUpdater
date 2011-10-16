@@ -71,6 +71,11 @@
     <Reference Include="DevExpress.DXCore.Controls.Utils.v6.3, Version=11.1.7.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Common Files\microsoft shared\MSEnv\PublicAssemblies\extensibility.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip.Reduced">
       <HintPath>DeploymentFiles\Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
@@ -98,6 +103,7 @@
     <Import Include="System.Diagnostics" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DXCoreOps.vb" />
     <Compile Include="Extensions\ByteExtensions.vb" />
     <Compile Include="Exclusions.vb" />
     <Compile Include="Extensions\FileInfoExtensions.vb" />
