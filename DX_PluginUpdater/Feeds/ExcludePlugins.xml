@@ -4,5 +4,8 @@
     <Plugin Name="CR_ClassCleaner" />
     <Plugin Name="CR_QuickAddReference" />
     <Plugin Name="Impromptu" />
+    <Plugin Name="CI_ReferenceTypeAssignedToSession" />
+    <Plugin Name="CR_Colorizer" />
   </Plugins>
+
 </Doc>
