@@ -1,7 +1,0 @@
-  - Inline Descriptions of Plugins (Scrape intro of Wiki)
-  - Links to Wiki
-  - Links to Binaries
-  - Links to Source
-  - Support plugins from other sites.
-  - Restart DXCore if needed.
-    - Careful of infinite loop here :S
