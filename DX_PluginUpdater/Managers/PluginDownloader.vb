@@ -32,14 +32,14 @@ Public Class PluginDownloader
                 If ShowUpdatesOnly Then
                     Return String.Empty
                 End If
-                Return String.Format("No versions of plugin {0} found on the community site.", RemotePlugin.PluginName)
+                Return String.Format("No versions of plugin {0} found on the community site.", Update.PluginName)
             Case LocalPlugin Is Nothing OrElse LocalPlugin.Version < Update.Version OrElse Force
-                Return DownloadAndInstallPlugin(RemotePlugin)
+                Return DownloadAndInstallPlugin(Update)
             Case LocalPlugin.Version >= Update.Version
                 If ShowUpdatesOnly Then
                     Return String.Empty
                 End If
-                Return String.Format("Plugin {0} is already up to date.", RemotePlugin.PluginName)
+                Return String.Format("Plugin {0} is already up to date.", Update.PluginName)
             Case Else
                 Return String.Empty
         End Select
