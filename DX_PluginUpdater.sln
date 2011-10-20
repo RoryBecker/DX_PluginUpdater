@@ -8,7 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D73B6447-961C-4092-9FB5-6192848C6239}"
 	ProjectSection(SolutionItems) = preProject
 		Readme.txt = Readme.txt
-		Still ToDo.txt = Still ToDo.txt
+		TodoVsDone.txt = TodoVsDone.txt
 	EndProjectSection
 EndProject
 Global
