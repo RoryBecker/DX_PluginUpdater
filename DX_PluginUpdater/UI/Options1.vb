@@ -77,18 +77,6 @@ Public Class Options1
             Call DXCoreOps.RestartDXCore()
         End If
     End Sub
-
-    Private Sub cmdSelectAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdSelectAll.Click
-        For Each Item As ListViewItem In chkLstPlugins.Items
-            Item.Checked = True
-        Next
-    End Sub
-
-    Private Sub cmdSelectNone_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdSelectNone.Click
-        For Each Item As ListViewItem In chkLstPlugins.Items
-            Item.Checked = False
-        Next
-    End Sub
 #End Region
 #Region "Options"
     Private Sub Options1_PreparePage(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.OptionsPageStorageEventArgs) Handles Me.PreparePage

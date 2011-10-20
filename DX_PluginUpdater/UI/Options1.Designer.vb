@@ -54,8 +54,6 @@ Partial Class Options1
         Me.txtCustom = New System.Windows.Forms.TextBox()
         Me.tabKeywords = New System.Windows.Forms.TabPage()
         Me.cmdRestartDXCore = New System.Windows.Forms.Button()
-        Me.cmdSelectNone = New System.Windows.Forms.Button()
-        Me.cmdSelectAll = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tabPlugins.SuspendLayout()
         Me.tabFeeds.SuspendLayout()
@@ -197,8 +195,6 @@ Partial Class Options1
         '
         'tabPlugins
         '
-        Me.tabPlugins.Controls.Add(Me.cmdSelectNone)
-        Me.tabPlugins.Controls.Add(Me.cmdSelectAll)
         Me.tabPlugins.Controls.Add(Me.lnkSource)
         Me.tabPlugins.Controls.Add(Me.lnkBinaries)
         Me.tabPlugins.Controls.Add(Me.lnkWiki)
@@ -329,26 +325,6 @@ Partial Class Options1
         Me.cmdRestartDXCore.Text = "Restart DXCore"
         Me.cmdRestartDXCore.UseVisualStyleBackColor = True
         '
-        'cmdSelectNone
-        '
-        Me.cmdSelectNone.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdSelectNone.Location = New System.Drawing.Point(452, 192)
-        Me.cmdSelectNone.Name = "cmdSelectNone"
-        Me.cmdSelectNone.Size = New System.Drawing.Size(75, 21)
-        Me.cmdSelectNone.TabIndex = 25
-        Me.cmdSelectNone.Text = "Select None"
-        Me.cmdSelectNone.UseVisualStyleBackColor = True
-        '
-        'cmdSelectAll
-        '
-        Me.cmdSelectAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdSelectAll.Location = New System.Drawing.Point(371, 192)
-        Me.cmdSelectAll.Name = "cmdSelectAll"
-        Me.cmdSelectAll.Size = New System.Drawing.Size(75, 21)
-        Me.cmdSelectAll.TabIndex = 24
-        Me.cmdSelectAll.Text = "Select All"
-        Me.cmdSelectAll.UseVisualStyleBackColor = True
-        '
         'Options1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -426,8 +402,6 @@ Partial Class Options1
     Friend WithEvents lnkBinaries As System.Windows.Forms.LinkLabel
     Friend WithEvents lnkWiki As System.Windows.Forms.LinkLabel
     Friend WithEvents cmdRestartDXCore As System.Windows.Forms.Button
-    Friend WithEvents cmdSelectNone As System.Windows.Forms.Button
-    Friend WithEvents cmdSelectAll As System.Windows.Forms.Button
 
 	Public Shared ReadOnly Property FullPath() As String
 		Get
