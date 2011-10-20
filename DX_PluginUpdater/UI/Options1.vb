@@ -117,11 +117,11 @@ Public Class Options1
         Dim Unstable = GetFeedPlugins(CommunityPluginProvider.RemoteBasePluginFolder & "UnstablePlugins.xml")
         Dim TickedPlugins As IEnumerable(Of RemotePluginRef) = NoPlugins 'Temporary
         Dim AllPlugins = TickedPlugins _
-                         .Union(FeedPlugins) _
-                         .Union(CustomPlugins) _
-                         .Union(CommunityPlugins) _
-                         .Except(Exclusions) _
-                         .Except(Unstable)
+                         .UnionWith(FeedPlugins) _
+                         .UnionWith(CustomPlugins) _
+                         .UnionWith(CommunityPlugins) _
+                         .ExceptFor(Exclusions) _
+                         .ExceptFor(Unstable)
         RepopulatePluginList(AllPlugins)
     End Sub
     Private Sub RepopulatePluginList(ByVal AllPlugins As IEnumerable(Of RemotePluginRef))

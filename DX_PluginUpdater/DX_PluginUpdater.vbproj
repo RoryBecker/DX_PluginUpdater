@@ -107,6 +107,7 @@
     <Compile Include="Extensions\ByteExtensions.vb" />
     <Compile Include="Exclusions.vb" />
     <Compile Include="Extensions\FileInfoExtensions.vb" />
+    <Compile Include="Extensions\IEnumerableExtensions.vb" />
     <Compile Include="Managers\LocalPluginProvider.vb" />
     <Compile Include="Managers\PluginProviders\BaseRemotePluginProvider.vb" />
     <Compile Include="Managers\PluginProviders\CommunityPluginProvider.vb" />
