@@ -1,9 +1,8 @@
 Todo
   - Inline Descriptions of Plugins (Scrape intro of Wiki)
-  - Restart DXCore if needed.
-    - Careful of infinite loop here :S
 
 Done
+  - Option to restart DXCore from within options.
   - Links to Wiki
   - Links to Binaries
   - Links to Source
