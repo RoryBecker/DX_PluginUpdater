@@ -53,6 +53,7 @@ Partial Class Options1
         Me.tabCustom = New System.Windows.Forms.TabPage()
         Me.txtCustom = New System.Windows.Forms.TextBox()
         Me.tabKeywords = New System.Windows.Forms.TabPage()
+        Me.cmdRestartDXCore = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tabPlugins.SuspendLayout()
         Me.tabFeeds.SuspendLayout()
@@ -194,6 +195,7 @@ Partial Class Options1
         '
         'tabPlugins
         '
+        Me.tabPlugins.Controls.Add(Me.cmdRestartDXCore)
         Me.tabPlugins.Controls.Add(Me.lnkSource)
         Me.tabPlugins.Controls.Add(Me.lnkBinaries)
         Me.tabPlugins.Controls.Add(Me.lnkWiki)
@@ -314,6 +316,15 @@ Partial Class Options1
         Me.tabKeywords.Text = "Keywords"
         Me.tabKeywords.UseVisualStyleBackColor = True
         '
+        'cmdRestartDXCore
+        '
+        Me.cmdRestartDXCore.Location = New System.Drawing.Point(452, 192)
+        Me.cmdRestartDXCore.Name = "cmdRestartDXCore"
+        Me.cmdRestartDXCore.Size = New System.Drawing.Size(75, 23)
+        Me.cmdRestartDXCore.TabIndex = 24
+        Me.cmdRestartDXCore.Text = "Restart DXCore"
+        Me.cmdRestartDXCore.UseVisualStyleBackColor = True
+        '
         'Options1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -389,6 +400,7 @@ Partial Class Options1
     Friend WithEvents lnkSource As System.Windows.Forms.LinkLabel
     Friend WithEvents lnkBinaries As System.Windows.Forms.LinkLabel
     Friend WithEvents lnkWiki As System.Windows.Forms.LinkLabel
+    Friend WithEvents cmdRestartDXCore As System.Windows.Forms.Button
 
 	Public Shared ReadOnly Property FullPath() As String
 		Get

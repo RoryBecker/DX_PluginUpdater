@@ -201,4 +201,8 @@ Public Class Options1
         System.Diagnostics.Process.Start(BaseSourceUrl & CurrentPluginName())
     End Sub
 #End Region
+
+    Private Sub cmdRestartDXCore_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdRestartDXCore.Click
+        Call DXCoreOps.RestartDXCore()
+    End Sub
 End Class
