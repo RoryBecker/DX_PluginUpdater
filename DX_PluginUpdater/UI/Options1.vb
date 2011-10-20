@@ -72,6 +72,23 @@ Public Class Options1
     Private Sub cmdOpenPluginFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdOpenPluginFolder.Click
         System.Diagnostics.Process.Start(CodeRush.Options.Paths.CommunityPlugInsPath)
     End Sub
+    Private Sub cmdRestartDXCore_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdRestartDXCore.Click
+        If MsgBox("Are you sure you want to restart the DXCore?", vbYesNo) = MsgBoxResult.Yes Then
+            Call DXCoreOps.RestartDXCore()
+        End If
+    End Sub
+
+    Private Sub cmdSelectAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdSelectAll.Click
+        For Each Item As ListViewItem In chkLstPlugins.Items
+            Item.Checked = True
+        Next
+    End Sub
+
+    Private Sub cmdSelectNone_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdSelectNone.Click
+        For Each Item As ListViewItem In chkLstPlugins.Items
+            Item.Checked = False
+        Next
+    End Sub
 #End Region
 #Region "Options"
     Private Sub Options1_PreparePage(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.OptionsPageStorageEventArgs) Handles Me.PreparePage
@@ -203,9 +220,5 @@ Public Class Options1
     End Sub
 #End Region
 
-    Private Sub cmdRestartDXCore_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdRestartDXCore.Click
-        If MsgBox("Are you sure you want to restart the DXCore?", vbYesNo) = MsgBoxResult.Yes Then
-            Call DXCoreOps.RestartDXCore()
-        End If
-    End Sub
+
 End Class

@@ -125,12 +125,6 @@
     <Compile Include="PlugIn1.Designer.vb">
       <DependentUpon>PlugIn1.vb</DependentUpon>
     </Compile>
-    <Compile Include="UI\PluginPicker.Designer.vb">
-      <DependentUpon>PluginPicker.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UI\PluginPicker.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Structures\PluginRef.vb" />
     <Compile Include="Managers\PluginDownloader.vb" />
     <Compile Include="Properties\AssemblyInfo.vb" />
@@ -156,9 +150,6 @@
   <ItemGroup>
     <EmbeddedResource Include="UI\Options1.resx">
       <DependentUpon>Options1.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\PluginPicker.resx">
-      <DependentUpon>PluginPicker.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
