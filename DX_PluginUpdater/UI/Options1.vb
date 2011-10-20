@@ -151,21 +151,22 @@ Public Class Options1
         Return CommunityPlugins
     End Function
     Private Function GetCustomPlugins(ByVal Source As String) As IEnumerable(Of RemotePluginRef)
-        Dim CustomPluginNames As String() = Split(Source.Trim, Environment.NewLine)
-        If CustomPluginNames.Count = 1 AndAlso CustomPluginNames(0).Trim = "" Then
-            CustomPluginNames = New String() {}
-        End If
+        Dim CustomPluginNames As String() = GetFeedNames(Source)
 
         Dim CustomPlugins = _
             From Name As String In CustomPluginNames _
             Select mCommunityPluginProvider.GetLatestCommunityPluginReference(Name)
         Return CustomPlugins
     End Function
-    Private Function GetFeedPlugins(ByVal Source As String) As IEnumerable(Of RemotePluginRef)
+    Private Function GetFeedNames(ByVal Source As String) As String()
         Dim FeedNames As String() = Split(Source.Trim, Environment.NewLine)
         If FeedNames.Count = 1 AndAlso FeedNames(0).Trim = "" Then
             FeedNames = New String() {}
         End If
+        Return FeedNames
+    End Function
+    Private Function GetFeedPlugins(ByVal Source As String) As IEnumerable(Of RemotePluginRef)
+        Dim FeedNames As String() = GetFeedNames(Source)
         Dim FeedPlugins = _
                     From URL As String In FeedNames, plugin In New FeedPluginProvider(URL).GetPluginReferences() _
                     Select plugin
@@ -203,6 +204,8 @@ Public Class Options1
 #End Region
 
     Private Sub cmdRestartDXCore_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdRestartDXCore.Click
-        Call DXCoreOps.RestartDXCore()
+        If MsgBox("Are you sure you want to restart the DXCore?", vbYesNo) = MsgBoxResult.Yes Then
+            Call DXCoreOps.RestartDXCore()
+        End If
     End Sub
 End Class

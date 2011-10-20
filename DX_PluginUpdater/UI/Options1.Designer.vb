@@ -43,6 +43,7 @@ Partial Class Options1
         Me.cmdRefresh = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tabPlugins = New System.Windows.Forms.TabPage()
+        Me.cmdRestartDXCore = New System.Windows.Forms.Button()
         Me.lnkSource = New System.Windows.Forms.LinkLabel()
         Me.lnkBinaries = New System.Windows.Forms.LinkLabel()
         Me.lnkWiki = New System.Windows.Forms.LinkLabel()
@@ -53,7 +54,6 @@ Partial Class Options1
         Me.tabCustom = New System.Windows.Forms.TabPage()
         Me.txtCustom = New System.Windows.Forms.TextBox()
         Me.tabKeywords = New System.Windows.Forms.TabPage()
-        Me.cmdRestartDXCore = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tabPlugins.SuspendLayout()
         Me.tabFeeds.SuspendLayout()
@@ -195,7 +195,6 @@ Partial Class Options1
         '
         'tabPlugins
         '
-        Me.tabPlugins.Controls.Add(Me.cmdRestartDXCore)
         Me.tabPlugins.Controls.Add(Me.lnkSource)
         Me.tabPlugins.Controls.Add(Me.lnkBinaries)
         Me.tabPlugins.Controls.Add(Me.lnkWiki)
@@ -209,6 +208,16 @@ Partial Class Options1
         Me.tabPlugins.TabIndex = 0
         Me.tabPlugins.Text = "Plugins"
         Me.tabPlugins.UseVisualStyleBackColor = True
+        '
+        'cmdRestartDXCore
+        '
+        Me.cmdRestartDXCore.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cmdRestartDXCore.Location = New System.Drawing.Point(321, 273)
+        Me.cmdRestartDXCore.Name = "cmdRestartDXCore"
+        Me.cmdRestartDXCore.Size = New System.Drawing.Size(102, 23)
+        Me.cmdRestartDXCore.TabIndex = 24
+        Me.cmdRestartDXCore.Text = "Restart DXCore"
+        Me.cmdRestartDXCore.UseVisualStyleBackColor = True
         '
         'lnkSource
         '
@@ -316,19 +325,11 @@ Partial Class Options1
         Me.tabKeywords.Text = "Keywords"
         Me.tabKeywords.UseVisualStyleBackColor = True
         '
-        'cmdRestartDXCore
-        '
-        Me.cmdRestartDXCore.Location = New System.Drawing.Point(452, 192)
-        Me.cmdRestartDXCore.Name = "cmdRestartDXCore"
-        Me.cmdRestartDXCore.Size = New System.Drawing.Size(75, 23)
-        Me.cmdRestartDXCore.TabIndex = 24
-        Me.cmdRestartDXCore.Text = "Restart DXCore"
-        Me.cmdRestartDXCore.UseVisualStyleBackColor = True
-        '
         'Options1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdRestartDXCore)
         Me.Controls.Add(Me.optLocal)
         Me.Controls.Add(Me.optNew)
         Me.Controls.Add(Me.optAll)
