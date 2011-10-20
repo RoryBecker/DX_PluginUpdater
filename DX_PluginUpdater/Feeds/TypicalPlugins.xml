@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Doc>
-  <Plugins BaseFolder="http://www.rorybecker.co.uk/DevExpress/Plugins/Community/">
+  <Plugins BaseFolder="http://www.rorybecker.co.uk/DevExpress/Community/Plugins/">
     <Plugin Name="CR_BlockPainterPlus" />
     <Plugin Name="CR_ClearAllMarkers" />
     <Plugin Name="CR_DeclareParameter" />
