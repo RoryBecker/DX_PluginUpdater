@@ -9,8 +9,8 @@ Public Class PlugIn1
 
 	'DXCore-generated code...
 #Region " InitializePlugIn "
-	Public Overrides Sub InitializePlugIn()
-		MyBase.InitializePlugIn()
+    Public Overrides Sub InitializePlugIn()
+        MyBase.InitializePlugIn()
         Call RegisterUpdatePluginsCommand()
         Call RegisterConfigurePluginUpdaterCommand()
     End Sub
