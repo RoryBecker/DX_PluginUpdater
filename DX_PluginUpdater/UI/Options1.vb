@@ -22,7 +22,7 @@ Public Class Options1
 
 #Region " GetCategory "
     Public Shared Function GetCategory() As String
-        Return "Community\Plugins"
+        Return "Community"
     End Function
 #End Region
 #Region " GetPageName "
