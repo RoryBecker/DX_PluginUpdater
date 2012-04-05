@@ -1,3 +1,4 @@
+Option Strict On
 Imports System.Text.RegularExpressions
 Imports System.IO
 Imports System.Linq
@@ -5,7 +6,8 @@ Imports System.Runtime.CompilerServices
 Imports System.Text
 Public Class PluginDownloader
     Private ReadOnly mLocalPluginProvider As LocalPluginProvider
-    Private WebManager As New WebManager
+    Private ReadOnly WebManager As New WebManager()
+
     Private Const REGEX_SpecificPluginZipFile As String = "(?<Plugin>({0}))_(?<Version>\d+)\.zip"">"
 
 
@@ -13,38 +15,39 @@ Public Class PluginDownloader
         mLocalPluginProvider = New LocalPluginProvider(LocalPluginFolder)
     End Sub
 
-    Public Function UpdatePlugins(ByVal Plugins As RemotePluginRef()) As String
-        Dim ResultsBuilder = New StringBuilder()
+    Public Function UpdateLocalPlugins(Action As Action(Of String), Optional ByVal ShowUpdatesOnly As Boolean = False) As List(Of RemotePluginRef)
+        Return UpdatePlugins(mLocalPluginProvider.GetPluginReferences, Action, ShowUpdatesOnly)
+    End Function
+    Public Function UpdatePlugins(ByVal Plugins As IEnumerable(Of RemotePluginRef), Action As Action(Of String), Optional ByVal ShowUpdatesOnly As Boolean = False) As List(Of RemotePluginRef)
+        Dim UpdatedPlugins As New List(Of RemotePluginRef)
         For Each Plugin In Plugins
-            ResultsBuilder.AppendLine(TryInstallPlugin(Plugin))
+            Dim Result As Result = TryInstallPlugin(Plugin, ShowUpdatesOnly)
+            Action.Invoke(Result.Message)
+            If Result.Result Then
+                UpdatedPlugins.Add(Plugin)
+            End If
         Next
-        Return ResultsBuilder.ToString()
+        Return UpdatedPlugins
     End Function
 
-    Public Function TryInstallPlugin(ByVal RemotePlugin As RemotePluginRef, Optional ByVal ShowUpdatesOnly As Boolean = False, Optional ByVal Force As Boolean = False) As String
+    Public Function TryInstallPlugin(ByVal RemotePlugin As RemotePluginRef, Optional ByVal ShowUpdatesOnly As Boolean = False, Optional ByVal Force As Boolean = False) As Result
         If RemotePlugin.PluginName = String.Empty Then
-            Return String.Empty
+            Return New Result(False, String.Empty)
         End If
         Dim LocalPlugin As PluginRef = mLocalPluginProvider.GetPluginReference(RemotePlugin.PluginName)
         Dim Update As RemotePluginRef = GetReferenceToLatestVersion(RemotePlugin)
         Select Case True
             Case Update Is Nothing
-                If ShowUpdatesOnly Then
-                    Return String.Empty
-                End If
-                Return String.Format("No versions of plugin {0} found on the community site.", Update.PluginName)
-            Case LocalPlugin Is Nothing OrElse LocalPlugin.Version < Update.Version OrElse Force
+                Return New Result(False, String.Format("No versions of plugin {0} found on the community site.", RemotePlugin.PluginName))
+            Case LocalPlugin.Version < Update.Version OrElse Force
                 Return DownloadAndInstallPlugin(Update)
             Case LocalPlugin.Version >= Update.Version
-                If ShowUpdatesOnly Then
-                    Return String.Empty
-                End If
-                Return String.Format("Plugin {0} is already up to date.", Update.PluginName)
+                Return New Result(False, String.Format("Plugin {0} is already up to date.", Update.PluginName))
             Case Else
-                Return String.Empty
+                Return New Result(False, String.Empty)
         End Select
     End Function
-    Public Function DownloadAndInstallPlugin(ByVal Plugin As RemotePluginRef) As String
+    Public Function DownloadAndInstallPlugin(ByVal Plugin As RemotePluginRef) As Result
         Try
             Dim WebManager As New WebManager()
             Dim FileBytes = WebManager.DownloadResource(Plugin.RemoteZipFileUrl)
@@ -52,12 +55,9 @@ Public Class PluginDownloader
                 WebManager.Unzip(ToStreamVariable, mLocalPluginProvider.LocalPluginFolder)
             End Using
         Catch ex As Exception
-            Return ex.Message
+            Return New Result(False, ex.Message)
         End Try
-        Return String.Format("Downloaded and installed version {0} of plugin {1}", Plugin.Version, Plugin.PluginName)
-    End Function
-    Private Function GetSpecificPluginRegex(ByVal PluginName As String) As System.Text.RegularExpressions.Regex
-        Return New System.Text.RegularExpressions.Regex(String.Format(REGEX_SpecificPluginZipFile, PluginName), RegexOptions.CultureInvariant Or RegexOptions.Compiled)
+        Return New Result(True, String.Format("Downloaded and installed version {0} of plugin {1}", Plugin.Version, Plugin.PluginName))
     End Function
     Public Function GetReferenceToLatestVersion(ByVal RemotePlugin As RemotePluginRef) As RemotePluginRef
         Return GetReferenceToLatestVersion(RemotePlugin.PluginName, RemotePlugin.RemoteFolderUrl)
@@ -76,5 +76,8 @@ Public Class PluginDownloader
             End If
         Next
         Return LatestPlugin
+    End Function
+    Private Function GetSpecificPluginRegex(ByVal PluginName As String) As System.Text.RegularExpressions.Regex
+        Return New System.Text.RegularExpressions.Regex(String.Format(REGEX_SpecificPluginZipFile, PluginName), RegexOptions.CultureInvariant Or RegexOptions.Compiled)
     End Function
 End Class

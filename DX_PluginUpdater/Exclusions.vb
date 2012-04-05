@@ -15,6 +15,5 @@ Public Class Exclusions
         "Xceed.FileSystem", _
         "Xceed.Ftp", _
         "Ionic.Zip.Reduced"})
-
     End Function
 End Class

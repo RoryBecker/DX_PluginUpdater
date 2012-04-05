@@ -12,7 +12,7 @@
     <AssemblyName>DX_PluginUpdater</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -39,7 +39,7 @@
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>..\..\..\..\Documents\DevExpress\IDE Tools\Community\PlugIns\</OutputPath>
+    <OutputPath>..\..\..\..\..\..\Users\Rory.Becker\Documents\DevExpress\IDE Tools\Community\Plugins\</OutputPath>
     <DocumentationFile>DX_PluginUpdater.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
@@ -72,9 +72,9 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Common Files\microsoft shared\MSEnv\PublicAssemblies\extensibility.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="Ionic.Zip.Reduced">
       <HintPath>DeploymentFiles\Ionic.Zip.Reduced.dll</HintPath>
@@ -107,19 +107,10 @@
     <Compile Include="Extensions\ByteExtensions.vb" />
     <Compile Include="Exclusions.vb" />
     <Compile Include="Extensions\FileInfoExtensions.vb" />
-    <Compile Include="Extensions\IEnumerableExtensions.vb" />
     <Compile Include="Managers\LocalPluginProvider.vb" />
-    <Compile Include="Managers\PluginProviders\BaseRemotePluginProvider.vb" />
-    <Compile Include="Managers\PluginProviders\CommunityPluginProvider.vb" />
-    <Compile Include="Managers\PluginProviders\FeedPluginProvider.vb" />
-    <Compile Include="Settings.vb" />
+    <Compile Include="Managers\CommunityPluginProvider.vb" />
+    <Compile Include="Managers\Result.vb" />
     <Compile Include="Structures\RemotePluginRef.vb" />
-    <Compile Include="UI\Options1.Designer.vb">
-      <DependentUpon>Options1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Options1.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="PlugIn1.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -149,19 +140,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="UI\Options1.resx">
-      <DependentUpon>Options1.vb</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="DeploymentFiles\DX_PluginUpdater.Readme.txt" />
     <Content Include="DeploymentFiles\Ionic.Zip.Reduced.Licence.txt" />
-    <Content Include="Feeds\ExcludePlugins.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Feeds\CRFWPlugins.xml" />
-    <Content Include="Feeds\RoryPlugins.xml" />
-    <Content Include="Feeds\TypicalPlugins.xml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />

@@ -6,14 +6,12 @@ Imports System
 Imports DevExpress.CodeRush.Core
 
 Public Class CommunityPluginProvider
-    Inherits BaseRemotePluginProvider
 #Region "Fields"
+    Protected ReadOnly WebManager As New WebManager()
     Private Const RootDownloadFolder As String = "/DevExpress/Community/Plugins/"
     Public Const RemoteBasePluginFolder As String = "http://www.rorybecker.co.uk" & RootDownloadFolder
-    Private Const REGEX_SpecificPluginZipFile As String = "(?<Plugin>({0}))_(?<Version>\d+)\.zip"">"
-    Private Const REGEX_PluginZipFile As String = "(?<Plugin>(\w|-|_)+)_(?<Version>\d+)\.zip"">"
 #End Region
-    Private PluginDownloader As New PluginDownloader(CodeRush.Options.Paths.CommunityPlugInsPath)
+    Private ReadOnly PluginDownloader As New PluginDownloader(CodeRush.Options.Paths.CommunityPlugInsPath)
     Private Function GetRootFolderMatches() As MatchCollection
         Dim Content = WebManager.GetUrlContentAsString(RemoteBasePluginFolder)
         Dim regex As Regex = New Regex(String.Format("<A HREF=""{0}(?<Plugin>(\w|-|_)+)/"">", RootDownloadFolder), RegexOptions.CultureInvariant Or RegexOptions.Compiled)
@@ -23,11 +21,8 @@ Public Class CommunityPluginProvider
         Return String.Format("{0}{1}", RemoteBasePluginFolder, PluginName)
     End Function
 
-    Private Function GetSpecificPluginRegex(ByVal PluginName As String) As System.Text.RegularExpressions.Regex
-        Return New System.Text.RegularExpressions.Regex(String.Format(REGEX_SpecificPluginZipFile, PluginName), RegexOptions.CultureInvariant Or RegexOptions.Compiled)
-    End Function
 #Region "GetPluginReferences"
-    Public Overrides Function GetPluginReferences() As IEnumerable(Of RemotePluginRef)
+    Public Function GetPluginReferences() As IEnumerable(Of RemotePluginRef)
         Dim Plugins As New List(Of RemotePluginRef)
         For Each Match As Match In GetRootFolderMatches()
             Dim PluginName As String = Match.Groups("Plugin").Value
