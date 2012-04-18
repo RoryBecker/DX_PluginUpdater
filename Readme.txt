@@ -1,24 +1,8 @@
-This plugin is designed to provide an action to download published updates to DXCore plugins.
-The targeted plugins are those found on the community site http://code.google.com/p/dxcorecommunityplugins/wiki
+This plugin will
+Iterate your existing 3rd Party plugins
 
-The plugins to download are to be configurable through the options screen.
-Current location of the page in question is Community\Plugins\PluginUpdater
-
-This plugin requires ... 
-...DXCore version 11.1.8 or better to function.
-...the Core\Startup 'Use raw assembly load (prevents locking of assemblies)'
-
-Goals 
-	- Provide Action to retrieve plugin updates for named Plugins.
-	- Provide OptionsPage to configure plugins to update.
-
-Options 
-	- Save simple named list of plugins
-	- Allow manual list population
-	- Allow list population from "All Community Plugins"
-	- Allow list population from "Local Plugins"
-	- Allow list population from "New Community Plugins"
-
-Future 
-	- Allow plugin retrieval from sites other than Community Site.
-	- Allow options population from rss or similar feed(s)
+DXPluginUpdater
+ - Updates local plugins to latest versions.
+ - Needs to find some way to depreciate plugins.
+   - Probably do this in the RSS Feed 
+   - Should have some sort of redirect

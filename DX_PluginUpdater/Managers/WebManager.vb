@@ -5,8 +5,12 @@ Imports Ionic.Zip
 Public Class WebManager
     Private WebClient = New System.Net.WebClient
     Public Function ContentIs404(ByVal Url As String, ByRef Content As String) As Boolean
-        Content = GetUrlContentAsString(Url)
-        Return is404(Content)
+        Try
+            Content = GetUrlContentAsString(Url)
+            Return is404(Content)
+        Catch ex As WebException
+            Return CType(ex.Response, HttpWebResponse).StatusCode = HttpStatusCode.NotFound
+        End Try
     End Function
     Public Function is404(ByVal Content As String) As Boolean
         Return Content.Contains("Oops")

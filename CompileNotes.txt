@@ -1,0 +1,4 @@
+Correct building of this project requires
+1.> Compile Targetting 3.5
+2.> ILMerge Ionic.etc
+3.> Raw loading of assemblys

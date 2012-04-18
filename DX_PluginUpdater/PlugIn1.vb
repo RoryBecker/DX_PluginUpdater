@@ -8,15 +8,18 @@ Imports DevExpress.CodeRush.StructuralParser
 Imports System.Text
 Imports DevExpress.CodeRush.Menus
 Imports System.Threading
+Imports System.Linq
 
 Public Class PlugIn1
     Private Const MenuCaption_Update_Plugins As String = "Update Plugins"
+    Private Const MenuCaption_Find_Plugins As String = "Find New Plugins"
 
     'DXCore-generated code...
 #Region " InitializePlugIn "
     Public Overrides Sub InitializePlugIn()
         MyBase.InitializePlugIn()
         Call RegisterUpdatePluginsCommand()
+        Call CreateFindNewPlugins()
         AddHandler EventNexus.DXCoreLoaded, AddressOf EventNexus_DXCoreLoaded
     End Sub
 #End Region
@@ -59,7 +62,8 @@ Public Class PlugIn1
 
     Private Sub EventNexus_DXCoreLoaded(ByVal ea As DXCoreLoadedEventArgs)
         Call SetMenuPositionAfterByCaption(MenuCaption_Update_Plugins, "&New Plug-in...")
-        Call SetMenuBeginGroupByCaption(MenuCaption_Update_Plugins, False)
+        Call SetMenuPositionAfterByCaption(MenuCaption_Find_Plugins, MenuCaption_Update_Plugins)
+        'Call SetMenuBeginGroupByCaption(MenuCaption_Update_Plugins, False)
     End Sub
 
     Public Sub RegisterUpdatePluginsCommand()
@@ -73,14 +77,48 @@ Public Class PlugIn1
         CType(UpdatePlugins, System.ComponentModel.ISupportInitialize).EndInit()
     End Sub
     Private Sub UpdatePlugins_Execute(ByVal ea As ExecuteEventArgs)
-        Dim PluginDownloader = New PluginDownloader(CodeRush.Options.Paths.CommunityPlugInsPath)
-        Dim UpdatedPlugins = PluginDownloader.UpdateLocalPlugins(AddressOf ShowMessage, True)
-        Call ShowMessage("")
-        If UpdatedPlugins.Count > 0 Then
-            Call ShowMessage(String.Format("{0} plugins updated", UpdatedPlugins.Count))
-        End If
+        ' Providers
+        Dim LocalPluginProvider = New LocalPluginProvider(CodeRush.Options.Paths.CommunityPlugInsPath)
+        Dim CommunityPluginProvider = New CommunityPluginProvider(LocalPluginProvider)
+        Dim PluginDownloader = New PluginDownloader(LocalPluginProvider, CommunityPluginProvider)
+
+        ' Plugins
+        Dim LocalPlugins = LocalPluginProvider.GetPluginReferences
+        Dim UnpickedPlugins = PluginPicker.GetPlugins(LocalPlugins, PickedVsUnPickedEnum.Unpicked)
+        Dim PluginsToUpdate = LocalPlugins.Except(UnpickedPlugins)
+
+        ' Action
+        Dim UpdatedPlugins = PluginDownloader.DownloadPlugins(PluginsToUpdate, AddressOf ShowMessage, True)
+        Call ShowMessage(String.Format("{0} plugins found. {1} plugins updated.", PluginsToUpdate.Count, UpdatedPlugins.Count))
     End Sub
+
     Public Sub ShowMessage(message As String)
         CodeRush.ApplicationObject.StatusBar.Text = message
+    End Sub
+    Public Sub CreateFindNewPlugins()
+        Dim FindNewPlugins As New DevExpress.CodeRush.Core.Action(components)
+        CType(FindNewPlugins, System.ComponentModel.ISupportInitialize).BeginInit()
+        FindNewPlugins.ActionName = "FindNewPlugins"
+        FindNewPlugins.ButtonText = MenuCaption_Find_Plugins ' Used if button is placed on a menu.
+        FindNewPlugins.RegisterInCR = True
+        FindNewPlugins.CommonMenu = DevExpress.CodeRush.Menus.VsCommonBar.DevExpress
+        AddHandler FindNewPlugins.Execute, AddressOf FindNewPlugins_Execute
+        CType(FindNewPlugins, System.ComponentModel.ISupportInitialize).EndInit()
+    End Sub
+
+
+    Private Sub FindNewPlugins_Execute(ByVal ea As ExecuteEventArgs)
+        ' Providers
+        Dim LocalPluginProvider = New LocalPluginProvider(CodeRush.Options.Paths.CommunityPlugInsPath)
+        Dim CommunityPluginProvider = New CommunityPluginProvider(LocalPluginProvider)
+        Dim PluginDownloader = New PluginDownloader(LocalPluginProvider, CommunityPluginProvider)
+
+        ' Plugins
+        Dim CommunityPlugins = CommunityPluginProvider.GetPluginReferencesNew()
+        Dim ChosenPlugins = PluginPicker.GetPlugins(CommunityPlugins, PickedVsUnPickedEnum.Picked)
+
+        ' Action
+        Dim UpdatedPlugins = PluginDownloader.DownloadPlugins(ChosenPlugins, AddressOf ShowMessage, True)
+        Call ShowMessage(String.Format("{0} plugins chosen. {1} plugins downloaded.", ChosenPlugins.Count, UpdatedPlugins.Count))
     End Sub
 End Class

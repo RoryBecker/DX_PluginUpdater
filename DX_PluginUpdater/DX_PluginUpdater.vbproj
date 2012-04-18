@@ -12,7 +12,7 @@
     <AssemblyName>DX_PluginUpdater</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -121,6 +121,12 @@
     <Compile Include="Managers\PluginDownloader.vb" />
     <Compile Include="Properties\AssemblyInfo.vb" />
     <Compile Include="Managers\WebManager.vb" />
+    <Compile Include="UI\PluginPicker.Designer.vb">
+      <DependentUpon>PluginPicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\PluginPicker.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -150,6 +156,11 @@
     <None Include="DX_PluginUpdater.Deploy.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\PluginPicker.resx">
+      <DependentUpon>PluginPicker.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

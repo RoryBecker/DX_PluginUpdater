@@ -1,9 +1,0 @@
-Todo
-  - Inline Descriptions of Plugins (Scrape intro of Wiki)
-
-Done
-  - Option to restart DXCore from within options.
-  - Links to Wiki
-  - Links to Binaries
-  - Links to Source
-  - Support plugins from other sites. (Via Feeds)
