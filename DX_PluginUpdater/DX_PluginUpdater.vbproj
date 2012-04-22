@@ -107,6 +107,7 @@
     <Compile Include="Extensions\ByteExtensions.vb" />
     <Compile Include="Exclusions.vb" />
     <Compile Include="Extensions\FileInfoExtensions.vb" />
+    <Compile Include="Managers\FeedPluginProvider.vb" />
     <Compile Include="Managers\LocalPluginProvider.vb" />
     <Compile Include="Managers\CommunityPluginProvider.vb" />
     <Compile Include="Managers\Result.vb" />
@@ -148,6 +149,10 @@
   <ItemGroup>
     <Content Include="DeploymentFiles\DX_PluginUpdater.Readme.txt" />
     <Content Include="DeploymentFiles\Ionic.Zip.Reduced.Licence.txt" />
+    <Content Include="Feeds\CRFWPlugins.xml" />
+    <Content Include="Feeds\ExcludePlugins.xml" />
+    <Content Include="Feeds\RoryPlugins.xml" />
+    <Content Include="Feeds\TypicalPlugins.xml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />

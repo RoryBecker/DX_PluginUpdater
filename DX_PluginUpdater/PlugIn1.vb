@@ -115,6 +115,7 @@ Public Class PlugIn1
 
         ' Plugins
         Dim CommunityPlugins = CommunityPluginProvider.GetPluginReferencesNew()
+
         Dim ChosenPlugins = PluginPicker.GetPlugins(CommunityPlugins, PickedVsUnPickedEnum.Picked)
 
         ' Action

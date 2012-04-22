@@ -16,22 +16,27 @@ Public Class CommunityPluginProvider
     Public Sub New(LocalPluginProvider As LocalPluginProvider)
         mLocalPluginProvider = LocalPluginProvider
     End Sub
-#Region "GetPluginReferences"
-    Public Function GetPluginReferencesNew() As IEnumerable(Of RemotePluginRef)
-        Dim CommunityPlugins = GetRemoteReferencesLatestAll().ToList
-        Dim LocalPlugins = mLocalPluginProvider.GetPluginReferences.ToList
+#Region "Subtraction"
+    Private Shared Function Subtract(Of T As PluginRef)(ByVal Source As IEnumerable(Of RemotePluginRef), ByVal ToSubtract As IEnumerable(Of T)) As IEnumerable(Of RemotePluginRef)
+        Return Subtract(Source, From Plugin In ToSubtract Select Plugin.PluginName)
+    End Function
+    Private Shared Function Subtract(ByVal Source As IEnumerable(Of RemotePluginRef), ByVal ToSubtractNames As IEnumerable(Of String)) As IEnumerable(Of RemotePluginRef)
         Dim Results As New List(Of RemotePluginRef)
-        For Each Item In CommunityPlugins
-            If Not LocalPlugins.Contains(Item) Then
+        For Each Item In Source
+            If Not ToSubtractNames.Contains(Item.PluginName) Then
                 Results.Add(Item)
             End If
         Next
         Return Results
     End Function
+#End Region
+
+#Region "GetPluginReferences"
+    Public Function GetPluginReferencesNew() As IEnumerable(Of RemotePluginRef)
+        Return Subtract(GetRemoteReferencesLatestAll(), mLocalPluginProvider.GetPluginReferences)
+    End Function
     Public Function GetRemoteReferencesLatestOf(ByVal LocalPlugins As IEnumerable(Of PluginRef)) As IEnumerable(Of RemotePluginRef)
-        Dim LocalPluginNames = From Plugin In LocalPlugins Select Plugin.PluginName
-        Return From Reference In GetRemoteReferencesLatestAll()
-               Where LocalPluginNames.Contains(Reference.PluginName)
+        Return Subtract(GetRemoteReferencesLatestAll(), LocalPlugins)
     End Function
     Public Function GetRemoteReferencesLatestAll() As IEnumerable(Of RemotePluginRef)
         Dim Content = WebManager.GetUrlContentAsString(RemoteLatestVersionsPage)
@@ -43,7 +48,9 @@ Public Class CommunityPluginProvider
                                             RemoteBasePluginAddress & Match.Groups("Plugin").Value,
                                             CInt(Match.Groups("Version").Value)))
         Next
-        Return Results
+        Dim ExcludedPlugins = FeedPluginProvider.GetFeedXML(RemoteBasePluginAddress & "ExcludePlugins.xml").GetPluginReferences
+        Return Subtract(Results, ExcludedPlugins)
+
     End Function
     Public Function GetRemoteReferenceLatestSpecific(ByVal PluginName As String) As RemotePluginRef
         Dim RemoteFolderUrl As String = RemoteBasePluginAddress & PluginName

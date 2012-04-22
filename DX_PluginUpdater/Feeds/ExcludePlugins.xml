@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Doc>
+  <Plugins BaseFolder="http://www.rorybecker.co.uk/DevExpress/Community/Plugins/">
+    <Plugin Name="CR_ClassCleaner" />
+    <Plugin Name="CR_QuickAddReference" />
+    <Plugin Name="Impromptu" />
+    <Plugin Name="CI_ReferenceTypeAssignedToSession" />
+    <Plugin Name="CR_Colorizer" />
+  </Plugins>
+
+</Doc>

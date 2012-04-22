@@ -17,9 +17,11 @@ Public Class WebManager
     End Function
     Public Function GetUrlContentAsString(ByVal Url As String) As String
         Dim Request As WebRequest = WebRequest.Create(Url)
-        Dim Response As WebResponse = Request.GetResponse()
-        Dim Reader As StreamReader = New StreamReader(Response.GetResponseStream())
-        Return Reader.ReadToEnd
+        Using Response As WebResponse = Request.GetResponse()
+            Using Reader As StreamReader = New StreamReader(Response.GetResponseStream())
+                Return Reader.ReadToEnd
+            End Using
+        End Using
     End Function
     Public Function DownloadResource(ByVal RemoteZipFileUrl As String) As Byte()
         Return WebClient.DownloadData(RemoteZipFileUrl)
