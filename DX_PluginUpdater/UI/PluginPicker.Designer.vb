@@ -38,13 +38,13 @@ Partial Class PluginPicker
         'lstPlugins
         '
         Me.lstPlugins.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lstPlugins.CheckBoxes = True
         Me.lstPlugins.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colName})
         Me.lstPlugins.Location = New System.Drawing.Point(12, 12)
         Me.lstPlugins.Name = "lstPlugins"
-        Me.lstPlugins.Size = New System.Drawing.Size(411, 257)
+        Me.lstPlugins.Size = New System.Drawing.Size(346, 222)
         Me.lstPlugins.TabIndex = 1
         Me.lstPlugins.UseCompatibleStateImageBehavior = False
         Me.lstPlugins.View = System.Windows.Forms.View.Details
@@ -58,7 +58,7 @@ Partial Class PluginPicker
         '
         Me.cmdCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.cmdCancel.Location = New System.Drawing.Point(343, 360)
+        Me.cmdCancel.Location = New System.Drawing.Point(278, 325)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
         Me.cmdCancel.TabIndex = 2
@@ -69,7 +69,7 @@ Partial Class PluginPicker
         '
         Me.cmdOk.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdOk.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.cmdOk.Location = New System.Drawing.Point(262, 360)
+        Me.cmdOk.Location = New System.Drawing.Point(197, 325)
         Me.cmdOk.Name = "cmdOk"
         Me.cmdOk.Size = New System.Drawing.Size(75, 23)
         Me.cmdOk.TabIndex = 3
@@ -79,7 +79,7 @@ Partial Class PluginPicker
         'cmdSelectAll
         '
         Me.cmdSelectAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdSelectAll.Location = New System.Drawing.Point(22, 360)
+        Me.cmdSelectAll.Location = New System.Drawing.Point(22, 325)
         Me.cmdSelectAll.Name = "cmdSelectAll"
         Me.cmdSelectAll.Size = New System.Drawing.Size(75, 23)
         Me.cmdSelectAll.TabIndex = 4
@@ -89,7 +89,7 @@ Partial Class PluginPicker
         'cmdSelectNone
         '
         Me.cmdSelectNone.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdSelectNone.Location = New System.Drawing.Point(103, 360)
+        Me.cmdSelectNone.Location = New System.Drawing.Point(103, 325)
         Me.cmdSelectNone.Name = "cmdSelectNone"
         Me.cmdSelectNone.Size = New System.Drawing.Size(75, 23)
         Me.cmdSelectNone.TabIndex = 5
@@ -109,12 +109,14 @@ Partial Class PluginPicker
         '
         'GroupBox1
         '
+        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.lnkSource)
         Me.GroupBox1.Controls.Add(Me.lnkBinaries)
         Me.GroupBox1.Controls.Add(Me.lnkWiki)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 275)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 240)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(406, 79)
+        Me.GroupBox1.Size = New System.Drawing.Size(341, 79)
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Details"
@@ -145,7 +147,7 @@ Partial Class PluginPicker
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(430, 395)
+        Me.ClientSize = New System.Drawing.Size(365, 360)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.cmdSelectNone)
         Me.Controls.Add(Me.cmdSelectAll)
