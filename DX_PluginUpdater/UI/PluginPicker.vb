@@ -71,7 +71,7 @@ Public Class PluginPicker
 #End Region
 
     Private Function CurrentPluginName() As String
-        Return If(lstPlugins.SelectedItems.Count > 0, TryCast(lstPlugins.SelectedItems(0).Tag, String), "")
+        Return If(lstPlugins.SelectedItems.Count > 0, TryCast(lstPlugins.SelectedItems(0).Tag, PluginRef).PluginName, "")
     End Function
 
     Private Sub lstPlugins_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstPlugins.SelectedIndexChanged
@@ -81,7 +81,7 @@ Public Class PluginPicker
     End Sub
 
     Public Const BaseWikiUrl As String = "http://code.google.com/p/dxcorecommunityplugins/wiki/"
-    Public Const BaseBinaryUrl As String = "http://www.rorybecker.co.uk/DevExpress/Plugins/Community/"
+    Public Const BaseBinaryUrl As String = "http://www.rorybecker.co.uk/DevExpress/Community/Plugins/"
     Public Const BaseSourceUrl As String = "http://code.google.com/p/dxcorecommunityplugins/source/browse/trunk/"
 
     Private Sub lnkWiki_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkWiki.LinkClicked

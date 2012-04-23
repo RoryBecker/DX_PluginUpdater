@@ -1,5 +1,4 @@
-Imports System.Xml
-Imports System.Xml.Linq
+Imports System.Linq
 Public Class PluginRef
     Protected mPluginName As String
     Protected mVersion As Integer
