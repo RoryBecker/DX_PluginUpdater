@@ -54,6 +54,9 @@ Public Class PlugIn1
 #End Region
 
 #Region "Action: Update Existing Plugins"
+    ' ProposedOption: Don't Prompt
+    ' SubOption: UpdateEverything
+    ' SubOption: ExcludePlugins
     Public Sub RegisterUpdatePluginsCommand()
         Dim UpdatePlugins As New DevExpress.CodeRush.Core.Action(components)
         CType(UpdatePlugins, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -80,7 +83,15 @@ Public Class PlugIn1
         Call ShowMessage(String.Format("{0} plugins found. {1} plugins updated.", PluginsToUpdate.Count, UpdatedPlugins.Count))
     End Sub
 #End Region
+
 #Region "Action: Find New (Recommended) Plugins"
+    ' ProposedOption: Show Recommended only.
+    ' ProposedOption: Show All Plugins (excluding Unstable)
+
+    ' ProposedOption: Show Navigation Plugins
+    ' ProposedOption: Show Refactoring Plugins
+    ' ProposedOption: Show Visualization Plugins
+
     Public Sub CreateFindNewPlugins()
         Dim FindNewPlugins As New DevExpress.CodeRush.Core.Action(components)
         CType(FindNewPlugins, System.ComponentModel.ISupportInitialize).BeginInit()
