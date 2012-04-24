@@ -1,4 +1,5 @@
 Option Infer On
+Option Strict On
 Imports DevExpress.CodeRush.Core
 Imports System.Linq
 Imports DX_PluginUpdater.IEnumerableExt
@@ -82,9 +83,11 @@ Public Class PlugIn1
         Dim PluginDownloader = New PluginDownloader(LocalPluginProvider, CommunityPluginProvider)
 
         ' Plugins
+        Dim CommunityPlugins = CommunityPluginProvider.GetRemoteReferencesLatestAll
         Dim LocalPlugins = LocalPluginProvider.GetPluginReferences
-        Dim UnpickedPlugins = PluginPicker.GetPlugins(LocalPlugins, PickedVsUnPickedEnum.Unpicked)
-        Dim PluginsToUpdate = LocalPlugins.Except(UnpickedPlugins)
+        Dim PickedPlugins = PluginPicker.GetPlugins(LocalPlugins, PickedVsUnPickedEnum.Picked)
+        Dim PickedPluginNames = From Plugin In PickedPlugins Select Plugin.PluginName
+        Dim PluginsToUpdate = From RemotePlugin In CommunityPlugins Where PickedPluginNames.Contains(RemotePlugin.PluginName)
 
         ' Action
         Dim UpdatedPlugins = PluginDownloader.DownloadPlugins(PluginsToUpdate, AddressOf ShowMessage, True)
