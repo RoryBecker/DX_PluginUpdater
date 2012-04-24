@@ -8,6 +8,7 @@ Public Class PlugIn1
 #Region " InitializePlugIn "
     Public Overrides Sub InitializePlugIn()
         MyBase.InitializePlugIn()
+        Call LoadSettings()
         Call RegisterUpdatePluginsCommand()
         Call CreateFindNewPlugins()
         AddHandler EventNexus.DXCoreLoaded, AddressOf EventNexus_DXCoreLoaded
@@ -25,6 +26,13 @@ Public Class PlugIn1
     Private Const MenuCaption_Update_Plugins As String = "Update Plugins"
     Private Const MenuCaption_Find_Plugins As String = "Find New Plugins"
     Private Const CommunitySiteRootPluginUrl As String = "http://www.rorybecker.co.uk/DevExpress/Community/Plugins/"
+#End Region
+#Region "Settings"
+
+    Dim Settings As PluginSettings
+    Private Sub LoadSettings()
+        Settings = PluginSettings.LoadSettings(Options1.Storage)
+    End Sub
 #End Region
 #Region "User Interface"
     Public Sub SetMenuBeginGroupByCaption(Caption As String, BeginGroupValue As Boolean)
@@ -82,6 +90,7 @@ Public Class PlugIn1
         Dim UpdatedPlugins = PluginDownloader.DownloadPlugins(PluginsToUpdate, AddressOf ShowMessage, True)
         Call ShowMessage(String.Format("{0} plugins found. {1} plugins updated.", PluginsToUpdate.Count, UpdatedPlugins.Count))
     End Sub
+
 #End Region
 
 #Region "Action: Find New (Recommended) Plugins"

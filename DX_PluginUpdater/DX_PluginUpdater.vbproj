@@ -12,7 +12,7 @@
     <AssemblyName>DX_PluginUpdater</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -80,6 +80,7 @@
       <HintPath>DeploymentFiles\Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -123,12 +124,19 @@
     <Compile Include="Managers\PluginDownloader.vb" />
     <Compile Include="Properties\AssemblyInfo.vb" />
     <Compile Include="Managers\WebManager.vb" />
+    <Compile Include="UI\Options1.Designer.vb">
+      <DependentUpon>Options1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Options1.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\PluginPicker.Designer.vb">
       <DependentUpon>PluginPicker.vb</DependentUpon>
     </Compile>
     <Compile Include="UI\PluginPicker.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\PluginSettings.vb" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -164,6 +172,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UI\Options1.resx">
+      <DependentUpon>Options1.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\PluginPicker.resx">
       <DependentUpon>PluginPicker.vb</DependentUpon>
     </EmbeddedResource>

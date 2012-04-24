@@ -27,11 +27,15 @@ Public Class WebManager
         Return WebClient.DownloadData(RemoteZipFileUrl)
     End Function
     Public Sub Unzip(ByVal FileStream As Stream, ByVal PluginFolder As String)
-        Using zip1 As ZipFile = ZipFile.Read(FileStream)
-            Dim e As ZipEntry
-            For Each e In zip1
-                e.Extract(PluginFolder, ExtractExistingFileAction.OverwriteSilently)
-            Next
-        End Using
+        Try
+            Using zip1 As ZipFile = ZipFile.Read(FileStream)
+                Dim e As ZipEntry
+                For Each e In zip1
+                    e.Extract(PluginFolder, ExtractExistingFileAction.OverwriteSilently)
+                Next
+            End Using
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        End Try
     End Sub
 End Class
