@@ -3,6 +3,7 @@ Option Strict On
 Imports DevExpress.CodeRush.Core
 Imports System.Linq
 Imports DX_PluginUpdater.IEnumerableExt
+Imports System
 
 Public Class PlugIn1
     'DXCore-generated code...
@@ -67,7 +68,22 @@ Public Class PlugIn1
 
 
 #End Region
+    Private Sub RestartDXCore(ByVal Count As Integer)
+        If Count <= 0 Then
+            Return
+        End If
 
+        Select Case Settings.RestartDXCore
+            Case YesNoAskEnum.Yes
+                DXCoreOps.RestartDXCore()
+            Case YesNoAskEnum.Ask
+                If MsgBox(String.Format("{0} plugins were downloaded and installed. Would you like to restart the DXCore in order to load them?", Count), MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    DXCoreOps.RestartDXCore()
+                End If
+            Case YesNoAskEnum.No
+                ' Do nothing. On Purpose :)
+        End Select
+    End Sub
 #Region "Action: Update Existing Plugins"
     ' ProposedOption: Don't Prompt
     ' SubOption: UpdateEverything
@@ -102,9 +118,8 @@ Public Class PlugIn1
         ' Action
         Dim UpdatedPlugins = PluginDownloader.DownloadPlugins(PickedPlugins, AddressOf ShowMessage, True)
         Call ShowMessage(String.Format("{0} plugins found. {1} plugins updated.", PickedPlugins.Count, UpdatedPlugins.Count))
+        RestartDXCore(UpdatedPlugins.Count)
     End Sub
-
-
 #End Region
 
 #Region "Action: Find New (Recommended) Plugins"
@@ -114,7 +129,6 @@ Public Class PlugIn1
     ' ProposedOption: Show Navigation Plugins
     ' ProposedOption: Show Refactoring Plugins
     ' ProposedOption: Show Visualization Plugins
-    ' ProposedOption: RestartDXCore: Yes/No/Ask
 
     Public Sub CreateFindNewPlugins()
         Dim FindNewPlugins As New DevExpress.CodeRush.Core.Action(components)
@@ -141,6 +155,14 @@ Public Class PlugIn1
         ' Action
         Dim UpdatedPlugins = PluginDownloader.DownloadPlugins(ChosenPlugins, AddressOf ShowMessage, True)
         Call ShowMessage(String.Format("{0} plugins chosen. {1} plugins downloaded.", ChosenPlugins.Count, UpdatedPlugins.Count))
+        RestartDXCore(UpdatedPlugins.Count)
     End Sub
+
 #End Region
+
+    Private Sub PlugIn1_OptionsChanged(ea As DevExpress.CodeRush.Core.OptionsChangedEventArgs) Handles Me.OptionsChanged
+        If ea.OptionsPages.Contains(GetType(Options1)) Then
+            LoadSettings()
+        End If
+    End Sub
 End Class

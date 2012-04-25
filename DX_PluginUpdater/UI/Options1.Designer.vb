@@ -29,23 +29,54 @@ Partial Class Options1
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
         Me.chkPromptBeforeUpdating = New System.Windows.Forms.CheckBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.ynaRestartDXCore = New DX_PluginUpdater.YesNoAskControl()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'chkPromptBeforeUpdating
         '
         Me.chkPromptBeforeUpdating.AutoSize = True
-        Me.chkPromptBeforeUpdating.Location = New System.Drawing.Point(59, 44)
+        Me.chkPromptBeforeUpdating.Location = New System.Drawing.Point(23, 29)
         Me.chkPromptBeforeUpdating.Name = "chkPromptBeforeUpdating"
-        Me.chkPromptBeforeUpdating.Size = New System.Drawing.Size(147, 17)
+        Me.chkPromptBeforeUpdating.Size = New System.Drawing.Size(171, 17)
         Me.chkPromptBeforeUpdating.TabIndex = 0
-        Me.chkPromptBeforeUpdating.Text = "Prompt before updating. "
+        Me.chkPromptBeforeUpdating.Text = "Prompt user before updating. "
         Me.chkPromptBeforeUpdating.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.Location = New System.Drawing.Point(40, 49)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(472, 23)
+        Me.Label1.TabIndex = 1
+        Me.Label1.Text = "(Unchecking this potion will cause all Local plugins to be updated when UpdatePlu" & _
+    "gins is chosen)"
+        '
+        'Label2
+        '
+        Me.Label2.Location = New System.Drawing.Point(20, 72)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(273, 14)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "Restart DXCore after plugins are installed \ updated."
+        '
+        'ynaRestartDXCore
+        '
+        Me.ynaRestartDXCore.Location = New System.Drawing.Point(285, 68)
+        Me.ynaRestartDXCore.Name = "ynaRestartDXCore"
+        Me.ynaRestartDXCore.Size = New System.Drawing.Size(95, 23)
+        Me.ynaRestartDXCore.TabIndex = 2
+        Me.ynaRestartDXCore.YesNoAskValue = DX_PluginUpdater.YesNoAskEnum.Ask
         '
         'Options1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ynaRestartDXCore)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.chkPromptBeforeUpdating)
         Me.Name = "Options1"
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
@@ -76,6 +107,9 @@ Partial Class Options1
         DevExpress.CodeRush.Core.CodeRush.Command.Execute("Options", FullPath)
     End Sub
     Friend WithEvents chkPromptBeforeUpdating As System.Windows.Forms.CheckBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents ynaRestartDXCore As DX_PluginUpdater.YesNoAskControl
+    Friend WithEvents Label2 As System.Windows.Forms.Label
 
 	Public Shared ReadOnly Property FullPath() As String
 		Get
