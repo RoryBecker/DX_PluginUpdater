@@ -85,14 +85,18 @@ Public Class PlugIn1
         ' Plugins
         Dim CommunityPlugins = CommunityPluginProvider.GetRemoteReferencesLatestAll
         Dim LocalPlugins = LocalPluginProvider.GetPluginReferences
-        Dim PickedPlugins = PluginPicker.GetPlugins(LocalPlugins, PickedVsUnPickedEnum.Picked)
-        Dim PickedPluginNames = From Plugin In PickedPlugins Select Plugin.PluginName
-        Dim PluginsToUpdate = From RemotePlugin In CommunityPlugins Where PickedPluginNames.Contains(RemotePlugin.PluginName)
+
+        Dim SourcePlugins = LocalPlugins.Intersection(CommunityPlugins)
+        Dim PickedPlugins As IEnumerable(Of RemotePluginRef) = SourcePlugins
+        If Settings.PromptBeforeUpdate Then
+            PickedPlugins = PluginPicker.GetPlugins(SourcePlugins, PickedVsUnPickedEnum.Picked)
+        End If
 
         ' Action
-        Dim UpdatedPlugins = PluginDownloader.DownloadPlugins(PluginsToUpdate, AddressOf ShowMessage, True)
-        Call ShowMessage(String.Format("{0} plugins found. {1} plugins updated.", PluginsToUpdate.Count, UpdatedPlugins.Count))
+        Dim UpdatedPlugins = PluginDownloader.DownloadPlugins(PickedPlugins, AddressOf ShowMessage, True)
+        Call ShowMessage(String.Format("{0} plugins found. {1} plugins updated.", PickedPlugins.Count, UpdatedPlugins.Count))
     End Sub
+
 
 #End Region
 
