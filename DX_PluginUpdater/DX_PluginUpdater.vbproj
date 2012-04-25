@@ -112,6 +112,7 @@
     <Compile Include="Managers\LocalPluginProvider.vb" />
     <Compile Include="Managers\CommunityPluginProvider.vb" />
     <Compile Include="Managers\Result.vb" />
+    <Compile Include="OutputWriter.vb" />
     <Compile Include="Structures\IEnumerableExt.vb" />
     <Compile Include="Structures\RemotePluginRef.vb" />
     <Compile Include="PlugIn1.vb">

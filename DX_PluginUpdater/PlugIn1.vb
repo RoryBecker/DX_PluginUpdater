@@ -6,6 +6,7 @@ Imports DX_PluginUpdater.IEnumerableExt
 
 Public Class PlugIn1
     'DXCore-generated code...
+    Private Output As OutputWriter
 #Region " InitializePlugIn "
     Public Overrides Sub InitializePlugIn()
         MyBase.InitializePlugIn()
@@ -13,6 +14,7 @@ Public Class PlugIn1
         Call RegisterUpdatePluginsCommand()
         Call CreateFindNewPlugins()
         AddHandler EventNexus.DXCoreLoaded, AddressOf EventNexus_DXCoreLoaded
+        Output = New OutputWriter("Plugin Updater")
     End Sub
 #End Region
 #Region " FinalizePlugIn "
@@ -20,6 +22,7 @@ Public Class PlugIn1
         'TODO: Add your finalization code here.
         RemoveHandler EventNexus.DXCoreLoaded, AddressOf EventNexus_DXCoreLoaded
         MyBase.FinalizePlugIn()
+        Output = Nothing
     End Sub
 #End Region
 
@@ -59,7 +62,10 @@ Public Class PlugIn1
     End Sub
     Public Sub ShowMessage(message As String)
         CodeRush.ApplicationObject.StatusBar.Text = message
+        Output.Writeline(message)
     End Sub
+
+
 #End Region
 
 #Region "Action: Update Existing Plugins"
