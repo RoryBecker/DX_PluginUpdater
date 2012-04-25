@@ -27,7 +27,7 @@ Public Class PluginSettings
     Public Sub Save(ByVal Storage As DecoupledStorage)
         Dim Settings As New PluginSettings
         Using StorageInternal = Storage
-            StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_PromptBeforeUpdate, Me.PromptBeforeUpdate)
+            StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_PromptBeforeUpdate, PromptBeforeUpdate)
         End Using
     End Sub
 End Class
