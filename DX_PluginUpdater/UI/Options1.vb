@@ -30,32 +30,51 @@ Public Class Options1
     End Function
     Private Sub Options1_RestoreDefaults(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.OptionsPageEventArgs) Handles Me.RestoreDefaults
         ' Setup defaults here
-        chkPromptBeforeUpdating.Checked = PluginSettings.DEFAULT_PromptBeforeUpdate
+        chkFindPromptBeforeUpdating.Checked = PluginSettings.DEFAULT_PromptBeforeUpdate
         ynaRestartDXCore.YesNoAskValue = PluginSettings.DEFAULT_RestartDXCore
         ynaCheckForPluginUpdatesOnStartup.YesNoAskValue = PluginSettings.DEFAULT_CheckForPluginUpdatesOnStartup
+
+        optAllPlugins.Checked = PluginSettings.DEFAULT_FindAllPlugins
+        optSelectedPlugins.Checked = Not PluginSettings.DEFAULT_FindAllPlugins
+
+        chkFindNavigationPlugins.Checked = PluginSettings.DEFAULT_FindNavigationalPlugins
+        chkFindCodeGenPlugins.Checked = PluginSettings.DEFAULT_FindCodeGenPlugins
+        chkFindRefactoringPlugins.Checked = PluginSettings.DEFAULT_FindRefactoringPlugins
     End Sub
 
     Private Sub Options1_PreparePage(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.OptionsPageStorageEventArgs) Handles Me.PreparePage
         ' Load options here
         Dim Settings = PluginSettings.LoadSettings(Options1.Storage)
-        chkPromptBeforeUpdating.Checked = Settings.PromptBeforeUpdate
+        chkFindPromptBeforeUpdating.Checked = Settings.PromptBeforeUpdate
         ynaRestartDXCore.YesNoAskValue = Settings.RestartDXCore
         ynaCheckForPluginUpdatesOnStartup.YesNoAskValue = Settings.CheckForPluginUpdatesOnStartup
+
+        optAllPlugins.Checked = Settings.FindAllPlugins
+        optSelectedPlugins.Checked = Not Settings.FindAllPlugins
+
+        chkFindNavigationPlugins.Checked = Settings.FindNavigationalPlugins
+        chkFindCodeGenPlugins.Checked = Settings.FindCodeGenPlugins
+        chkFindRefactoringPlugins.Checked = Settings.FindRefactoringPlugins
     End Sub
 
     Private Sub Options1_CommitChanges(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.CommitChangesEventArgs) Handles Me.CommitChanges
         ' Save changes here.
         Dim Settings As New PluginSettings
 
-        Settings.PromptBeforeUpdate = chkPromptBeforeUpdating.Checked
+        Settings.PromptBeforeUpdate = chkFindPromptBeforeUpdating.Checked
         Settings.RestartDXCore = ynaRestartDXCore.YesNoAskValue
         Settings.CheckForPluginUpdatesOnStartup = ynaCheckForPluginUpdatesOnStartup.YesNoAskValue
+
+        Settings.FindAllPlugins = chkFindPromptBeforeUpdating.Checked
+
+        Settings.FindCodeGenPlugins = chkFindCodeGenPlugins.Checked
+        Settings.FindNavigationalPlugins = chkFindNavigationPlugins.Checked
+        Settings.FindRefactoringPlugins = chkFindRefactoringPlugins.Checked
 
         Settings.Save(Options1.Storage)
     End Sub
 
-
-    Private Sub Options1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-
+    Private Sub cmdFindNewPlugins_Click(sender As System.Object, e As System.EventArgs) Handles cmdFindNewPlugins.Click
+        CodeRush.Actions.Item(PlugIn1.ACTION_FindNewPlugins).DoExecute()
     End Sub
 End Class

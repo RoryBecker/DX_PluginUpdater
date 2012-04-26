@@ -5,14 +5,24 @@ Imports System.Xml.Linq
 Public Class FeedPluginProvider
     Private ReadOnly mWebManager As New WebManager()
     Private ReadOnly mFeedUrl As String
+    Private mFeedXML As XElement
     Public Sub New(ByVal FeedUrl As String)
         mFeedUrl = FeedUrl
+        Call RefreshFeedFromSource()
     End Sub
-    Public Shared Function GetFeedXML(FeedUrl As String) As FeedPluginProvider
+    Public Sub RefreshFeedFromSource()
+        mFeedXML = GetFeedXML()
+    End Sub
+    Public Shared Function GetProvider(FeedUrl As String) As FeedPluginProvider
         Return New FeedPluginProvider(FeedUrl)
     End Function
     Public Function GetPluginReferences() As IEnumerable(Of RemotePluginRef)
-        Return From Plugin In GetFeedXML().<Plugins>.<Plugin>
+        Return From Plugin In mFeedXML.<Plugins>.<Plugin>
+               Select New RemotePluginRef(Plugin.@Name, Plugin.Parent.@BaseFolder & Plugin.@Name)
+    End Function
+    Public Function GetPluginReferencesWithCat(Category As String) As IEnumerable(Of RemotePluginRef)
+        Return From Plugin In mFeedXML.<Plugins>.<Plugin>
+               Where Plugin.@Categories.Split(",").ToList.Contains(Category)
                Select New RemotePluginRef(Plugin.@Name, Plugin.Parent.@BaseFolder & Plugin.@Name)
     End Function
     Private Function GetFeedXML() As XElement

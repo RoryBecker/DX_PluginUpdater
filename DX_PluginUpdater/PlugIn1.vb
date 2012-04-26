@@ -6,7 +6,8 @@ Imports DX_PluginUpdater.IEnumerableExt
 Imports System
 
 Public Class PlugIn1
-    Private Const ACTION_UpdatePlugins As String = "UpdatePlugins"
+    Public Const ACTION_UpdatePlugins As String = "UpdatePlugins"
+    Public Const ACTION_FindNewPlugins As String = "FindNewPlugins"
     'DXCore-generated code...
     Private Output As OutputWriter
 #Region " InitializePlugIn "
@@ -137,9 +138,8 @@ Public Class PlugIn1
 #End Region
 
 #Region "Action: Find New (Recommended) Plugins"
-    ' ProposedOption: Show Recommended only.
-    ' ProposedOption: Show All Plugins (excluding Unstable)
 
+    ' ProposedOption: Show All Plugins (excluding Unstable)
     ' ProposedOption: Show Navigation Plugins
     ' ProposedOption: Show Refactoring Plugins
     ' ProposedOption: Show Visualization Plugins
@@ -147,7 +147,7 @@ Public Class PlugIn1
     Public Sub RegisterFindNewPlugins()
         Dim FindNewPlugins As New DevExpress.CodeRush.Core.Action(components)
         CType(FindNewPlugins, System.ComponentModel.ISupportInitialize).BeginInit()
-        FindNewPlugins.ActionName = "FindNewPlugins"
+        FindNewPlugins.ActionName = ACTION_FindNewPlugins
         FindNewPlugins.ButtonText = MenuCaption_Find_Plugins ' Used if button is placed on a menu.
         FindNewPlugins.RegisterInCR = True
         FindNewPlugins.CommonMenu = DevExpress.CodeRush.Menus.VsCommonBar.DevExpress
@@ -159,12 +159,27 @@ Public Class PlugIn1
         Dim LocalPluginProvider = New LocalPluginProvider(CodeRush.Options.Paths.CommunityPlugInsPath)
         Dim CommunityPluginProvider = New CommunityPluginProvider(LocalPluginProvider, CommunitySiteRootPluginUrl)
         Dim PluginDownloader = New PluginDownloader(LocalPluginProvider, CommunityPluginProvider)
-        Dim RecommendedPlugins = FeedPluginProvider.GetFeedXML(CommunitySiteRootPluginUrl & "RecommendedPlugins.xml").GetPluginReferences
+        Dim SourcePlugins = Enumerable.Empty(Of RemotePluginRef)()
+        Dim ApprovedFeed = FeedPluginProvider.GetProvider(CommunitySiteRootPluginUrl & "RecommendedPlugins.xml")
+        Select Case True
+            Case Settings.FindAllPlugins
+                SourcePlugins = SourcePlugins.Concat(ApprovedFeed.GetPluginReferences)
+            Case Else
+                If Settings.FindRefactoringPlugins Then
+                    SourcePlugins = SourcePlugins.Concat(ApprovedFeed.GetPluginReferencesWithCat("Refactoring"))
+                End If
+                If Settings.FindCodeGenPlugins Then
+                    SourcePlugins = SourcePlugins.Concat(ApprovedFeed.GetPluginReferencesWithCat("CodeGen"))
+                End If
+                If Settings.FindNavigationalPlugins Then
+                    SourcePlugins = SourcePlugins.Concat(ApprovedFeed.GetPluginReferencesWithCat("Navigation"))
+                End If
+        End Select
 
         ' Plugins
-        Dim PluginsWithUpdates = Subtract(RecommendedPlugins, LocalPluginProvider.GetPluginReferences)
+        Dim NewPlugins = Subtract(SourcePlugins, LocalPluginProvider.GetPluginReferences)
 
-        Dim ChosenPlugins = PluginPicker.GetPlugins(PluginsWithUpdates, PickedVsUnPickedEnum.Picked)
+        Dim ChosenPlugins = PluginPicker.GetPlugins(NewPlugins, PickedVsUnPickedEnum.Picked)
 
         ' Action
         Dim UpdatedPlugins = PluginDownloader.DownloadPlugins(ChosenPlugins, AddressOf ShowMessage, True)

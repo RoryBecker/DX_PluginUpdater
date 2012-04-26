@@ -28,24 +28,30 @@ Partial Class Options1
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
-        Me.chkPromptBeforeUpdating = New System.Windows.Forms.CheckBox()
+        Me.chkFindPromptBeforeUpdating = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ynaRestartDXCore = New DX_PluginUpdater.YesNoAskControl()
         Me.ynaCheckForPluginUpdatesOnStartup = New DX_PluginUpdater.YesNoAskControl()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.chkFindRefactoringPlugins = New System.Windows.Forms.CheckBox()
+        Me.chkFindNavigationPlugins = New System.Windows.Forms.CheckBox()
+        Me.chkFindCodeGenPlugins = New System.Windows.Forms.CheckBox()
+        Me.optAllPlugins = New System.Windows.Forms.RadioButton()
+        Me.optSelectedPlugins = New System.Windows.Forms.RadioButton()
+        Me.cmdFindNewPlugins = New System.Windows.Forms.Button()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'chkPromptBeforeUpdating
+        'chkFindPromptBeforeUpdating
         '
-        Me.chkPromptBeforeUpdating.AutoSize = True
-        Me.chkPromptBeforeUpdating.Location = New System.Drawing.Point(23, 29)
-        Me.chkPromptBeforeUpdating.Name = "chkPromptBeforeUpdating"
-        Me.chkPromptBeforeUpdating.Size = New System.Drawing.Size(171, 17)
-        Me.chkPromptBeforeUpdating.TabIndex = 0
-        Me.chkPromptBeforeUpdating.Text = "Prompt user before updating. "
-        Me.chkPromptBeforeUpdating.UseVisualStyleBackColor = True
+        Me.chkFindPromptBeforeUpdating.AutoSize = True
+        Me.chkFindPromptBeforeUpdating.Location = New System.Drawing.Point(23, 29)
+        Me.chkFindPromptBeforeUpdating.Name = "chkFindPromptBeforeUpdating"
+        Me.chkFindPromptBeforeUpdating.Size = New System.Drawing.Size(171, 17)
+        Me.chkFindPromptBeforeUpdating.TabIndex = 0
+        Me.chkFindPromptBeforeUpdating.Text = "Prompt user before updating. "
+        Me.chkFindPromptBeforeUpdating.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -88,16 +94,83 @@ Partial Class Options1
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Update Plugins on startup"
         '
+        'chkFindRefactoringPlugins
+        '
+        Me.chkFindRefactoringPlugins.AutoSize = True
+        Me.chkFindRefactoringPlugins.Location = New System.Drawing.Point(43, 192)
+        Me.chkFindRefactoringPlugins.Name = "chkFindRefactoringPlugins"
+        Me.chkFindRefactoringPlugins.Size = New System.Drawing.Size(118, 17)
+        Me.chkFindRefactoringPlugins.TabIndex = 6
+        Me.chkFindRefactoringPlugins.Text = "Refactoring Plugins"
+        Me.chkFindRefactoringPlugins.UseVisualStyleBackColor = True
+        '
+        'chkFindNavigationPlugins
+        '
+        Me.chkFindNavigationPlugins.AutoSize = True
+        Me.chkFindNavigationPlugins.Location = New System.Drawing.Point(43, 215)
+        Me.chkFindNavigationPlugins.Name = "chkFindNavigationPlugins"
+        Me.chkFindNavigationPlugins.Size = New System.Drawing.Size(113, 17)
+        Me.chkFindNavigationPlugins.TabIndex = 7
+        Me.chkFindNavigationPlugins.Text = "Navigation Plugins"
+        Me.chkFindNavigationPlugins.UseVisualStyleBackColor = True
+        '
+        'chkFindCodeGenPlugins
+        '
+        Me.chkFindCodeGenPlugins.AutoSize = True
+        Me.chkFindCodeGenPlugins.Location = New System.Drawing.Point(43, 238)
+        Me.chkFindCodeGenPlugins.Name = "chkFindCodeGenPlugins"
+        Me.chkFindCodeGenPlugins.Size = New System.Drawing.Size(109, 17)
+        Me.chkFindCodeGenPlugins.TabIndex = 8
+        Me.chkFindCodeGenPlugins.Text = "Code Gen Plugins"
+        Me.chkFindCodeGenPlugins.UseVisualStyleBackColor = True
+        '
+        'optAllPlugins
+        '
+        Me.optAllPlugins.AutoSize = True
+        Me.optAllPlugins.Location = New System.Drawing.Point(23, 146)
+        Me.optAllPlugins.Name = "optAllPlugins"
+        Me.optAllPlugins.Size = New System.Drawing.Size(72, 17)
+        Me.optAllPlugins.TabIndex = 9
+        Me.optAllPlugins.TabStop = True
+        Me.optAllPlugins.Text = "All Plugins"
+        Me.optAllPlugins.UseVisualStyleBackColor = True
+        '
+        'optSelectedPlugins
+        '
+        Me.optSelectedPlugins.AutoSize = True
+        Me.optSelectedPlugins.Location = New System.Drawing.Point(23, 169)
+        Me.optSelectedPlugins.Name = "optSelectedPlugins"
+        Me.optSelectedPlugins.Size = New System.Drawing.Size(129, 17)
+        Me.optSelectedPlugins.TabIndex = 9
+        Me.optSelectedPlugins.TabStop = True
+        Me.optSelectedPlugins.Text = "Selected Plugin Types"
+        Me.optSelectedPlugins.UseVisualStyleBackColor = True
+        '
+        'cmdFindNewPlugins
+        '
+        Me.cmdFindNewPlugins.Location = New System.Drawing.Point(26, 261)
+        Me.cmdFindNewPlugins.Name = "cmdFindNewPlugins"
+        Me.cmdFindNewPlugins.Size = New System.Drawing.Size(130, 23)
+        Me.cmdFindNewPlugins.TabIndex = 10
+        Me.cmdFindNewPlugins.Text = "Find New Plugins"
+        Me.cmdFindNewPlugins.UseVisualStyleBackColor = True
+        '
         'Options1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdFindNewPlugins)
+        Me.Controls.Add(Me.optSelectedPlugins)
+        Me.Controls.Add(Me.optAllPlugins)
+        Me.Controls.Add(Me.chkFindCodeGenPlugins)
+        Me.Controls.Add(Me.chkFindNavigationPlugins)
+        Me.Controls.Add(Me.chkFindRefactoringPlugins)
         Me.Controls.Add(Me.ynaCheckForPluginUpdatesOnStartup)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.ynaRestartDXCore)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.chkPromptBeforeUpdating)
+        Me.Controls.Add(Me.chkFindPromptBeforeUpdating)
         Me.Name = "Options1"
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -126,12 +199,18 @@ Partial Class Options1
     Public Shared Shadows Sub Show()
         DevExpress.CodeRush.Core.CodeRush.Command.Execute("Options", FullPath)
     End Sub
-    Friend WithEvents chkPromptBeforeUpdating As System.Windows.Forms.CheckBox
+    Friend WithEvents chkFindPromptBeforeUpdating As System.Windows.Forms.CheckBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents ynaRestartDXCore As DX_PluginUpdater.YesNoAskControl
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents ynaCheckForPluginUpdatesOnStartup As DX_PluginUpdater.YesNoAskControl
     Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents chkFindRefactoringPlugins As System.Windows.Forms.CheckBox
+    Friend WithEvents chkFindNavigationPlugins As System.Windows.Forms.CheckBox
+    Friend WithEvents chkFindCodeGenPlugins As System.Windows.Forms.CheckBox
+    Friend WithEvents optAllPlugins As System.Windows.Forms.RadioButton
+    Friend WithEvents optSelectedPlugins As System.Windows.Forms.RadioButton
+    Friend WithEvents cmdFindNewPlugins As System.Windows.Forms.Button
 
 	Public Shared ReadOnly Property FullPath() As String
 		Get

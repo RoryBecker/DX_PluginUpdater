@@ -25,7 +25,7 @@ Public Class CommunityPluginProvider
                                             mRemoteBasePluginUrl & Match.Groups("Plugin").Value,
                                             CInt(Match.Groups("Version").Value)))
         Next
-        Dim ExcludedPlugins = FeedPluginProvider.GetFeedXML(mRemoteBasePluginUrl & "ExcludePlugins.xml").GetPluginReferences
+        Dim ExcludedPlugins = FeedPluginProvider.GetProvider(mRemoteBasePluginUrl & "ExcludePlugins.xml").GetPluginReferences
         Return Subtract(Results, ExcludedPlugins)
 
     End Function
