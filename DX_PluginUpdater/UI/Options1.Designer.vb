@@ -48,9 +48,12 @@ Partial Class Options1
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ynaRestartDXCore = New DX_PluginUpdater.YesNoAskControl()
         Me.ynaCheckForPluginUpdatesOnStartup = New DX_PluginUpdater.YesNoAskControl()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -77,7 +80,7 @@ Partial Class Options1
         '
         Me.Label2.Location = New System.Drawing.Point(42, 24)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(273, 14)
+        Me.Label2.Size = New System.Drawing.Size(261, 14)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Restart DXCore after plugins are installed \ updated."
         '
@@ -143,7 +146,7 @@ Partial Class Options1
         '
         'cmdFindNewPlugins
         '
-        Me.cmdFindNewPlugins.Location = New System.Drawing.Point(368, 123)
+        Me.cmdFindNewPlugins.Location = New System.Drawing.Point(274, 53)
         Me.cmdFindNewPlugins.Name = "cmdFindNewPlugins"
         Me.cmdFindNewPlugins.Size = New System.Drawing.Size(128, 23)
         Me.cmdFindNewPlugins.TabIndex = 10
@@ -175,13 +178,12 @@ Partial Class Options1
         '
         Me.GroupBox1.Controls.Add(Me.chkFindCodeGenPlugins)
         Me.GroupBox1.Controls.Add(Me.chkFindRefactoringPlugins)
-        Me.GroupBox1.Controls.Add(Me.cmdFindNewPlugins)
         Me.GroupBox1.Controls.Add(Me.chkFindNavigationPlugins)
         Me.GroupBox1.Controls.Add(Me.optSelectedPlugins)
         Me.GroupBox1.Controls.Add(Me.chkFindCodeIssuePlugins)
         Me.GroupBox1.Controls.Add(Me.optAllPlugins)
         Me.GroupBox1.Controls.Add(Me.chkFindMiscPlugins)
-        Me.GroupBox1.Location = New System.Drawing.Point(17, 138)
+        Me.GroupBox1.Location = New System.Drawing.Point(17, 131)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(502, 152)
         Me.GroupBox1.TabIndex = 11
@@ -192,19 +194,18 @@ Partial Class Options1
         '
         Me.GroupBox2.Controls.Add(Me.ynaCheckForPluginUpdatesOnStartup)
         Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.cmdUpdatePluginsNow)
         Me.GroupBox2.Controls.Add(Me.chkFindPromptBeforeUpdating)
         Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Location = New System.Drawing.Point(17, 14)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(502, 118)
+        Me.GroupBox2.Size = New System.Drawing.Size(502, 101)
         Me.GroupBox2.TabIndex = 11
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Update Plugin options"
         '
         'cmdUpdatePluginsNow
         '
-        Me.cmdUpdatePluginsNow.Location = New System.Drawing.Point(385, 89)
+        Me.cmdUpdatePluginsNow.Location = New System.Drawing.Point(85, 53)
         Me.cmdUpdatePluginsNow.Name = "cmdUpdatePluginsNow"
         Me.cmdUpdatePluginsNow.Size = New System.Drawing.Size(111, 23)
         Me.cmdUpdatePluginsNow.TabIndex = 10
@@ -216,7 +217,7 @@ Partial Class Options1
         '
         Me.GroupBox3.Controls.Add(Me.ynaRestartDXCore)
         Me.GroupBox3.Controls.Add(Me.Label2)
-        Me.GroupBox3.Location = New System.Drawing.Point(17, 309)
+        Me.GroupBox3.Location = New System.Drawing.Point(17, 298)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(502, 51)
         Me.GroupBox3.TabIndex = 12
@@ -239,10 +240,32 @@ Partial Class Options1
         Me.ynaCheckForPluginUpdatesOnStartup.TabIndex = 4
         Me.ynaCheckForPluginUpdatesOnStartup.YesNoAskValue = DX_PluginUpdater.YesNoAskEnum.Ask
         '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.Label4)
+        Me.GroupBox4.Controls.Add(Me.cmdUpdatePluginsNow)
+        Me.GroupBox4.Controls.Add(Me.cmdFindNewPlugins)
+        Me.GroupBox4.Location = New System.Drawing.Point(17, 365)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(502, 84)
+        Me.GroupBox4.TabIndex = 13
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Test"
+        '
+        'Label4
+        '
+        Me.Label4.Location = New System.Drawing.Point(26, 17)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(433, 33)
+        Me.Label4.TabIndex = 11
+        Me.Label4.Text = "Note: Despite the phrase 'Test', these functions are real and will update \ insta" & _
+    "ll plugins. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Additionally they operate using the latest *saved* settings."
+        '
         'Options1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -253,6 +276,7 @@ Partial Class Options1
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -298,6 +322,8 @@ Partial Class Options1
     Friend WithEvents cmdUpdatePluginsNow As System.Windows.Forms.Button
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label4 As System.Windows.Forms.Label
 
 	Public Shared ReadOnly Property FullPath() As String
 		Get
