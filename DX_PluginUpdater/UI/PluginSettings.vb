@@ -35,10 +35,9 @@ Public Class PluginSettings
         Return Settings
     End Function
     Public Sub Save(ByVal Storage As DecoupledStorage)
-        Dim Settings As New PluginSettings
         Using StorageInternal = Storage
             StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_PromptBeforeUpdate, PromptBeforeUpdate)
-            Storage.WriteEnum(SETTING_SECTION, SETTING_RestartDXCore, Settings.RestartDXCore)
+            StorageInternal.WriteEnum(SETTING_SECTION, SETTING_RestartDXCore, RestartDXCore)
         End Using
     End Sub
 
