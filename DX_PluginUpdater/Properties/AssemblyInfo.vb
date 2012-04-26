@@ -34,5 +34,5 @@ Imports DevExpress.CodeRush.Common
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.20")> 
-<Assembly: AssemblyFileVersion("1.0.0.20")> 
+<Assembly: AssemblyVersion("1.0.0.21")> 
+<Assembly: AssemblyFileVersion("1.0.0.21")> 
