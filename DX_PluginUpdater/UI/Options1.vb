@@ -40,6 +40,8 @@ Public Class Options1
         chkFindNavigationPlugins.Checked = PluginSettings.DEFAULT_FindNavigationalPlugins
         chkFindCodeGenPlugins.Checked = PluginSettings.DEFAULT_FindCodeGenPlugins
         chkFindRefactoringPlugins.Checked = PluginSettings.DEFAULT_FindRefactoringPlugins
+        chkFindCodeIssuePlugins.Checked = PluginSettings.DEFAULT_FindCodeIssuePlugins
+        chkFindMiscPlugins.Checked = PluginSettings.DEFAULT_FindMiscPlugins
     End Sub
 
     Private Sub Options1_PreparePage(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.OptionsPageStorageEventArgs) Handles Me.PreparePage
@@ -55,6 +57,8 @@ Public Class Options1
         chkFindNavigationPlugins.Checked = Settings.FindNavigationalPlugins
         chkFindCodeGenPlugins.Checked = Settings.FindCodeGenPlugins
         chkFindRefactoringPlugins.Checked = Settings.FindRefactoringPlugins
+        chkFindCodeIssuePlugins.Checked = Settings.FindCodeIssuePlugins
+        chkFindMiscPlugins.Checked = Settings.FindMiscPlugins
     End Sub
 
     Private Sub Options1_CommitChanges(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.CommitChangesEventArgs) Handles Me.CommitChanges
@@ -70,11 +74,25 @@ Public Class Options1
         Settings.FindCodeGenPlugins = chkFindCodeGenPlugins.Checked
         Settings.FindNavigationalPlugins = chkFindNavigationPlugins.Checked
         Settings.FindRefactoringPlugins = chkFindRefactoringPlugins.Checked
+        Settings.FindCodeIssuePlugins = chkFindCodeIssuePlugins.Checked
+        Settings.FindMiscPlugins = chkFindMiscPlugins.Checked
 
         Settings.Save(Options1.Storage)
     End Sub
 
     Private Sub cmdFindNewPlugins_Click(sender As System.Object, e As System.EventArgs) Handles cmdFindNewPlugins.Click
         CodeRush.Actions.Item(PlugIn1.ACTION_FindNewPlugins).DoExecute()
+    End Sub
+
+    Private Sub optAllPlugins_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles optAllPlugins.CheckedChanged
+        chkFindCodeGenPlugins.Enabled = Not optAllPlugins.Checked
+        chkFindRefactoringPlugins.Enabled = Not optAllPlugins.Checked
+        chkFindMiscPlugins.Enabled = Not optAllPlugins.Checked
+        chkFindCodeIssuePlugins.Enabled = Not optAllPlugins.Checked
+        chkFindNavigationPlugins.Enabled = Not optAllPlugins.Checked
+    End Sub
+
+    Private Sub cmdUpdatePluginsNow_Click(sender As System.Object, e As System.EventArgs) Handles cmdUpdatePluginsNow.Click
+        CodeRush.Actions.Item(PlugIn1.ACTION_UpdatePlugins).DoExecute()
     End Sub
 End Class

@@ -12,10 +12,11 @@ Public Class PluginSettings
     Public Property RestartDXCore() As YesNoAskEnum
     Public Property CheckForPluginUpdatesOnStartup() As YesNoAskEnum
     Public Property FindAllPlugins() As Boolean
-    Public Property FindRecommendedPluginsOnly() As Boolean
     Public Property FindRefactoringPlugins() As Boolean
     Public Property FindCodeGenPlugins() As Boolean
     Public Property FindNavigationalPlugins() As Boolean
+    Public Property FindCodeIssuePlugins() As Boolean
+    Public Property FindMiscPlugins() As Boolean
 #End Region
 
 #Region "Constants"
@@ -33,9 +34,6 @@ Public Class PluginSettings
     Public Const SETTING_FindAllPlugins As String = "FindAllPlugins"
     Public Const DEFAULT_FindAllPlugins As Boolean = True
 
-    Public Const SETTING_FindRecommendedPluginsOnly As String = "FindRecommendedPluginsOnly"
-    Public Const DEFAULT_FindRecommendedPluginsOnly As Boolean = False
-
     Public Const SETTING_FindRefactoringPlugins As String = "FindRefactoringPlugins"
     Public Const DEFAULT_FindRefactoringPlugins As Boolean = True
 
@@ -45,6 +43,12 @@ Public Class PluginSettings
     Public Const SETTING_FindNavigationalPlugins As String = "FindNavigationalPlugins"
     Public Const DEFAULT_FindNavigationalPlugins As Boolean = True
 
+    Public Const SETTING_FindCodeIssuePlugins As String = "FindCodeIssuePlugins"
+    Public Const DEFAULT_FindCodeIssuePlugins As Boolean = True
+
+    Public Const SETTING_FindMiscPlugins As String = "FindMiscPlugins"
+    Public Const DEFAULT_FindMiscPlugins As Boolean = True
+
 #End Region
 #Region "Construction"
     Public Sub New()
@@ -53,10 +57,11 @@ Public Class PluginSettings
         CheckForPluginUpdatesOnStartup = DEFAULT_CheckForPluginUpdatesOnStartup
 
         FindAllPlugins = DEFAULT_FindAllPlugins
-        FindRecommendedPluginsOnly = DEFAULT_FindRecommendedPluginsOnly
         FindRefactoringPlugins = DEFAULT_FindRefactoringPlugins
         FindCodeGenPlugins = DEFAULT_FindCodeGenPlugins
         FindNavigationalPlugins = DEFAULT_FindNavigationalPlugins
+        FindCodeIssuePlugins = DEFAULT_FindCodeIssuePlugins
+        FindMiscPlugins = DEFAULT_FindMiscPlugins
     End Sub
 #End Region
     Public Shared Function LoadSettings(ByVal Storage As DecoupledStorage) As PluginSettings
@@ -67,10 +72,11 @@ Public Class PluginSettings
             Settings.CheckForPluginUpdatesOnStartup = Storage.ReadEnum(Of YesNoAskEnum)(SETTING_SECTION, SETTING_CheckForUpdatesOnStartup, DEFAULT_CheckForPluginUpdatesOnStartup)
 
             Settings.FindAllPlugins = StorageInternal.ReadBoolean(SETTING_SECTION, SETTING_FindAllPlugins, DEFAULT_FindAllPlugins)
-            Settings.FindRecommendedPluginsOnly = StorageInternal.ReadBoolean(SETTING_SECTION, SETTING_FindRecommendedPluginsOnly, DEFAULT_FindRecommendedPluginsOnly)
             Settings.FindRefactoringPlugins = StorageInternal.ReadBoolean(SETTING_SECTION, SETTING_FindRefactoringPlugins, DEFAULT_FindRefactoringPlugins)
             Settings.FindCodeGenPlugins = StorageInternal.ReadBoolean(SETTING_SECTION, SETTING_FindCodeGenPlugins, DEFAULT_FindCodeGenPlugins)
             Settings.FindNavigationalPlugins = StorageInternal.ReadBoolean(SETTING_SECTION, SETTING_FindNavigationalPlugins, DEFAULT_FindNavigationalPlugins)
+            Settings.FindCodeIssuePlugins = StorageInternal.ReadBoolean(SETTING_SECTION, SETTING_FindCodeIssuePlugins, DEFAULT_FindCodeIssuePlugins)
+            Settings.FindMiscPlugins = StorageInternal.ReadBoolean(SETTING_SECTION, SETTING_FindMiscPlugins, DEFAULT_FindMiscPlugins)
         End Using
         Return Settings
     End Function
@@ -81,10 +87,12 @@ Public Class PluginSettings
             StorageInternal.WriteEnum(SETTING_SECTION, SETTING_CheckForUpdatesOnStartup, CheckForPluginUpdatesOnStartup)
 
             StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_FindAllPlugins, FindAllPlugins)
-            StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_FindRecommendedPluginsOnly, FindRecommendedPluginsOnly)
+
             StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_FindRefactoringPlugins, FindRefactoringPlugins)
             StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_FindCodeGenPlugins, FindCodeGenPlugins)
             StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_FindNavigationalPlugins, FindNavigationalPlugins)
+            StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_FindCodeIssuePlugins, FindCodeIssuePlugins)
+            StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_FindMiscPlugins, FindMiscPlugins)
 
         End Using
     End Sub

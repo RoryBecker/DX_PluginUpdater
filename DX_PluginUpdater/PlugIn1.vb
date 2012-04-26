@@ -160,19 +160,26 @@ Public Class PlugIn1
         Dim CommunityPluginProvider = New CommunityPluginProvider(LocalPluginProvider, CommunitySiteRootPluginUrl)
         Dim PluginDownloader = New PluginDownloader(LocalPluginProvider, CommunityPluginProvider)
         Dim SourcePlugins = Enumerable.Empty(Of RemotePluginRef)()
-        Dim ApprovedFeed = FeedPluginProvider.GetProvider(CommunitySiteRootPluginUrl & "RecommendedPlugins.xml")
+        Dim Feed = FeedPluginProvider.GetProvider(CommunitySiteRootPluginUrl & "RecommendedPlugins.xml")
         Select Case True
             Case Settings.FindAllPlugins
-                SourcePlugins = SourcePlugins.Concat(ApprovedFeed.GetPluginReferences)
+                SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferences)
             Case Else
                 If Settings.FindRefactoringPlugins Then
-                    SourcePlugins = SourcePlugins.Concat(ApprovedFeed.GetPluginReferencesWithCat("Refactoring"))
+                    SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("Refactoring"))
                 End If
                 If Settings.FindCodeGenPlugins Then
-                    SourcePlugins = SourcePlugins.Concat(ApprovedFeed.GetPluginReferencesWithCat("CodeGen"))
+                    SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("CodeGen"))
                 End If
                 If Settings.FindNavigationalPlugins Then
-                    SourcePlugins = SourcePlugins.Concat(ApprovedFeed.GetPluginReferencesWithCat("Navigation"))
+                    SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("Navigation"))
+                End If
+                If Settings.FindCodeIssuePlugins Then
+                    SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("CodeIssue") _
+                                                 .Concat(Feed.GetPluginReferencesWithCat("CodeIssues")))
+                End If
+                If Settings.FindMiscPlugins Then
+                    SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("Misc"))
                 End If
         End Select
 
