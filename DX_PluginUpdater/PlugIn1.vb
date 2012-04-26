@@ -6,6 +6,7 @@ Imports DX_PluginUpdater.IEnumerableExt
 Imports System
 
 Public Class PlugIn1
+    Private Const ACTION_UpdatePlugins As String = "UpdatePlugins"
     'DXCore-generated code...
     Private Output As OutputWriter
 #Region " InitializePlugIn "
@@ -13,9 +14,10 @@ Public Class PlugIn1
         MyBase.InitializePlugIn()
         Call LoadSettings()
         Call RegisterUpdatePluginsCommand()
-        Call CreateFindNewPlugins()
+        Call RegisterFindNewPlugins()
         AddHandler EventNexus.DXCoreLoaded, AddressOf EventNexus_DXCoreLoaded
         Output = New OutputWriter("Plugin Updater")
+        Call CheckForUpdates()
     End Sub
 #End Region
 #Region " FinalizePlugIn "
@@ -84,6 +86,18 @@ Public Class PlugIn1
                 ' Do nothing. On Purpose :)
         End Select
     End Sub
+    Private Sub CheckForUpdates()
+        Select Case Settings.CheckForPluginUpdatesOnStartup
+            Case YesNoAskEnum.Ask
+                If MsgBox("Would you like to check for Plugin updates now?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    CodeRush.Actions.Item(ACTION_UpdatePlugins).DoExecute()
+                End If
+            Case YesNoAskEnum.Yes
+                CodeRush.Actions.Item(ACTION_UpdatePlugins).DoExecute()
+            Case YesNoAskEnum.No
+                ' Do nothing. On Purpose :)
+        End Select
+    End Sub
 #Region "Action: Update Existing Plugins"
     ' ProposedOption: Don't Prompt
     ' SubOption: UpdateEverything
@@ -92,7 +106,7 @@ Public Class PlugIn1
     Public Sub RegisterUpdatePluginsCommand()
         Dim UpdatePlugins As New DevExpress.CodeRush.Core.Action(components)
         CType(UpdatePlugins, System.ComponentModel.ISupportInitialize).BeginInit()
-        UpdatePlugins.ActionName = "UpdatePlugins"
+        UpdatePlugins.ActionName = ACTION_UpdatePlugins
         UpdatePlugins.ButtonText = MenuCaption_Update_Plugins ' Used if button is placed on a menu.
         UpdatePlugins.RegisterInCR = True
         UpdatePlugins.CommonMenu = DevExpress.CodeRush.Menus.VsCommonBar.DevExpress
@@ -130,7 +144,7 @@ Public Class PlugIn1
     ' ProposedOption: Show Refactoring Plugins
     ' ProposedOption: Show Visualization Plugins
 
-    Public Sub CreateFindNewPlugins()
+    Public Sub RegisterFindNewPlugins()
         Dim FindNewPlugins As New DevExpress.CodeRush.Core.Action(components)
         CType(FindNewPlugins, System.ComponentModel.ISupportInitialize).BeginInit()
         FindNewPlugins.ActionName = "FindNewPlugins"
