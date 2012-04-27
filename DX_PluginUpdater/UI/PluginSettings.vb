@@ -16,6 +16,7 @@ Public Class PluginSettings
     Public Property FindCodeGenPlugins() As Boolean
     Public Property FindNavigationalPlugins() As Boolean
     Public Property FindCodeIssuePlugins() As Boolean
+    Public Property FindPaintingPlugins() As Boolean
     Public Property FindMiscPlugins() As Boolean
 #End Region
 
@@ -46,6 +47,9 @@ Public Class PluginSettings
     Public Const SETTING_FindCodeIssuePlugins As String = "FindCodeIssuePlugins"
     Public Const DEFAULT_FindCodeIssuePlugins As Boolean = True
 
+    Public Const SETTING_FindPaintingPlugins As String = "FindPaintingPlugins"
+    Public Const DEFAULT_FindPaintingPlugins As Boolean = True
+
     Public Const SETTING_FindMiscPlugins As String = "FindMiscPlugins"
     Public Const DEFAULT_FindMiscPlugins As Boolean = True
 
@@ -61,6 +65,7 @@ Public Class PluginSettings
         FindCodeGenPlugins = DEFAULT_FindCodeGenPlugins
         FindNavigationalPlugins = DEFAULT_FindNavigationalPlugins
         FindCodeIssuePlugins = DEFAULT_FindCodeIssuePlugins
+        FindPaintingPlugins = DEFAULT_FindPaintingPlugins
         FindMiscPlugins = DEFAULT_FindMiscPlugins
     End Sub
 #End Region
@@ -76,6 +81,7 @@ Public Class PluginSettings
             Settings.FindCodeGenPlugins = StorageInternal.ReadBoolean(SETTING_SECTION, SETTING_FindCodeGenPlugins, DEFAULT_FindCodeGenPlugins)
             Settings.FindNavigationalPlugins = StorageInternal.ReadBoolean(SETTING_SECTION, SETTING_FindNavigationalPlugins, DEFAULT_FindNavigationalPlugins)
             Settings.FindCodeIssuePlugins = StorageInternal.ReadBoolean(SETTING_SECTION, SETTING_FindCodeIssuePlugins, DEFAULT_FindCodeIssuePlugins)
+            Settings.FindPaintingPlugins = StorageInternal.ReadBoolean(SETTING_SECTION, SETTING_FindPaintingPlugins, DEFAULT_FindPaintingPlugins)
             Settings.FindMiscPlugins = StorageInternal.ReadBoolean(SETTING_SECTION, SETTING_FindMiscPlugins, DEFAULT_FindMiscPlugins)
         End Using
         Return Settings
@@ -92,6 +98,7 @@ Public Class PluginSettings
             StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_FindCodeGenPlugins, FindCodeGenPlugins)
             StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_FindNavigationalPlugins, FindNavigationalPlugins)
             StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_FindCodeIssuePlugins, FindCodeIssuePlugins)
+            StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_FindPaintingPlugins, FindPaintingPlugins)
             StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_FindMiscPlugins, FindMiscPlugins)
 
         End Using

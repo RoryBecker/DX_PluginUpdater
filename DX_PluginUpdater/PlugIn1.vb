@@ -169,6 +169,9 @@ Public Class PlugIn1
                     SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("CodeIssue") _
                                                  .Concat(Feed.GetPluginReferencesWithCat("CodeIssues")))
                 End If
+                If Settings.FindPaintingPlugins Then
+                    SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("Painting"))
+                End If
                 If Settings.FindMiscPlugins Then
                     SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("Misc"))
                 End If

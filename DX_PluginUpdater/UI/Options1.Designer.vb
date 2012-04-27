@@ -50,6 +50,7 @@ Partial Class Options1
         Me.Label4 = New System.Windows.Forms.Label()
         Me.ynaRestartDXCore = New DX_PluginUpdater.YesNoAskControl()
         Me.ynaCheckForPluginUpdatesOnStartup = New DX_PluginUpdater.YesNoAskControl()
+        Me.chkFindPaintingPlugins = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -167,7 +168,7 @@ Partial Class Options1
         'chkFindMiscPlugins
         '
         Me.chkFindMiscPlugins.AutoSize = True
-        Me.chkFindMiscPlugins.Location = New System.Drawing.Point(62, 108)
+        Me.chkFindMiscPlugins.Location = New System.Drawing.Point(208, 108)
         Me.chkFindMiscPlugins.Name = "chkFindMiscPlugins"
         Me.chkFindMiscPlugins.Size = New System.Drawing.Size(82, 17)
         Me.chkFindMiscPlugins.TabIndex = 8
@@ -180,6 +181,7 @@ Partial Class Options1
         Me.GroupBox1.Controls.Add(Me.chkFindRefactoringPlugins)
         Me.GroupBox1.Controls.Add(Me.chkFindNavigationPlugins)
         Me.GroupBox1.Controls.Add(Me.optSelectedPlugins)
+        Me.GroupBox1.Controls.Add(Me.chkFindPaintingPlugins)
         Me.GroupBox1.Controls.Add(Me.chkFindCodeIssuePlugins)
         Me.GroupBox1.Controls.Add(Me.optAllPlugins)
         Me.GroupBox1.Controls.Add(Me.chkFindMiscPlugins)
@@ -261,6 +263,16 @@ Partial Class Options1
         Me.ynaCheckForPluginUpdatesOnStartup.TabIndex = 4
         Me.ynaCheckForPluginUpdatesOnStartup.YesNoAskValue = DX_PluginUpdater.YesNoAskEnum.Ask
         '
+        'chkFindPaintingPlugins
+        '
+        Me.chkFindPaintingPlugins.AutoSize = True
+        Me.chkFindPaintingPlugins.Location = New System.Drawing.Point(62, 108)
+        Me.chkFindPaintingPlugins.Name = "chkFindPaintingPlugins"
+        Me.chkFindPaintingPlugins.Size = New System.Drawing.Size(100, 17)
+        Me.chkFindPaintingPlugins.TabIndex = 8
+        Me.chkFindPaintingPlugins.Text = "Painting Plugins"
+        Me.chkFindPaintingPlugins.UseVisualStyleBackColor = True
+        '
         'Options1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -324,6 +336,7 @@ Partial Class Options1
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents chkFindPaintingPlugins As System.Windows.Forms.CheckBox
 
 	Public Shared ReadOnly Property FullPath() As String
 		Get

@@ -41,6 +41,7 @@ Public Class Options1
         chkFindCodeGenPlugins.Checked = PluginSettings.DEFAULT_FindCodeGenPlugins
         chkFindRefactoringPlugins.Checked = PluginSettings.DEFAULT_FindRefactoringPlugins
         chkFindCodeIssuePlugins.Checked = PluginSettings.DEFAULT_FindCodeIssuePlugins
+        chkFindPaintingPlugins.Checked = PluginSettings.DEFAULT_FindPaintingPlugins
         chkFindMiscPlugins.Checked = PluginSettings.DEFAULT_FindMiscPlugins
     End Sub
 
@@ -58,6 +59,7 @@ Public Class Options1
         chkFindCodeGenPlugins.Checked = Settings.FindCodeGenPlugins
         chkFindRefactoringPlugins.Checked = Settings.FindRefactoringPlugins
         chkFindCodeIssuePlugins.Checked = Settings.FindCodeIssuePlugins
+        chkFindPaintingPlugins.Checked = Settings.FindPaintingPlugins
         chkFindMiscPlugins.Checked = Settings.FindMiscPlugins
     End Sub
 
@@ -75,6 +77,7 @@ Public Class Options1
         Settings.FindNavigationalPlugins = chkFindNavigationPlugins.Checked
         Settings.FindRefactoringPlugins = chkFindRefactoringPlugins.Checked
         Settings.FindCodeIssuePlugins = chkFindCodeIssuePlugins.Checked
+        Settings.FindPaintingPlugins = chkFindPaintingPlugins.Checked
         Settings.FindMiscPlugins = chkFindMiscPlugins.Checked
 
         Settings.Save(Options1.Storage)
@@ -87,9 +90,10 @@ Public Class Options1
     Private Sub optAllPlugins_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles optAllPlugins.CheckedChanged
         chkFindCodeGenPlugins.Enabled = Not optAllPlugins.Checked
         chkFindRefactoringPlugins.Enabled = Not optAllPlugins.Checked
-        chkFindMiscPlugins.Enabled = Not optAllPlugins.Checked
-        chkFindCodeIssuePlugins.Enabled = Not optAllPlugins.Checked
         chkFindNavigationPlugins.Enabled = Not optAllPlugins.Checked
+        chkFindCodeIssuePlugins.Enabled = Not optAllPlugins.Checked
+        chkFindPaintingPlugins.Enabled = Not optAllPlugins.Checked
+        chkFindMiscPlugins.Enabled = Not optAllPlugins.Checked
     End Sub
 
     Private Sub cmdUpdatePluginsNow_Click(sender As System.Object, e As System.EventArgs) Handles cmdUpdatePluginsNow.Click
