@@ -100,10 +100,6 @@ Public Class PlugIn1
         End Select
     End Sub
 #Region "Action: Update Existing Plugins"
-    ' ProposedOption: Don't Prompt
-    ' SubOption: UpdateEverything
-    ' SubOption: ExcludePlugins
-    ' ProposedOption: RestartDXCore: Yes/No/Ask
     Public Sub RegisterUpdatePluginsCommand()
         Dim UpdatePlugins As New DevExpress.CodeRush.Core.Action(components)
         CType(UpdatePlugins, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -138,12 +134,7 @@ Public Class PlugIn1
 #End Region
 
 #Region "Action: Find New (Recommended) Plugins"
-
-    ' ProposedOption: Show All Plugins (excluding Unstable)
-    ' ProposedOption: Show Navigation Plugins
-    ' ProposedOption: Show Refactoring Plugins
     ' ProposedOption: Show Visualization Plugins
-
     Public Sub RegisterFindNewPlugins()
         Dim FindNewPlugins As New DevExpress.CodeRush.Core.Action(components)
         CType(FindNewPlugins, System.ComponentModel.ISupportInitialize).BeginInit()

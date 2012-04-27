@@ -46,10 +46,10 @@ Partial Class Options1
         Me.cmdUpdatePluginsNow = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ynaRestartDXCore = New DX_PluginUpdater.YesNoAskControl()
-        Me.ynaCheckForPluginUpdatesOnStartup = New DX_PluginUpdater.YesNoAskControl()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.ynaRestartDXCore = New DX_PluginUpdater.YesNoAskControl()
+        Me.ynaCheckForPluginUpdatesOnStartup = New DX_PluginUpdater.YesNoAskControl()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -73,7 +73,7 @@ Partial Class Options1
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(472, 23)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "(Unchecking this potion will cause all Local plugins to be updated when UpdatePlu" & _
+        Me.Label1.Text = "(Unchecking this option will cause all Local plugins to be updated when UpdatePlu" & _
     "gins is chosen)"
         '
         'Label2
@@ -188,7 +188,7 @@ Partial Class Options1
         Me.GroupBox1.Size = New System.Drawing.Size(502, 152)
         Me.GroupBox1.TabIndex = 11
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Find New Plugin options"
+        Me.GroupBox1.Text = "Find New Plugin Options"
         '
         'GroupBox2
         '
@@ -201,7 +201,7 @@ Partial Class Options1
         Me.GroupBox2.Size = New System.Drawing.Size(502, 101)
         Me.GroupBox2.TabIndex = 11
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Update Plugin options"
+        Me.GroupBox2.Text = "Update Plugin Options"
         '
         'cmdUpdatePluginsNow
         '
@@ -222,23 +222,7 @@ Partial Class Options1
         Me.GroupBox3.Size = New System.Drawing.Size(502, 51)
         Me.GroupBox3.TabIndex = 12
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Common"
-        '
-        'ynaRestartDXCore
-        '
-        Me.ynaRestartDXCore.Location = New System.Drawing.Point(307, 20)
-        Me.ynaRestartDXCore.Name = "ynaRestartDXCore"
-        Me.ynaRestartDXCore.Size = New System.Drawing.Size(95, 23)
-        Me.ynaRestartDXCore.TabIndex = 2
-        Me.ynaRestartDXCore.YesNoAskValue = DX_PluginUpdater.YesNoAskEnum.Ask
-        '
-        'ynaCheckForPluginUpdatesOnStartup
-        '
-        Me.ynaCheckForPluginUpdatesOnStartup.Location = New System.Drawing.Point(222, 20)
-        Me.ynaCheckForPluginUpdatesOnStartup.Name = "ynaCheckForPluginUpdatesOnStartup"
-        Me.ynaCheckForPluginUpdatesOnStartup.Size = New System.Drawing.Size(95, 23)
-        Me.ynaCheckForPluginUpdatesOnStartup.TabIndex = 4
-        Me.ynaCheckForPluginUpdatesOnStartup.YesNoAskValue = DX_PluginUpdater.YesNoAskEnum.Ask
+        Me.GroupBox3.Text = "Common Options"
         '
         'GroupBox4
         '
@@ -260,6 +244,22 @@ Partial Class Options1
         Me.Label4.TabIndex = 11
         Me.Label4.Text = "Note: Despite the phrase 'Test', these functions are real and will update \ insta" & _
     "ll plugins. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Additionally they operate using the latest *saved* settings."
+        '
+        'ynaRestartDXCore
+        '
+        Me.ynaRestartDXCore.Location = New System.Drawing.Point(307, 20)
+        Me.ynaRestartDXCore.Name = "ynaRestartDXCore"
+        Me.ynaRestartDXCore.Size = New System.Drawing.Size(95, 23)
+        Me.ynaRestartDXCore.TabIndex = 2
+        Me.ynaRestartDXCore.YesNoAskValue = DX_PluginUpdater.YesNoAskEnum.Ask
+        '
+        'ynaCheckForPluginUpdatesOnStartup
+        '
+        Me.ynaCheckForPluginUpdatesOnStartup.Location = New System.Drawing.Point(222, 20)
+        Me.ynaCheckForPluginUpdatesOnStartup.Name = "ynaCheckForPluginUpdatesOnStartup"
+        Me.ynaCheckForPluginUpdatesOnStartup.Size = New System.Drawing.Size(95, 23)
+        Me.ynaCheckForPluginUpdatesOnStartup.TabIndex = 4
+        Me.ynaCheckForPluginUpdatesOnStartup.YesNoAskValue = DX_PluginUpdater.YesNoAskEnum.Ask
         '
         'Options1
         '
