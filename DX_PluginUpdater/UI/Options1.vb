@@ -71,7 +71,7 @@ Public Class Options1
         Settings.RestartDXCore = ynaRestartDXCore.YesNoAskValue
         Settings.CheckForPluginUpdatesOnStartup = ynaCheckForPluginUpdatesOnStartup.YesNoAskValue
 
-        Settings.FindAllPlugins = chkFindPromptBeforeUpdating.Checked
+        Settings.FindAllPlugins = optAllPlugins.Checked
 
         Settings.FindCodeGenPlugins = chkFindCodeGenPlugins.Checked
         Settings.FindNavigationalPlugins = chkFindNavigationPlugins.Checked
