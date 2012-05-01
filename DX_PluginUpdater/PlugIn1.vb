@@ -111,25 +111,35 @@ Public Class PlugIn1
         CType(UpdatePlugins, System.ComponentModel.ISupportInitialize).EndInit()
     End Sub
     Private Sub UpdatePlugins_Execute(ByVal ea As ExecuteEventArgs)
-        ' Providers
-        Dim LocalPluginProvider = New LocalPluginProvider(CodeRush.Options.Paths.CommunityPlugInsPath)
-        Dim CommunityPluginProvider = New CommunityPluginProvider(LocalPluginProvider, CommunitySiteRootPluginUrl)
-        Dim PluginDownloader = New PluginDownloader(LocalPluginProvider, CommunityPluginProvider)
+        If Settings.UserUnderstandsWarning Then
 
-        ' Plugins
-        Dim CommunityPlugins = CommunityPluginProvider.GetRemoteReferencesLatestAll
-        Dim LocalPlugins = LocalPluginProvider.GetPluginReferences
+            ' Providers
+            Dim LocalPluginProvider = New LocalPluginProvider(CodeRush.Options.Paths.CommunityPlugInsPath)
+            Dim CommunityPluginProvider = New CommunityPluginProvider(LocalPluginProvider, CommunitySiteRootPluginUrl)
+            Dim PluginDownloader = New PluginDownloader(LocalPluginProvider, CommunityPluginProvider)
 
-        Dim SourcePlugins = LocalPlugins.Intersection(CommunityPlugins)
-        Dim PickedPlugins As IEnumerable(Of RemotePluginRef) = SourcePlugins
-        If Settings.PromptBeforeUpdate Then
-            PickedPlugins = PluginPicker.GetPlugins(SourcePlugins, PickedVsUnPickedEnum.Picked)
+            ' Plugins
+            Dim CommunityPlugins = CommunityPluginProvider.GetRemoteReferencesLatestAll
+            Dim LocalPlugins = LocalPluginProvider.GetPluginReferences
+
+            Dim SourcePlugins = LocalPlugins.Intersection(CommunityPlugins)
+            Dim PickedPlugins As IEnumerable(Of RemotePluginRef) = SourcePlugins
+            If Settings.PromptBeforeUpdate Then
+                PickedPlugins = PluginPicker.GetPlugins(SourcePlugins, PickedVsUnPickedEnum.Picked)
+            End If
+
+            ' Action
+            Dim UpdatedPlugins = PluginDownloader.DownloadPlugins(PickedPlugins, AddressOf ShowMessage, True)
+            Call ShowMessage(String.Format("{0} plugins found. {1} plugins updated.", PickedPlugins.Count, UpdatedPlugins.Count))
+            RestartDXCore(UpdatedPlugins.Count)
+        Else
+            If MsgBox("Before continuing, please read the warning on the Plugin updater options page and indicate your acceptance." _
+                   & Environment.NewLine _
+                   & "Would you like to view the options page now?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                CodeRush.Options.Show(Options1.FullPath)
+            End If
         End If
 
-        ' Action
-        Dim UpdatedPlugins = PluginDownloader.DownloadPlugins(PickedPlugins, AddressOf ShowMessage, True)
-        Call ShowMessage(String.Format("{0} plugins found. {1} plugins updated.", PickedPlugins.Count, UpdatedPlugins.Count))
-        RestartDXCore(UpdatedPlugins.Count)
     End Sub
 #End Region
 
@@ -146,46 +156,55 @@ Public Class PlugIn1
         CType(FindNewPlugins, System.ComponentModel.ISupportInitialize).EndInit()
     End Sub
     Private Sub FindNewPlugins_Execute(ByVal ea As ExecuteEventArgs)
-        ' Providers
-        Dim LocalPluginProvider = New LocalPluginProvider(CodeRush.Options.Paths.CommunityPlugInsPath)
-        Dim CommunityPluginProvider = New CommunityPluginProvider(LocalPluginProvider, CommunitySiteRootPluginUrl)
-        Dim PluginDownloader = New PluginDownloader(LocalPluginProvider, CommunityPluginProvider)
-        Dim SourcePlugins = Enumerable.Empty(Of RemotePluginRef)()
-        Dim Feed = FeedPluginProvider.GetProvider(CommunitySiteRootPluginUrl & "RecommendedPlugins.xml")
-        Select Case True
-            Case Settings.FindAllPlugins
-                SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferences)
-            Case Else
-                If Settings.FindRefactoringPlugins Then
-                    SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("Refactoring"))
-                End If
-                If Settings.FindCodeGenPlugins Then
-                    SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("CodeGen"))
-                End If
-                If Settings.FindNavigationalPlugins Then
-                    SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("Navigation"))
-                End If
-                If Settings.FindCodeIssuePlugins Then
-                    SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("CodeIssue") _
-                                                 .Concat(Feed.GetPluginReferencesWithCat("CodeIssues")))
-                End If
-                If Settings.FindPaintingPlugins Then
-                    SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("Painting"))
-                End If
-                If Settings.FindMiscPlugins Then
-                    SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("Misc"))
-                End If
-        End Select
+        If Settings.UserUnderstandsWarning Then
 
-        ' Plugins
-        Dim NewPlugins = Subtract(SourcePlugins, LocalPluginProvider.GetPluginReferences)
+            ' Providers
+            Dim LocalPluginProvider = New LocalPluginProvider(CodeRush.Options.Paths.CommunityPlugInsPath)
+            Dim CommunityPluginProvider = New CommunityPluginProvider(LocalPluginProvider, CommunitySiteRootPluginUrl)
+            Dim PluginDownloader = New PluginDownloader(LocalPluginProvider, CommunityPluginProvider)
+            Dim SourcePlugins = Enumerable.Empty(Of RemotePluginRef)()
+            Dim Feed = FeedPluginProvider.GetProvider(CommunitySiteRootPluginUrl & "RecommendedPlugins.xml")
+            Select Case True
+                Case Settings.FindAllPlugins
+                    SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferences)
+                Case Else
+                    If Settings.FindRefactoringPlugins Then
+                        SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("Refactoring"))
+                    End If
+                    If Settings.FindCodeGenPlugins Then
+                        SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("CodeGen"))
+                    End If
+                    If Settings.FindNavigationalPlugins Then
+                        SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("Navigation"))
+                    End If
+                    If Settings.FindCodeIssuePlugins Then
+                        SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("CodeIssue") _
+                                                     .Concat(Feed.GetPluginReferencesWithCat("CodeIssues")))
+                    End If
+                    If Settings.FindPaintingPlugins Then
+                        SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("Painting"))
+                    End If
+                    If Settings.FindMiscPlugins Then
+                        SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferencesWithCat("Misc"))
+                    End If
+            End Select
 
-        Dim ChosenPlugins = PluginPicker.GetPlugins(NewPlugins, PickedVsUnPickedEnum.Picked)
+            ' Plugins
+            Dim NewPlugins = Subtract(SourcePlugins, LocalPluginProvider.GetPluginReferences)
 
-        ' Action
-        Dim UpdatedPlugins = PluginDownloader.DownloadPlugins(ChosenPlugins, AddressOf ShowMessage, True)
-        Call ShowMessage(String.Format("{0} plugins chosen. {1} plugins downloaded.", ChosenPlugins.Count, UpdatedPlugins.Count))
-        RestartDXCore(UpdatedPlugins.Count)
+            Dim ChosenPlugins = PluginPicker.GetPlugins(NewPlugins, PickedVsUnPickedEnum.Picked)
+
+            ' Action
+            Dim UpdatedPlugins = PluginDownloader.DownloadPlugins(ChosenPlugins, AddressOf ShowMessage, True)
+            Call ShowMessage(String.Format("{0} plugins chosen. {1} plugins downloaded.", ChosenPlugins.Count, UpdatedPlugins.Count))
+            RestartDXCore(UpdatedPlugins.Count)
+        Else
+            If MsgBox("Before continuing, please read the warning on the Plugin updater options page and indicate your acceptance." _
+                   & Environment.NewLine _
+                   & "Would you like to view the options page now?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                CodeRush.Options.Show(Options1.FullPath)
+            End If
+        End If
     End Sub
 
 #End Region

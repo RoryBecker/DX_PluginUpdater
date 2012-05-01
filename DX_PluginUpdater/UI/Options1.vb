@@ -30,6 +30,7 @@ Public Class Options1
     End Function
     Private Sub Options1_RestoreDefaults(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.OptionsPageEventArgs) Handles Me.RestoreDefaults
         ' Setup defaults here
+        chkUserUnderstandsWarning.Checked = PluginSettings.DEFAULT_UserUnderstandsWarning
         chkFindPromptBeforeUpdating.Checked = PluginSettings.DEFAULT_PromptBeforeUpdate
         ynaRestartDXCore.YesNoAskValue = PluginSettings.DEFAULT_RestartDXCore
         ynaCheckForPluginUpdatesOnStartup.YesNoAskValue = PluginSettings.DEFAULT_CheckForPluginUpdatesOnStartup
@@ -48,6 +49,7 @@ Public Class Options1
     Private Sub Options1_PreparePage(ByVal sender As Object, ByVal ea As DevExpress.CodeRush.Core.OptionsPageStorageEventArgs) Handles Me.PreparePage
         ' Load options here
         Dim Settings = PluginSettings.LoadSettings(Options1.Storage)
+        chkUserUnderstandsWarning.Checked = Settings.UserUnderstandsWarning
         chkFindPromptBeforeUpdating.Checked = Settings.PromptBeforeUpdate
         ynaRestartDXCore.YesNoAskValue = Settings.RestartDXCore
         ynaCheckForPluginUpdatesOnStartup.YesNoAskValue = Settings.CheckForPluginUpdatesOnStartup
@@ -67,6 +69,7 @@ Public Class Options1
         ' Save changes here.
         Dim Settings As New PluginSettings
 
+        Settings.UserUnderstandsWarning = chkUserUnderstandsWarning.Checked
         Settings.PromptBeforeUpdate = chkFindPromptBeforeUpdating.Checked
         Settings.RestartDXCore = ynaRestartDXCore.YesNoAskValue
         Settings.CheckForPluginUpdatesOnStartup = ynaCheckForPluginUpdatesOnStartup.YesNoAskValue

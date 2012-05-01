@@ -54,7 +54,7 @@ Partial Class Options1
         Me.Label4 = New System.Windows.Forms.Label()
         Me.grpWarning = New System.Windows.Forms.GroupBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.chkUserUnderstandsWarning = New System.Windows.Forms.CheckBox()
         Me.grpFindNewPlugins.SuspendLayout()
         Me.grpUpdatePlugins.SuspendLayout()
         Me.grpCommonOptions.SuspendLayout()
@@ -280,7 +280,7 @@ Partial Class Options1
         '
         'grpWarning
         '
-        Me.grpWarning.Controls.Add(Me.CheckBox1)
+        Me.grpWarning.Controls.Add(Me.chkUserUnderstandsWarning)
         Me.grpWarning.Controls.Add(Me.Label5)
         Me.grpWarning.Location = New System.Drawing.Point(17, 4)
         Me.grpWarning.Name = "grpWarning"
@@ -297,15 +297,15 @@ Partial Class Options1
         Me.Label5.TabIndex = 0
         Me.Label5.Text = resources.GetString("Label5.Text")
         '
-        'CheckBox1
+        'chkUserUnderstandsWarning
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(222, 67)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(91, 17)
-        Me.CheckBox1.TabIndex = 1
-        Me.CheckBox1.Text = "I understand "
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.chkUserUnderstandsWarning.AutoSize = True
+        Me.chkUserUnderstandsWarning.Location = New System.Drawing.Point(222, 67)
+        Me.chkUserUnderstandsWarning.Name = "chkUserUnderstandsWarning"
+        Me.chkUserUnderstandsWarning.Size = New System.Drawing.Size(91, 17)
+        Me.chkUserUnderstandsWarning.TabIndex = 1
+        Me.chkUserUnderstandsWarning.Text = "I understand "
+        Me.chkUserUnderstandsWarning.UseVisualStyleBackColor = True
         '
         'Options1
         '
@@ -376,7 +376,7 @@ Partial Class Options1
     Friend WithEvents chkFindPaintingPlugins As System.Windows.Forms.CheckBox
     Friend WithEvents grpWarning As System.Windows.Forms.GroupBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
+    Friend WithEvents chkUserUnderstandsWarning As System.Windows.Forms.CheckBox
 
 	Public Shared ReadOnly Property FullPath() As String
 		Get

@@ -18,6 +18,7 @@ Public Class PluginSettings
     Public Property FindCodeIssuePlugins() As Boolean
     Public Property FindPaintingPlugins() As Boolean
     Public Property FindMiscPlugins() As Boolean
+    Public Property UserUnderstandsWarning() As Boolean
 #End Region
 
 #Region "Constants"
@@ -28,6 +29,9 @@ Public Class PluginSettings
 
     Public Const SETTING_RestartDXCore As String = "RestartDXCore"
     Public Const DEFAULT_RestartDXCore As YesNoAskEnum = YesNoAskEnum.Ask
+
+    Public Const SETTING_UserUnderstandsWarning As String = "UserUnderstandsWarning"
+    Public Const DEFAULT_UserUnderstandsWarning As Boolean = False
 
     Public Const SETTING_PromptBeforeUpdate As String = "PromptBeforeUpdate"
     Public Const DEFAULT_PromptBeforeUpdate As Boolean = True
@@ -60,6 +64,7 @@ Public Class PluginSettings
         RestartDXCore = DEFAULT_RestartDXCore
         CheckForPluginUpdatesOnStartup = DEFAULT_CheckForPluginUpdatesOnStartup
 
+        UserUnderstandsWarning = DEFAULT_UserUnderstandsWarning
         FindAllPlugins = DEFAULT_FindAllPlugins
         FindRefactoringPlugins = DEFAULT_FindRefactoringPlugins
         FindCodeGenPlugins = DEFAULT_FindCodeGenPlugins
@@ -72,6 +77,7 @@ Public Class PluginSettings
     Public Shared Function LoadSettings(ByVal Storage As DecoupledStorage) As PluginSettings
         Dim Settings As New PluginSettings
         Using StorageInternal = Storage
+            Settings.UserUnderstandsWarning = StorageInternal.ReadBoolean(SETTING_SECTION, SETTING_UserUnderstandsWarning, DEFAULT_UserUnderstandsWarning)
             Settings.PromptBeforeUpdate = StorageInternal.ReadBoolean(SETTING_SECTION, SETTING_PromptBeforeUpdate, DEFAULT_PromptBeforeUpdate)
             Settings.RestartDXCore = Storage.ReadEnum(Of YesNoAskEnum)(SETTING_SECTION, SETTING_RestartDXCore, DEFAULT_RestartDXCore)
             Settings.CheckForPluginUpdatesOnStartup = Storage.ReadEnum(Of YesNoAskEnum)(SETTING_SECTION, SETTING_CheckForUpdatesOnStartup, DEFAULT_CheckForPluginUpdatesOnStartup)
@@ -88,6 +94,7 @@ Public Class PluginSettings
     End Function
     Public Sub Save(ByVal Storage As DecoupledStorage)
         Using StorageInternal = Storage
+            StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_UserUnderstandsWarning, UserUnderstandsWarning)
             StorageInternal.WriteBoolean(SETTING_SECTION, SETTING_PromptBeforeUpdate, PromptBeforeUpdate)
             StorageInternal.WriteEnum(SETTING_SECTION, SETTING_RestartDXCore, RestartDXCore)
             StorageInternal.WriteEnum(SETTING_SECTION, SETTING_CheckForUpdatesOnStartup, CheckForPluginUpdatesOnStartup)
