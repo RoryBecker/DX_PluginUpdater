@@ -29,6 +29,7 @@ Partial Class Options1
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Options1))
         Me.chkFindPromptBeforeUpdating = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -41,20 +42,24 @@ Partial Class Options1
         Me.cmdFindNewPlugins = New System.Windows.Forms.Button()
         Me.chkFindCodeIssuePlugins = New System.Windows.Forms.CheckBox()
         Me.chkFindMiscPlugins = New System.Windows.Forms.CheckBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.cmdUpdatePluginsNow = New System.Windows.Forms.Button()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.ynaRestartDXCore = New DX_PluginUpdater.YesNoAskControl()
-        Me.ynaCheckForPluginUpdatesOnStartup = New DX_PluginUpdater.YesNoAskControl()
+        Me.grpFindNewPlugins = New System.Windows.Forms.GroupBox()
         Me.chkFindPaintingPlugins = New System.Windows.Forms.CheckBox()
-        Me.GroupBox1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
+        Me.grpUpdatePlugins = New System.Windows.Forms.GroupBox()
+        Me.ynaCheckForPluginUpdatesOnStartup = New DX_PluginUpdater.YesNoAskControl()
+        Me.cmdUpdatePluginsNow = New System.Windows.Forms.Button()
+        Me.grpCommonOptions = New System.Windows.Forms.GroupBox()
+        Me.ynaRestartDXCore = New DX_PluginUpdater.YesNoAskControl()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.grpTest = New System.Windows.Forms.GroupBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.grpWarning = New System.Windows.Forms.GroupBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.grpFindNewPlugins.SuspendLayout()
+        Me.grpUpdatePlugins.SuspendLayout()
+        Me.grpCommonOptions.SuspendLayout()
+        Me.grpTest.SuspendLayout()
+        Me.grpWarning.SuspendLayout()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -79,7 +84,7 @@ Partial Class Options1
         '
         'Label2
         '
-        Me.Label2.Location = New System.Drawing.Point(42, 24)
+        Me.Label2.Location = New System.Drawing.Point(40, 17)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(261, 14)
         Me.Label2.TabIndex = 1
@@ -175,93 +180,22 @@ Partial Class Options1
         Me.chkFindMiscPlugins.Text = "Misc Plugins"
         Me.chkFindMiscPlugins.UseVisualStyleBackColor = True
         '
-        'GroupBox1
+        'grpFindNewPlugins
         '
-        Me.GroupBox1.Controls.Add(Me.chkFindCodeGenPlugins)
-        Me.GroupBox1.Controls.Add(Me.chkFindRefactoringPlugins)
-        Me.GroupBox1.Controls.Add(Me.chkFindNavigationPlugins)
-        Me.GroupBox1.Controls.Add(Me.optSelectedPlugins)
-        Me.GroupBox1.Controls.Add(Me.chkFindPaintingPlugins)
-        Me.GroupBox1.Controls.Add(Me.chkFindCodeIssuePlugins)
-        Me.GroupBox1.Controls.Add(Me.optAllPlugins)
-        Me.GroupBox1.Controls.Add(Me.chkFindMiscPlugins)
-        Me.GroupBox1.Location = New System.Drawing.Point(17, 131)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(502, 152)
-        Me.GroupBox1.TabIndex = 11
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Find New Plugin Options"
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.ynaCheckForPluginUpdatesOnStartup)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.chkFindPromptBeforeUpdating)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Location = New System.Drawing.Point(17, 14)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(502, 101)
-        Me.GroupBox2.TabIndex = 11
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Update Plugin Options"
-        '
-        'cmdUpdatePluginsNow
-        '
-        Me.cmdUpdatePluginsNow.Location = New System.Drawing.Point(85, 53)
-        Me.cmdUpdatePluginsNow.Name = "cmdUpdatePluginsNow"
-        Me.cmdUpdatePluginsNow.Size = New System.Drawing.Size(111, 23)
-        Me.cmdUpdatePluginsNow.TabIndex = 10
-        Me.cmdUpdatePluginsNow.Text = "Update Plugins Now"
-        Me.ToolTip1.SetToolTip(Me.cmdUpdatePluginsNow, "Uses last *saved* settings.")
-        Me.cmdUpdatePluginsNow.UseVisualStyleBackColor = True
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.ynaRestartDXCore)
-        Me.GroupBox3.Controls.Add(Me.Label2)
-        Me.GroupBox3.Location = New System.Drawing.Point(17, 298)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(502, 51)
-        Me.GroupBox3.TabIndex = 12
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Common Options"
-        '
-        'GroupBox4
-        '
-        Me.GroupBox4.Controls.Add(Me.Label4)
-        Me.GroupBox4.Controls.Add(Me.cmdUpdatePluginsNow)
-        Me.GroupBox4.Controls.Add(Me.cmdFindNewPlugins)
-        Me.GroupBox4.Location = New System.Drawing.Point(17, 365)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(502, 84)
-        Me.GroupBox4.TabIndex = 13
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Test"
-        '
-        'Label4
-        '
-        Me.Label4.Location = New System.Drawing.Point(26, 17)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(433, 33)
-        Me.Label4.TabIndex = 11
-        Me.Label4.Text = "Note: Despite the phrase 'Test', these functions are real and will update \ insta" & _
-    "ll plugins. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Additionally they operate using the latest *saved* settings."
-        '
-        'ynaRestartDXCore
-        '
-        Me.ynaRestartDXCore.Location = New System.Drawing.Point(307, 20)
-        Me.ynaRestartDXCore.Name = "ynaRestartDXCore"
-        Me.ynaRestartDXCore.Size = New System.Drawing.Size(95, 23)
-        Me.ynaRestartDXCore.TabIndex = 2
-        Me.ynaRestartDXCore.YesNoAskValue = DX_PluginUpdater.YesNoAskEnum.Ask
-        '
-        'ynaCheckForPluginUpdatesOnStartup
-        '
-        Me.ynaCheckForPluginUpdatesOnStartup.Location = New System.Drawing.Point(222, 20)
-        Me.ynaCheckForPluginUpdatesOnStartup.Name = "ynaCheckForPluginUpdatesOnStartup"
-        Me.ynaCheckForPluginUpdatesOnStartup.Size = New System.Drawing.Size(95, 23)
-        Me.ynaCheckForPluginUpdatesOnStartup.TabIndex = 4
-        Me.ynaCheckForPluginUpdatesOnStartup.YesNoAskValue = DX_PluginUpdater.YesNoAskEnum.Ask
+        Me.grpFindNewPlugins.Controls.Add(Me.chkFindCodeGenPlugins)
+        Me.grpFindNewPlugins.Controls.Add(Me.chkFindRefactoringPlugins)
+        Me.grpFindNewPlugins.Controls.Add(Me.chkFindNavigationPlugins)
+        Me.grpFindNewPlugins.Controls.Add(Me.optSelectedPlugins)
+        Me.grpFindNewPlugins.Controls.Add(Me.chkFindPaintingPlugins)
+        Me.grpFindNewPlugins.Controls.Add(Me.chkFindCodeIssuePlugins)
+        Me.grpFindNewPlugins.Controls.Add(Me.optAllPlugins)
+        Me.grpFindNewPlugins.Controls.Add(Me.chkFindMiscPlugins)
+        Me.grpFindNewPlugins.Location = New System.Drawing.Point(17, 192)
+        Me.grpFindNewPlugins.Name = "grpFindNewPlugins"
+        Me.grpFindNewPlugins.Size = New System.Drawing.Size(502, 138)
+        Me.grpFindNewPlugins.TabIndex = 11
+        Me.grpFindNewPlugins.TabStop = False
+        Me.grpFindNewPlugins.Text = "Find New Plugin Options"
         '
         'chkFindPaintingPlugins
         '
@@ -273,22 +207,125 @@ Partial Class Options1
         Me.chkFindPaintingPlugins.Text = "Painting Plugins"
         Me.chkFindPaintingPlugins.UseVisualStyleBackColor = True
         '
+        'grpUpdatePlugins
+        '
+        Me.grpUpdatePlugins.Controls.Add(Me.ynaCheckForPluginUpdatesOnStartup)
+        Me.grpUpdatePlugins.Controls.Add(Me.Label3)
+        Me.grpUpdatePlugins.Controls.Add(Me.chkFindPromptBeforeUpdating)
+        Me.grpUpdatePlugins.Controls.Add(Me.Label1)
+        Me.grpUpdatePlugins.Location = New System.Drawing.Point(17, 100)
+        Me.grpUpdatePlugins.Name = "grpUpdatePlugins"
+        Me.grpUpdatePlugins.Size = New System.Drawing.Size(502, 86)
+        Me.grpUpdatePlugins.TabIndex = 11
+        Me.grpUpdatePlugins.TabStop = False
+        Me.grpUpdatePlugins.Text = "Update Plugin Options"
+        '
+        'ynaCheckForPluginUpdatesOnStartup
+        '
+        Me.ynaCheckForPluginUpdatesOnStartup.Location = New System.Drawing.Point(222, 20)
+        Me.ynaCheckForPluginUpdatesOnStartup.Name = "ynaCheckForPluginUpdatesOnStartup"
+        Me.ynaCheckForPluginUpdatesOnStartup.Size = New System.Drawing.Size(95, 23)
+        Me.ynaCheckForPluginUpdatesOnStartup.TabIndex = 4
+        Me.ynaCheckForPluginUpdatesOnStartup.YesNoAskValue = DX_PluginUpdater.YesNoAskEnum.Ask
+        '
+        'cmdUpdatePluginsNow
+        '
+        Me.cmdUpdatePluginsNow.Location = New System.Drawing.Point(85, 53)
+        Me.cmdUpdatePluginsNow.Name = "cmdUpdatePluginsNow"
+        Me.cmdUpdatePluginsNow.Size = New System.Drawing.Size(111, 23)
+        Me.cmdUpdatePluginsNow.TabIndex = 10
+        Me.cmdUpdatePluginsNow.Text = "Update Plugins Now"
+        Me.ToolTip1.SetToolTip(Me.cmdUpdatePluginsNow, "Uses last *saved* settings.")
+        Me.cmdUpdatePluginsNow.UseVisualStyleBackColor = True
+        '
+        'grpCommonOptions
+        '
+        Me.grpCommonOptions.Controls.Add(Me.ynaRestartDXCore)
+        Me.grpCommonOptions.Controls.Add(Me.Label2)
+        Me.grpCommonOptions.Location = New System.Drawing.Point(17, 336)
+        Me.grpCommonOptions.Name = "grpCommonOptions"
+        Me.grpCommonOptions.Size = New System.Drawing.Size(502, 41)
+        Me.grpCommonOptions.TabIndex = 12
+        Me.grpCommonOptions.TabStop = False
+        Me.grpCommonOptions.Text = "Common Options"
+        '
+        'ynaRestartDXCore
+        '
+        Me.ynaRestartDXCore.Location = New System.Drawing.Point(307, 14)
+        Me.ynaRestartDXCore.Name = "ynaRestartDXCore"
+        Me.ynaRestartDXCore.Size = New System.Drawing.Size(95, 23)
+        Me.ynaRestartDXCore.TabIndex = 2
+        Me.ynaRestartDXCore.YesNoAskValue = DX_PluginUpdater.YesNoAskEnum.Ask
+        '
+        'grpTest
+        '
+        Me.grpTest.Controls.Add(Me.Label4)
+        Me.grpTest.Controls.Add(Me.cmdUpdatePluginsNow)
+        Me.grpTest.Controls.Add(Me.cmdFindNewPlugins)
+        Me.grpTest.Location = New System.Drawing.Point(17, 383)
+        Me.grpTest.Name = "grpTest"
+        Me.grpTest.Size = New System.Drawing.Size(502, 84)
+        Me.grpTest.TabIndex = 13
+        Me.grpTest.TabStop = False
+        Me.grpTest.Text = "Test"
+        '
+        'Label4
+        '
+        Me.Label4.Location = New System.Drawing.Point(26, 17)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(433, 33)
+        Me.Label4.TabIndex = 11
+        Me.Label4.Text = "Note: Despite the phrase 'Test', these functions are real and will update \ insta" & _
+    "ll plugins. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Additionally they operate using the latest *saved* settings."
+        '
+        'grpWarning
+        '
+        Me.grpWarning.Controls.Add(Me.CheckBox1)
+        Me.grpWarning.Controls.Add(Me.Label5)
+        Me.grpWarning.Location = New System.Drawing.Point(17, 4)
+        Me.grpWarning.Name = "grpWarning"
+        Me.grpWarning.Size = New System.Drawing.Size(502, 90)
+        Me.grpWarning.TabIndex = 14
+        Me.grpWarning.TabStop = False
+        Me.grpWarning.Text = "Warning"
+        '
+        'Label5
+        '
+        Me.Label5.Location = New System.Drawing.Point(6, 17)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(486, 47)
+        Me.Label5.TabIndex = 0
+        Me.Label5.Text = resources.GetString("Label5.Text")
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(222, 67)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(91, 17)
+        Me.CheckBox1.TabIndex = 1
+        Me.CheckBox1.Text = "I understand "
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'Options1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.GroupBox4)
-        Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.grpWarning)
+        Me.Controls.Add(Me.grpTest)
+        Me.Controls.Add(Me.grpCommonOptions)
+        Me.Controls.Add(Me.grpUpdatePlugins)
+        Me.Controls.Add(Me.grpFindNewPlugins)
         Me.Name = "Options1"
         Me.Size = New System.Drawing.Size(536, 480)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox4.ResumeLayout(False)
+        Me.grpFindNewPlugins.ResumeLayout(False)
+        Me.grpFindNewPlugins.PerformLayout()
+        Me.grpUpdatePlugins.ResumeLayout(False)
+        Me.grpUpdatePlugins.PerformLayout()
+        Me.grpCommonOptions.ResumeLayout(False)
+        Me.grpTest.ResumeLayout(False)
+        Me.grpWarning.ResumeLayout(False)
+        Me.grpWarning.PerformLayout()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -329,14 +366,17 @@ Partial Class Options1
     Friend WithEvents cmdFindNewPlugins As System.Windows.Forms.Button
     Friend WithEvents chkFindCodeIssuePlugins As System.Windows.Forms.CheckBox
     Friend WithEvents chkFindMiscPlugins As System.Windows.Forms.CheckBox
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents grpFindNewPlugins As System.Windows.Forms.GroupBox
+    Friend WithEvents grpUpdatePlugins As System.Windows.Forms.GroupBox
     Friend WithEvents cmdUpdatePluginsNow As System.Windows.Forms.Button
-    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents grpCommonOptions As System.Windows.Forms.GroupBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+    Friend WithEvents grpTest As System.Windows.Forms.GroupBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents chkFindPaintingPlugins As System.Windows.Forms.CheckBox
+    Friend WithEvents grpWarning As System.Windows.Forms.GroupBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
 
 	Public Shared ReadOnly Property FullPath() As String
 		Get

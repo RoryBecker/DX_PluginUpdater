@@ -120,4 +120,10 @@
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Many plugins downloaded by this tool are not controlled by DevExpress. They are the responsibility of their authors alone. Support of these plugins should be sought from their authors, via the Community site or directly from the authors themselves.</value>
+  </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>31</value>
+  </metadata>
 </root>
