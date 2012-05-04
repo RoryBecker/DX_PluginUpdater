@@ -19,6 +19,7 @@ Public Class PluginPicker
     End Function
     Private Sub Populate(Of T As PluginRef)(ByVal SourcePlugins As IEnumerable(Of T))
         Dim PluginItems = (From Plugin In SourcePlugins _
+                          Order By Plugin.PluginName _
                           Select New ListViewItem(New String() {Plugin.PluginName}) _
                           With {.Tag = Plugin}).ToArray
         lstPlugins.Items.Clear()
