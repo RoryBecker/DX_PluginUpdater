@@ -18,12 +18,12 @@ Public Class FeedPluginProvider
     End Function
     Public Function GetPluginReferences() As IEnumerable(Of RemotePluginRef)
         Return From Plugin In mFeedXML.<Plugins>.<Plugin>
-               Select New RemotePluginRef(Plugin.@Name, Plugin.Parent.@BaseFolder & Plugin.@Name)
+               Select New RemotePluginRef(Plugin.@Name, Plugin.Parent.@BaseFolder & Plugin.@Name) With {.Description = Plugin.Value}
     End Function
     Public Function GetPluginReferencesWithCat(Category As String) As IEnumerable(Of RemotePluginRef)
         Return From Plugin In mFeedXML.<Plugins>.<Plugin>
                Where Plugin.@Categories.Split(",").ToList.Contains(Category)
-               Select New RemotePluginRef(Plugin.@Name, Plugin.Parent.@BaseFolder & Plugin.@Name)
+               Select New RemotePluginRef(Plugin.@Name, Plugin.Parent.@BaseFolder & Plugin.@Name) With {.Description = Plugin.Value}
     End Function
     Private Function GetFeedXML() As XElement
         Dim Content As String = String.Empty
