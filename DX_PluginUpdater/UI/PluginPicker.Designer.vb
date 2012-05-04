@@ -145,12 +145,10 @@ Partial Class PluginPicker
         '
         'lblDescription
         '
-        Me.lblDescription.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblDescription.Location = New System.Drawing.Point(6, 16)
+        Me.lblDescription.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblDescription.Location = New System.Drawing.Point(3, 16)
         Me.lblDescription.Name = "lblDescription"
-        Me.lblDescription.Size = New System.Drawing.Size(360, 38)
+        Me.lblDescription.Size = New System.Drawing.Size(366, 32)
         Me.lblDescription.TabIndex = 10
         '
         'GroupBox2
