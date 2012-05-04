@@ -120,6 +120,8 @@ Public Class PlugIn1
 
             ' Plugins
             Dim CommunityPlugins = CommunityPluginProvider.GetRemoteReferencesLatestAll
+
+            Call UpdateComunityPluginDescriptions(CommunityPlugins)
             Dim LocalPlugins = LocalPluginProvider.GetPluginReferences
 
             Dim SourcePlugins = LocalPlugins.Intersection(CommunityPlugins)
@@ -140,6 +142,16 @@ Public Class PlugIn1
             End If
         End If
 
+    End Sub
+    Private Shared Sub UpdateComunityPluginDescriptions(ByVal CommunityPlugins As IEnumerable(Of RemotePluginRef))
+        Dim FeedPlugins = FeedPluginProvider.GetProvider(CommunitySiteRootPluginUrl & "CommunityPlugins.xml").GetPluginReferences
+        For Each CommunityPlugin In CommunityPlugins
+            Dim CommunityPluginName As String = CommunityPlugin.PluginName
+            Dim FeedPlugin = (From item In FeedPlugins Where item.PluginName = CommunityPluginName).FirstOrDefault
+            If FeedPlugin IsNot Nothing Then
+                CommunityPlugin.Description = FeedPlugin.Description
+            End If
+        Next
     End Sub
 #End Region
 
@@ -163,7 +175,7 @@ Public Class PlugIn1
             Dim CommunityPluginProvider = New CommunityPluginProvider(LocalPluginProvider, CommunitySiteRootPluginUrl)
             Dim PluginDownloader = New PluginDownloader(LocalPluginProvider, CommunityPluginProvider)
             Dim SourcePlugins = Enumerable.Empty(Of RemotePluginRef)()
-            Dim Feed = FeedPluginProvider.GetProvider(CommunitySiteRootPluginUrl & "RecommendedPlugins.xml")
+            Dim Feed = FeedPluginProvider.GetProvider(CommunitySiteRootPluginUrl & "CommunityPlugins.xml")
             Select Case True
                 Case Settings.FindAllPlugins
                     SourcePlugins = SourcePlugins.Concat(Feed.GetPluginReferences)
