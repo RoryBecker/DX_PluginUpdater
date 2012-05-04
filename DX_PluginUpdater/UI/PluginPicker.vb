@@ -76,9 +76,13 @@ Public Class PluginPicker
     End Function
 
     Private Sub lstPlugins_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstPlugins.SelectedIndexChanged
-        lnkWiki.Text = "Wiki: " & CurrentPluginName()
-        lnkBinaries.Text = "Binaries:" & CurrentPluginName()
-        lnkSource.Text = "Source: " & CurrentPluginName()
+        If lstPlugins.SelectedItems.Count > 0 Then
+
+            lnkWiki.Text = "Wiki: " & CurrentPluginName()
+            lnkBinaries.Text = "Binaries:" & CurrentPluginName()
+            lnkSource.Text = "Source: " & CurrentPluginName()
+            lblDescription.Text = TryCast(lstPlugins.SelectedItems(0).Tag, PluginRef).Description.Trim
+        End If
     End Sub
 
     Public Const BaseWikiUrl As String = "http://code.google.com/p/dxcorecommunityplugins/wiki/"
